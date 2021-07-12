@@ -5,12 +5,27 @@
 #include <aval.h>
 #include <store.h>
 #include <ranking.h>
+#include "gandom.h"
 #define AAA
+
+void Widget::Time(Data* _data, Widget* w){
+    for(;_data->getTime()<3600;){
+        std::this_thread::sleep_for(1000ms);
+       _data->AddTime(1);
+       w->set();
+       qDebug() << _data->getTime();
+    }
+           _data->setTime(0);
+}
 
 Widget::Widget(QWidget *parent, Data* _data)
     : QWidget(parent)
 {
     data = _data;
+    //std::thread qw(&Widget::Time);
+    //std::thread t([&](Widget* view){ view->Time(data,this); });
+
+    //t.join();
     this->setMinimumHeight(768);
     this->setMinimumWidth(1366);
     this->setMaximumHeight(768);
@@ -195,6 +210,7 @@ Widget::Widget(QWidget *parent, Data* _data)
     connect(back_to_main_menu, SIGNAL(clicked()), this, SLOT(back_slot()));
     connect(store_butt, SIGNAL(clicked()), this, SLOT(store_slot()));
     connect(rankings, SIGNAL(clicked()), this, SLOT(rank_slot()));
+    connect(lands_butt, SIGNAL(clicked()), this, SLOT(lands_slot()));
 
 }
 
@@ -226,8 +242,15 @@ void Widget::store_slot(){
    temp->showFullScreen();
    this->destroy();
 }
+
 void Widget::rank_slot(){
     Ranking* temp = new Ranking(nullptr, data);
+    temp->showFullScreen();
+    this->destroy();
+}
+
+void Widget::lands_slot(){
+    Gandom* temp = new Gandom(nullptr, data);
     temp->showFullScreen();
     this->destroy();
 }

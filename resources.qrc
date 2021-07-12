@@ -74,5 +74,12 @@
         <file>icons/uplevel2.png</file>
         <file>icons/xpp.jpeg</file>
         <file>backgrounds/start.jpg</file>
+        <file>icons/cow_osaurus3.jpg</file>
+        <file>icons/egg_3.png</file>
+        <file>icons/Hen _osaurus3.png</file>
+        <file>icons/Pashm3.png</file>
+        <file>icons/Sheep_osaurus3.png</file>
+        <file>icons/Yon3.png</file>
+        <file>icons/milk_3.png</file>
     </qresource>
 </RCC>

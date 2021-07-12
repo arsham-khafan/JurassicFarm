@@ -1,18 +1,5 @@
 #include "aval.h"
 #include "ui_aval.h"
-//#include <Windows.h>
-#include <thread>
-
-void Time(Data* _data, Widget* w){
-       //Sleep(1000);
-        std::this_thread::sleep_for(1000ms);
-       _data->AddTime(1);
-       w->set();
-       if(_data->getTime()>=3600)
-           _data->setTime(0);
-       Time(_data,w);
-
-}
 
 aval::aval(QWidget *parent) :
     QWidget(parent),
@@ -143,10 +130,9 @@ void aval::vorood() {
             if (o["password"].toString() == lv2->text()) {
                Data* _Data= new Data(o);
                Widget* temp=new Widget(nullptr, _Data);
-               std::thread time(Time,_Data,temp);
-                this->close();
-                f.close();
-                temp->showFullScreen();
+               f.close();
+               temp->showFullScreen();
+               this->close();
             }
         }
         else{

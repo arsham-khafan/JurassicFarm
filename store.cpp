@@ -192,6 +192,7 @@ store::store(QWidget *parent, Data* _data) :
         ui->milk->setFixedSize(ui->hen->size());
         ui->yonje->setFixedSize(ui->hen->size());
 
+    connect(go_back,SIGNAL(clicked()),this,SLOT(map_menu()));
     connect(milk,SIGNAL(clicked()),this,SLOT(milk_()));
     connect(egg,SIGNAL(clicked()),this,SLOT(egg_()));
     connect(cow,SIGNAL(clicked()),this,SLOT(cow_()));
@@ -255,7 +256,7 @@ void store::show3(){
     counter++;
     if(counter==4){
         if(!data->getGav()->isBuild()){
-           // milk->setStyleSheet("QPushButton {border-image:url(:icons/milk_3.jpg);}");
+            milk->setStyleSheet("QPushButton {border-image:url(:icons/milk_3.png);}");
             cow->setStyleSheet("QPushButton {border-image:url(:icons/cow_osaurus3.jpg);}");
             ui->milk->setFont(f);
             ui->milk->setStyleSheet("color: #00FFFF");
