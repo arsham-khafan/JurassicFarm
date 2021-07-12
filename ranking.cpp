@@ -64,16 +64,7 @@ Ranking::Ranking(QWidget *parent ,Data* _data) :
        pair<pair<int,int>,QString> value = *p;
        r->add(value.first.first,i,value.first.second,value.second,data->getName());
     }
-    r->add(5,7,20,"ww","ww");
-    r->add(5,7,20,"ww","ghf");
-    r->add(5,7,20,"ww","ghf");
-    r->add(5,7,20,"ww","ghf");
-    r->add(5,7,20,"ww","ghf");
-    r->add(5,7,20,"ww","ghf");
-    r->add(5,7,20,"ererererererererererer","ghf");
-    r->add(5,7,20,"ww","ghf");
-    r->add(5,7,20,"ww","ghf");
-    r->add(5,7,20,"gfngfngfngfngn","ghf");
+
     ui->scrollArea->setWidget(r);
 }
 
@@ -116,7 +107,7 @@ void Row::add(int level_, int rank_, int exp_, QString name_, QString gold){
     if(rank_>3 && name_==gold)
         level->setStyleSheet("background-color: #FFFF00");
     if(name_==gold){
-        name->setStyleSheet("background color: #FFFF00");
+        name->setStyleSheet("background-color: #FFFF00");
         level->setStyleSheet("background-color: #FFFF00");
     }
 
