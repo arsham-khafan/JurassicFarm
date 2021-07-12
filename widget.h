@@ -34,9 +34,13 @@ private:
     QLabel* lvl_txt;
     QPushButton* back_to_main_menu;
     QPushButton* one_day_forward;
+    QPushButton* rankings;
     QProgressBar* exp_bar;
 public slots:
     void storage_slot();
     void siloo_slot();
+    void back_slot();
+    void store_slot();
+    void rank_slot();
 };
 #endif // WIDGET_H

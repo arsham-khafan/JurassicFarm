@@ -1,8 +1,11 @@
 #include "widget.h"
-#define AAA
 #include "storage.h"
 #include <QMovie>
 #include <siloo.h>
+#include <aval.h>
+#include <store.h>
+#include <ranking.h>
+#define AAA
 
 Widget::Widget(QWidget *parent, Data* _data)
     : QWidget(parent)
@@ -115,7 +118,6 @@ Widget::Widget(QWidget *parent, Data* _data)
     lvl_txt->move(75,193);
 
     back_to_main_menu = new QPushButton(this);
-//    back_to_main_menu->setToolTip("Back to Main menu");
     back_to_main_menu->setMinimumHeight(48);
     back_to_main_menu->setMinimumWidth(48);
     back_to_main_menu->setMaximumHeight(48);
@@ -135,7 +137,16 @@ Widget::Widget(QWidget *parent, Data* _data)
     one_day_forward->setCursor(Qt::PointingHandCursor);
     one_day_forward->setStyleSheet("QPushButton {border-image:url(:icons/forward.png);}");
     one_day_forward->setToolTip("One Day Forward");
-//    one_day_forward->setToolTip("1 day forward");
+
+    rankings = new QPushButton(this);
+    rankings->setMinimumHeight(40);
+    rankings->setMinimumWidth(40);
+    rankings->setMaximumHeight(40);
+    rankings->setMaximumWidth(40);
+    rankings->move(1300, 130);
+    rankings->setCursor(Qt::PointingHandCursor);
+    rankings->setStyleSheet("QPushButton {border-image:url(:icons/rank.png);}");
+    rankings->setToolTip("see players rankings");
 
     exp_bar = new QProgressBar(this);
     exp_bar->setMinimumHeight(12);
@@ -181,6 +192,10 @@ Widget::Widget(QWidget *parent, Data* _data)
     talk->move(170,480);
 
     connect(siloo_butt, SIGNAL(clicked()), this, SLOT(siloo_slot()));
+    connect(back_to_main_menu, SIGNAL(clicked()), this, SLOT(back_slot()));
+    connect(store_butt, SIGNAL(clicked()), this, SLOT(store_slot()));
+    connect(rankings, SIGNAL(clicked()), this, SLOT(rank_slot()));
+
 }
 
 Widget::~Widget()
@@ -200,3 +215,19 @@ void Widget::siloo_slot(){
     this->destroy();
 }
 
+void Widget::back_slot(){
+    aval* temp = new aval;
+    temp->showFullScreen();
+    this->destroy();
+}
+
+void Widget::store_slot(){
+   store* temp = new store(nullptr, data);
+   temp->showFullScreen();
+   this->destroy();
+}
+void Widget::rank_slot(){
+    Ranking* temp = new Ranking(nullptr, data);
+    temp->showFullScreen();
+    this->destroy();
+}
