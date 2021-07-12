@@ -30,6 +30,7 @@ private:
 
 public slots:
     void map_menu();
+    void upgrade_slot();
 };
 
 

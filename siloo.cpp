@@ -2,6 +2,7 @@
 #include <QMovie>
 #include <QLabel>
 #include "widget.h"
+#include "msg.h"
 
 siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
 {
@@ -27,8 +28,8 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
     main_bar->setStyleSheet("QProgressBar { border-image: url(:icons/silomask2.png); }"
                             "QProgressBar::chunk { background-image: url(:backgrounds/weat.jpg); }");
     main_bar->setTextVisible(false);
-    main_bar->setValue(40);
-    main_bar->setToolTip("silo level: " + QString::number(data->getsilo()->getLevel()));
+    main_bar->setValue((data->getsilo()->getCount() * 68)/data->getsilo()->getSpace());
+    main_bar->setToolTip("silo level: " + QString::number(data->getsilo()->getLevel()) + "\n" + "weat volume: " + QString::number(data->getsilo()->getCount()) + "\n" + "silo capacity: " + QString::number(data->getsilo()->getSpace()));
 
     QMovie* movie = new QMovie(":gifs/tenor.gif");
     QLabel* label = new QLabel(this);
@@ -64,10 +65,32 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
     upgrade->setToolTip("level up silo");
 
     connect(go_back, SIGNAL(clicked()), this, SLOT(back_to_map()));
+    connect(upgrade, SIGNAL(clicked()), this, SLOT(upgrade_slot()));
 }
 
 void siloo::back_to_map(){
     Widget* temp = new Widget(nullptr, data);
     temp->showFullScreen();
     this->destroy();
+}
+
+void siloo::upgrade_slot(){
+   if( data->isCanAddLevelSilo()){
+       int x = data->getAnbar()->getLevel();
+       data->operator-= (100 * (int)qPow((2 * x), 2));
+       data->getAnbar()->ChangeMikh(x*-2);
+       data->getAnbar()->ChangeBil(-(x - 2));
+       if (data->addExp(data->getsilo()->getLevel() * 2))
+         data->UpLevel();
+       data->getsilo()->UpLevel();
+       QString str = "SUCCESSFULLY UPGRADED!";
+       msg* temp = new msg(nullptr , &str);
+       temp->show();
+   }
+   else{
+       QString str = "CHECK YOUR RESOURCES OR LEVEL FIRST!!";
+       msg* temp = new msg(nullptr , &str);
+       temp->show();
+   }
+
 }

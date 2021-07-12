@@ -1,6 +1,7 @@
 #include "storage.h"
 #include "widget.h"
 #include <QMovie>
+#include <msg.h>
 
 storage::storage(QWidget *parent, Data* _data) : QWidget(parent)
 {
@@ -142,6 +143,7 @@ storage::storage(QWidget *parent, Data* _data) : QWidget(parent)
     up_level->setToolTip("Upgrade Storage");
 
     connect(go_back, SIGNAL(clicked()), this , SLOT(map_menu()));
+    connect(up_level, SIGNAL(clicked()), this , SLOT(upgrade_slot()));
 
     cpc_bar = new QProgressBar(this);
     cpc_bar->setMinimumHeight(25);
@@ -184,4 +186,21 @@ void storage::map_menu(){
     Widget* temp = new Widget(nullptr, data);
     temp->showFullScreen();
     this->destroy();
+}
+
+void storage::upgrade_slot(){
+    if(data->isCanAddLevelAnbar()){
+        data->operator-= ((int)qPow(data->getAnbar()->getLevel(), 3) * 10);
+        if (data->addExp(data->getAnbar()->getLevel() * 3))
+          data->UpLevel();
+        data->getAnbar()->UpLevel();
+        QString str = "SUCCESSFULLY UPGRADED!";
+        msg* temp = new msg(nullptr , &str);
+        temp->show();
+    }
+    else{
+        QString str = "CHECK YOUR RESOURCES OR LEVEL FIRST!!";
+        msg* temp = new msg(nullptr , &str);
+        temp->show();
+    }
 }

@@ -5,7 +5,7 @@
 #include "store.h"
 #include "aval.h"
 #include "mainwindow.h"
-
+#include "msg.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

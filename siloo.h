@@ -16,6 +16,7 @@ private:
     QPushButton* upgrade;
 public slots:
     void back_to_map();
+    void upgrade_slot();
 };
 
 #endif // SILOO_H
