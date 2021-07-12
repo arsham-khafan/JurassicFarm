@@ -29,7 +29,7 @@ store::store(QWidget *parent, Data* _data) :
     cow->setStyleSheet("QPushButton {border-image:url(:icons/cow_osaurus.jpg);}"
 "                           QPushButton::hover{border-image:url(:icons/cow_osaurus2.jpg);} ");
 
-    hen->setStyleSheet("QPushButton {border-image:url(:icons/Hen _osaurus.png);}"
+    hen->setStyleSheet("QPushButton {border-image:url(:icons/Hen_osaurus.png);}"
 "                           QPushButton::hover{border-image:url(:icons/Hen _osaurus2.png);} ");
 
     sheep->setStyleSheet("QPushButton {border-image:url(:icons/Sheep_osaurus.png);}"
@@ -102,7 +102,7 @@ store::store(QWidget *parent, Data* _data) :
         hen->setMinimumWidth(90);
         hen->setMaximumHeight(90);
         hen->setMaximumWidth(90);
-        sheep->move(550, 340);
+        hen->move(550, 340);
         hen->setToolTip("Hen_osaurus: "+QString::fromLatin1(to_string(data->getMorq()->getCount())));
         hen->setHidden(true);
 
@@ -167,10 +167,10 @@ store::store(QWidget *parent, Data* _data) :
     ui->setupUi(this);
     ui->gandom->move(155,270);
     ui->bill->move(155,110);
-    ui->yonje->move(470,270);
-    ui->mikh->move(470,110);
+    ui->yonje->move(520,270);
+    ui->mikh->move(510,110);
     ui->egg->move(155,400);
-    ui->hen->move(450,400);
+    ui->hen->move(520,400);
     ui->milk->move(155,520);
     ui->cow->move(525,520);
     ui->pashm->move(155,670);
@@ -186,6 +186,11 @@ store::store(QWidget *parent, Data* _data) :
         ui->yonje->setHidden(true);
         ui->bill->setHidden(true);
         ui->mikh->setHidden(true);
+
+        ui->egg->setFixedSize(ui->hen->size());
+        ui->pashm->setFixedSize(ui->hen->size());
+        ui->milk->setFixedSize(ui->hen->size());
+        ui->yonje->setFixedSize(ui->hen->size());
 
     connect(milk,SIGNAL(clicked()),this,SLOT(milk_()));
     connect(egg,SIGNAL(clicked()),this,SLOT(egg_()));
@@ -245,9 +250,17 @@ void store::show2(){
 }
 
 void store::show3(){
+    QFont f = ui->mikh->font();
+    f.setPointSize(14);
     counter++;
-    if(counter==1){
+    if(counter==4){
         if(!data->getGav()->isBuild()){
+           // milk->setStyleSheet("QPushButton {border-image:url(:icons/milk_3.jpg);}");
+            cow->setStyleSheet("QPushButton {border-image:url(:icons/cow_osaurus3.jpg);}");
+            ui->milk->setFont(f);
+            ui->milk->setStyleSheet("color: #00FFFF");
+            ui->cow->setFont(f);
+            ui->cow->setStyleSheet("color: #00FFFF");
             if(data->getLevel()<4){
                 ui->milk->setText("Locked(Level 4)");
                 ui->cow->setText("Locked(Level 4)");
@@ -264,8 +277,14 @@ void store::show3(){
         ui->milk->setHidden(false);
         ui->cow->setHidden(false);
     }
-    else if(counter==2){
+    else if(counter==3){
         if(!data->getMorq()->isBuild()){
+            egg->setStyleSheet("QPushButton {border-image:url(:icons/egg_3.png);}");
+            hen->setStyleSheet("QPushButton {border-image:url(:icons/Hen _osaurus3.png);}");
+            ui->egg->setFont(f);
+            ui->egg->setStyleSheet("color: #00FFFF");
+            ui->hen->setFont(f);
+            ui->hen->setStyleSheet("color: #00FFFF");
             if(data->getLevel()<2){
                 ui->egg->setText("Locked(Level 2)");
                 ui->hen->setText("Locked(Level 2)");
@@ -282,8 +301,14 @@ void store::show3(){
         ui->egg->setHidden(false);
         ui->hen->setHidden(false);
     }
-    else if(counter==3){
+    else if(counter==5){
         if(!data->getGav()->isBuild()){
+            pashm->setStyleSheet("QPushButton {border-image:url(:icons/Pashm3.png);}");
+            sheep->setStyleSheet("QPushButton {border-image:url(:icons/Sheep_osaurus3.png);}");
+            ui->pashm->setFont(f);
+            ui->pashm->setStyleSheet("color: #00FFFF");
+            ui->sheep->setFont(f);
+            ui->sheep->setStyleSheet("color: #00FFFF");
             if(data->getLevel()<6){
                 ui->pashm->setText("Locked(Level 6)");
                 ui->sheep->setText("Locked(Level 6)");
@@ -300,8 +325,11 @@ void store::show3(){
         ui->pashm->setHidden(false);
         ui->sheep->setHidden(false);
     }
-    else if(counter==4){
+    else if(counter==2){
         if(!data->getGav()->isBuild()){
+            yonje->setStyleSheet("QPushButton {border-image:url(:icons/Yon3.png);}");
+            ui->yonje->setFont(f);
+            ui->yonje->setStyleSheet("color: #00FFFF");
             if(data->getLevel()<3)
                 ui->yonje->setText("Locked(Level 3)");
             else
@@ -313,7 +341,7 @@ void store::show3(){
         ui->gandom->setHidden(false);
         ui->yonje->setHidden(false);
     }
-    else if(counter==5){
+    else if(counter==1){
         bil->setHidden(false);
         mikh->setHidden(false);
         ui->bill->setHidden(false);
@@ -321,8 +349,8 @@ void store::show3(){
     }
     else if(counter==6){
         go_back->setHidden(false);
-        ui->co->setHidden(true);
-        coins->setHidden(true);
+        ui->co->setHidden(false);
+        coins->setHidden(false);
     }
 }
 
