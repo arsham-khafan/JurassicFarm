@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+    <file>gifs/farmg1.gif</file>
+    <file>gifs/farmg2.gif</file>
+    <file>gifs/farmg3.gif</file>
+</qresource>
+</RCC>

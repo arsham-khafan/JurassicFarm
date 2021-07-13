@@ -181,10 +181,30 @@ Widget::Widget(QWidget *parent, Data* _data)
                           "QProgressBar::chunk {"
                           "background-color: #176C5B; }");
     exp_bar->setValue(80);
+
+
 #ifdef AAA
     exp_bar->setValue((data->getTime() * 100)/3600);
     exp_bar->setValue((data->getExperience() * 100)/data->getCapacity());
 #endif
+
+    time_bar = new QProgressBar(this);
+    time_bar->setMinimumHeight(12);
+    time_bar->setMinimumWidth(160);
+    time_bar->setMaximumHeight(12);
+    time_bar->setMaximumWidth(160);
+    time_bar->move(75,92);
+    time_bar->setStyleSheet("QProgressBar {"
+                          "background-color: #EEC677;"
+                          "color: #FFFFFF;"
+                          "border-style: outset;"
+                          "border-width: 2px;"
+                          "border-color: #176C5B;"
+                          "border-radius: 7px;"
+                          "text-align: left; }"
+
+                          "QProgressBar::chunk {"
+                          "background-color: #176C5B; }");
 
     connect(storage_butt, SIGNAL(clicked()), this, SLOT(storage_slot()));
 

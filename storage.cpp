@@ -181,6 +181,26 @@ storage::storage(QWidget *parent, Data* _data) : QWidget(parent)
     }
 
 
+    time_bar = new QProgressBar(this);
+    time_bar->setToolTip("Time 😥😥");
+    time_bar->setMinimumHeight(12);
+    time_bar->setMinimumWidth(90);
+    time_bar->setMaximumHeight(12);
+    time_bar->setMaximumWidth(90);
+    time_bar->move(20,150);
+    time_bar->setStyleSheet("QProgressBar {"
+                          "background-color: #EEC677;"
+                          "color: #FFFFFF;"
+                          "border-style: outset;"
+                          "border-width: 2px;"
+                          "border-color: #176C5B;"
+                          "border-radius: 7px;"
+                          "text-align: left; }"
+
+                          "QProgressBar::chunk {"
+                          "background-color: #176C5B; }");
+
+
 }
 
 void storage::map_menu(){

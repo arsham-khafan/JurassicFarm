@@ -40,6 +40,7 @@ private:
     QPushButton* one_day_forward;
     QPushButton* rankings;
     QProgressBar* exp_bar;
+    QProgressBar* time_bar;
 public slots:
     void lands_slot();
     void storage_slot();

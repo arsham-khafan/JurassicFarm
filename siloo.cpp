@@ -20,7 +20,7 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
 
     main_bar = new QProgressBar(this);
     main_bar->setOrientation(Qt::Vertical);
-    main_bar->move(400,140);
+    main_bar->move(250,140);
     main_bar->setMinimumHeight(514);
     main_bar->setMinimumWidth(599);
     main_bar->setMaximumHeight(514);
@@ -30,10 +30,10 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
     main_bar->setTextVisible(false);
     main_bar->setValue((data->getsilo()->getCount() * 68)/data->getsilo()->getSpace());
     main_bar->setToolTip("silo level: " + QString::number(data->getsilo()->getLevel()) + "\n" + "weat volume: " + QString::number(data->getsilo()->getCount()) + "\n" + "silo capacity: " + QString::number(data->getsilo()->getSpace()));
-
-    QMovie* movie = new QMovie(":gifs/tenor.gif");
+///////////////////////////////////////////////////////
+    QMovie* movie = new QMovie(":gifs/farmg1.gif");
     QLabel* label = new QLabel(this);
-    label->move(0,676);
+    label->move(30,560);
     // Make sure the GIF was loaded correctly
     if (!movie->isValid())
     {
@@ -43,7 +43,20 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
         label->setMovie(movie);
         movie->start();
     }
-
+///////////////////////////////////////////////////////
+    QMovie* movie2 = new QMovie(":gifs/farmg2.gif");
+    QLabel* label2 = new QLabel(this);
+    label2->move(1000,500);
+    // Make sure the GIF was loaded correctly
+    if (!movie2->isValid())
+    {
+        label2->setText("mammad");
+    }
+    else{
+        label2->setMovie(movie2);
+        movie2->start();
+    }
+///////////////////////////////////////////////////////
     go_back = new QPushButton(this);
     go_back->setMinimumHeight(90);
     go_back->setMinimumWidth(90);
@@ -66,6 +79,25 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
 
     connect(go_back, SIGNAL(clicked()), this, SLOT(back_to_map()));
     connect(upgrade, SIGNAL(clicked()), this, SLOT(upgrade_slot()));
+
+    time_bar = new QProgressBar(this);
+    time_bar->setToolTip("Time 😥😥");
+    time_bar->setMinimumHeight(12);
+    time_bar->setMinimumWidth(90);
+    time_bar->setMaximumHeight(12);
+    time_bar->setMaximumWidth(90);
+    time_bar->move(20,270);
+    time_bar->setStyleSheet("QProgressBar {"
+                          "background-color: #EEC677;"
+                          "color: #FFFFFF;"
+                          "border-style: outset;"
+                          "border-width: 2px;"
+                          "border-color: #176C5B;"
+                          "border-radius: 7px;"
+                          "text-align: left; }"
+
+                          "QProgressBar::chunk {"
+                          "background-color: #176C5B; }");
 }
 
 void siloo::back_to_map(){
