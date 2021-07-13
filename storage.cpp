@@ -2,6 +2,7 @@
 #include "widget.h"
 #include <QMovie>
 #include <msg.h>
+#include <QMessageBox>
 
 storage::storage(QWidget *parent, Data* _data) : QWidget(parent)
 {
@@ -189,18 +190,38 @@ void storage::map_menu(){
 }
 
 void storage::upgrade_slot(){
-    if(data->isCanAddLevelAnbar()){
-        data->operator-= ((int)qPow(data->getAnbar()->getLevel(), 3) * 10);
-        if (data->addExp(data->getAnbar()->getLevel() * 3))
-          data->UpLevel();
-        data->getAnbar()->UpLevel();
-        QString str = "SUCCESSFULLY UPGRADED!";
-        msg* temp = new msg(nullptr , &str);
-        temp->show();
-    }
-    else{
-        QString str = "CHECK YOUR RESOURCES OR LEVEL FIRST!!";
-        msg* temp = new msg(nullptr , &str);
-        temp->show();
-    }
+     QMessageBox msgBox;
+//     msgBox.setText("are you sure you want to upgrade?");
+     msgBox.setInformativeText("are you sure you want to upgrade?");
+     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+     msgBox.setDefaultButton(QMessageBox::Yes);
+     msgBox.setStyleSheet("color : white; background-color : red");
+     int ret = msgBox.exec();
+
+     switch (ret) {
+        case QMessageBox::Yes:
+
+         if(data->isCanAddLevelAnbar()){
+             data->operator-= ((int)qPow(data->getAnbar()->getLevel(), 3) * 10);
+             if (data->addExp(data->getAnbar()->getLevel() * 3))
+               data->UpLevel();
+             data->getAnbar()->UpLevel();
+             QString str = "SUCCESSFULLY UPGRADED!";
+             msg* temp = new msg(nullptr , &str);
+             temp->show();
+         }
+         else{
+             QString str = "CHECK YOUR RESOURCES OR LEVEL FIRST!!";
+             msg* temp = new msg(nullptr , &str);
+             temp->show();
+         }
+            break;
+        case QMessageBox::Cancel:
+            return;
+            // Don't Save was clicked
+            break;
+        default:
+            // should never be reached
+            break;
+      }
 }

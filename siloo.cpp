@@ -75,22 +75,39 @@ void siloo::back_to_map(){
 }
 
 void siloo::upgrade_slot(){
-   if( data->isCanAddLevelSilo()){
-       int x = data->getAnbar()->getLevel();
-       data->operator-= (100 * (int)qPow((2 * x), 2));
-       data->getAnbar()->ChangeMikh(x*-2);
-       data->getAnbar()->ChangeBil(-(x - 2));
-       if (data->addExp(data->getsilo()->getLevel() * 2))
-         data->UpLevel();
-       data->getsilo()->UpLevel();
-       QString str = "SUCCESSFULLY UPGRADED!";
-       msg* temp = new msg(nullptr , &str);
-       temp->show();
-   }
-   else{
-       QString str = "CHECK YOUR RESOURCES OR LEVEL FIRST!!";
-       msg* temp = new msg(nullptr , &str);
-       temp->show();
-   }
+    QMessageBox* msgBox = new QMessageBox;
+//     msgBox.setText("are you sure you want to upgrade?");
+    msgBox->setText("are you sure you want to upgrade?");
+    msgBox->setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+    msgBox->setDefaultButton(QMessageBox::Yes);
+    msgBox->setStyleSheet("color : white; background-color : red");
+    int ret = msgBox->exec();
 
+     switch (ret) {
+        case QMessageBox::Yes:
+         if( data->isCanAddLevelSilo()){
+             int x = data->getAnbar()->getLevel();
+             data->operator-= (100 * (int)qPow((2 * x), 2));
+             data->getAnbar()->ChangeMikh(x*-2);
+             data->getAnbar()->ChangeBil(-(x - 2));
+             if (data->addExp(data->getsilo()->getLevel() * 2))
+               data->UpLevel();
+             data->getsilo()->UpLevel();
+             QString str = "SUCCESSFULLY UPGRADED!";
+             msg* temp = new msg(nullptr , &str);
+             temp->show();
+         }
+         else{
+             QString str = "CHECK YOUR RESOURCES OR LEVEL FIRST!!";
+             msg* temp = new msg(nullptr , &str);
+             temp->show();
+         }
+            break;
+        case QMessageBox::Cancel:
+            return;
+            break;
+        default:
+            // should never be reached
+            break;
+      }
 }
