@@ -125,7 +125,7 @@ public:
     void unsetTime(){data["BeginAndLastFood"] = -1;}
     int getTime() { return data["BeginAndLastFood"].toInt(); }
     bool isBuild(){ return data["isbuild"].toBool(); }
-    bool setBuild(bool i){data["isbuild"]=i;}
+    void setBuild(bool i){data["isbuild"]=i;}
     void UpLevel();
     int Taghzie();
     int JamAvari();
