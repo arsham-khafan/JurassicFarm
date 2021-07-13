@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/">
-    <file>gifs/farmg1.gif</file>
-    <file>gifs/farmg2.gif</file>
-    <file>gifs/farmg3.gif</file>
-</qresource>
+        <file>gifs/farmg1.gif</file>
+        <file>gifs/farmg2.gif</file>
+        <file>gifs/farmg3.gif</file>
+        <file>icons/kh-y.jpeg</file>
+        <file>icons/y1.jfif</file>
+    </qresource>
 </RCC>

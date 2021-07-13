@@ -112,12 +112,14 @@ void Data::BuildYonje(){
         UpLevel();
 }
 
-void Data::check(){
-
-}
-
 void Data::nextDay(){
-
+    qDebug() << data;
+    for(;getAnbar()->getMilk()>0;){
+        if(getDays() - getAnbar()->getFirstMilk()>10)
+            getAnbar()->RemoveMilk();
+        else
+            break;
+    }
 }
 
 void Data::quit() {
@@ -126,6 +128,13 @@ void Data::quit() {
     QByteArray b = f.readAll();
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject total = d.object();
+    data["aqol"] = getAqol()->getData();
+    data["gavdari"] = getGav()->getData();
+    data["morqdari"] = getMorq()->getData();
+    data["anbar"] = getAnbar()->getData();
+    data["silo"] = getsilo()->getData();
+    data["gandomland"] = getGandomLand()->getData();
+    data["yonjeland"] = getYonjeLand()->getData();
     total[data["username"].toString()] = data;
     f.close();
     f.open(QIODevice::WriteOnly);
@@ -166,7 +175,11 @@ void silo::UpLevel() {
 }
 
 void lands::UpLevel(){
-    data["area"] = data["area"].toInt()*2;
+    int i = data["area"].toArray().count();
+    QJsonArray arr = data["area"].toArray();
+    for(int j=0;j<i;j++)
+        arr.append(0);
+    data["area"] = arr;
     data["level"] = data["level"].toInt()+1;
 }
 

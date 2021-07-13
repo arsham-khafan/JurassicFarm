@@ -12,7 +12,7 @@ khata::khata(QWidget *parent,QString tozihkhata) :
         this->setMaximumHeight(400);
         this->setMaximumWidth(600);
     setAutoFillBackground(true);
-    QPixmap pixmap=QPixmap(":backgrounds/warning.jpeg").scaled(this->size());
+    QPixmap pixmap=QPixmap(":backgrounds/warningg.jpg").scaled(this->size());
     QPalette palette(this->palette());
     palette.setBrush(this->backgroundRole(),QBrush(pixmap.scaled(this->size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
     this->setPalette(palette);
@@ -21,10 +21,10 @@ khata::khata(QWidget *parent,QString tozihkhata) :
    lb2=new  QLabel("type of warning:");
    lb1->setText(tozihkhata);
    lb1->setEnabled(false);
-    lb1->setStyleSheet("color:black;" "font-size:12px;");
+    lb1->setStyleSheet("color:black;" "background-color:yellow;" "font-size:12px;");
     lb2->setStyleSheet("color:blue;" "font-size:20px;");
-    lb1->setFixedSize(300,35);
-    lb1->move(40,320);
+    lb1->setFixedSize(550,70);
+    lb1->move(25,310);
     lb2->move(40,280);
     lb1->setParent(this);
     lb2->setParent(this);

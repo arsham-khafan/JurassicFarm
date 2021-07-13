@@ -197,18 +197,24 @@ void signupp::sett() {
         sil["level"] = 1;
         sil["time"] = -1;
 
-        gandom["area"] = 5;
+        QJsonArray yon = {0,0,0,0} , gan = {0,0,0,0,0};
+        gandom["area"] = gan;
         gandom["kesht_time"] = 0;
         gandom["count"] = 0;
         gandom["time"] = -1;
         gandom["isbuild"] = true;
+        yonje["iskasht"] = false;
+        yonje["isbardasht"] = true;
 
-        yonje["area"] = 4;
+        yonje["area"] = yon;
         yonje["kesht_time"] = 0;
         yonje["shokhm_time"] = 0;
         yonje["count"] = 0;
         yonje["time"] = -1;
         yonje["isbuild"] = false;
+        yonje["isshokhm"] = true;
+        yonje["iskasht"] = false;
+        yonje["isbardasht"] = true;
 
         aq["count"] = 0;
         aq["capacity"] = 2;

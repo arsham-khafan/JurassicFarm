@@ -1,15 +1,15 @@
 #include "widget.h"
 #include "storage.h"
 #include <QApplication>
-#include "ranking.h"
-#include "store.h"
+#include "yonje.h"
+#include "gandom.h"
 #include "aval.h"
 #include "mainwindow.h"
-#include "msg.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    aval w;
+    Gandom w;
     w.showFullScreen();
     return a.exec();
 }
