@@ -1,4 +1,5 @@
 #include "animals_place.h"
+#include "msg.h"
 
 Animals_Place::Animals_Place(QWidget *parent, Data* _data)
     : QWidget(parent)
@@ -11,148 +12,244 @@ Animals_Place::Animals_Place(QWidget *parent, Data* _data)
     this->setMaximumHeight(768);
     this->setMaximumWidth(1366);
 
-   setAutoFillBackground(true);
-    QPixmap pixmap=QPixmap(":backgrounds/aval.jpeg").scaled(this->size());
+    setAutoFillBackground(true);
+    QPixmap pixmap=QPixmap(":backgrounds/animals_place.png").scaled(this->size());
     QPalette palette(this->palette());
     palette.setBrush(this->backgroundRole(),QBrush(pixmap.scaled(this->size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
     this->setPalette(palette);
 
-    pbnMorgh = new QPushButton("Hen_osaurus Place", this);
-    pbnMorgh->setMinimumHeight(50);
-    pbnMorgh->setMinimumWidth(200);
-    pbnMorgh->setMaximumHeight(50);
-    pbnMorgh->setMaximumWidth(200);
-    pbnMorgh->move(500, 200);
-    pbnMorgh->setStyleSheet("QPushButton{background:#80c342;}");
-    pbnMorgh->setCursor(Qt::PointingHandCursor);
-    if (data->getMorq()->isBuild() == 1)
-        pbnMorgh->setEnabled(true);
-    else
-        pbnMorgh->setEnabled(false);
-
-    build1 = new QPushButton("Build", this);
-    build1->setMinimumHeight(50);
-    build1->setMinimumWidth(100);
-    build1->setMaximumHeight(50);
-    build1->setMaximumWidth(100);
-    build1->move(710, 200);
-    build1->setStyleSheet("QPushButton{background:#80c342;}");
-    build1->setCursor(Qt::PointingHandCursor);
-    if (data->isCanBuildMorqdari() == 1)
-        build1->setEnabled(true);
-    else
-        build1->setEnabled(false);
-
-    pbnGav = new QPushButton("Cow_osaurus Place", this);
-    pbnGav->setMinimumHeight(50);
-    pbnGav->setMinimumWidth(200);
-    pbnGav->setMaximumHeight(50);
-    pbnGav->setMaximumWidth(200);
-    pbnGav->move(500, 260);
-    pbnGav->setStyleSheet("QPushButton{background:#80c342;}");
+    pbnGav = new QPushButton( this);
+    pbnGav->setMinimumHeight(485);
+    pbnGav->setMinimumWidth(600);
+    pbnGav->setMaximumHeight(485);
+    pbnGav->setMaximumWidth(600);
+    pbnGav->move(130, 100);
+    pbnGav->setStyleSheet("QPushButton{background:transparent;}");
     pbnGav->setCursor(Qt::PointingHandCursor);
-    if (data->getGav()->isBuild() == 1)
+//    if (data->getGav()->isBuild() == 1)
         pbnGav->setEnabled(true);
-    else
-        pbnGav->setEnabled(false);
+//    else
+//        pbnGav->setEnabled(false);
 
-   build2 = new QPushButton("Build", this);
-   build2->setMinimumHeight(50);
-   build2->setMinimumWidth(100);
-   build2->setMaximumHeight(50);
-   build2->setMaximumWidth(100);
-   build2->move(710, 260);
-   build2->setStyleSheet("QPushButton{background:#80c342;}");
-   build2->setCursor(Qt::PointingHandCursor);
-   if (data->isCanBuildGavdari() == 1)
-        build2->setEnabled(true);
-    else
-        build2->setEnabled(false);
+//    build1 = new QPushButton("Build", this);
+//    build1->setMinimumHeight(50);
+//    build1->setMinimumWidth(100);
+//    build1->setMaximumHeight(50);
+//    build1->setMaximumWidth(100);
+//    build1->move(710, 200);
+//    build1->setStyleSheet("QPushButton{background:#80c342;}");
+//    build1->setCursor(Qt::PointingHandCursor);
+//    if (data->isCanBuildMorqdari() == 1)
+//        build1->setEnabled(true);
+//    else
+//        build1->setEnabled(false);
 
-    pbnGusfand = new QPushButton("Sheep_osaurus Place", this);
-    pbnGusfand->setMinimumHeight(50);
-    pbnGusfand->setMinimumWidth(200);
-    pbnGusfand->setMaximumHeight(50);
-    pbnGusfand->setMaximumWidth(200);
-    pbnGusfand->move(500, 320);
-    pbnGusfand->setStyleSheet("QPushButton{background:#80c342;}");
+    pbnMorgh = new QPushButton(this);
+    pbnMorgh->setMinimumHeight(183);
+    pbnMorgh->setMinimumWidth(860);
+    pbnMorgh->setMaximumHeight(183);
+    pbnMorgh->setMaximumWidth(860);
+    pbnMorgh->move(470, 605);
+    pbnMorgh->setStyleSheet("QPushButton{background: transparent;}");
+    pbnMorgh->setCursor(Qt::PointingHandCursor);
+//    if (data->getMorq()->isBuild() == 1)
+        pbnMorgh->setEnabled(true);
+//    else
+//        pbnMorgh->setEnabled(false);
+
+//   build2 = new QPushButton("Build", this);
+//   build2->setMinimumHeight(50);
+//   build2->setMinimumWidth(100);
+//   build2->setMaximumHeight(50);
+//   build2->setMaximumWidth(100);
+//   build2->move(710, 260);
+//   build2->setStyleSheet("QPushButton{background:#80c342;}");
+//   build2->setCursor(Qt::PointingHandCursor);
+//   if (data->isCanBuildGavdari() == 1)
+//        build2->setEnabled(true);
+//    else
+//        build2->setEnabled(false);
+
+    pbnGusfand = new QPushButton(this);
+    pbnGusfand->setMinimumHeight(200);
+    pbnGusfand->setMinimumWidth(270);
+    pbnGusfand->setMaximumHeight(200);
+    pbnGusfand->setMaximumWidth(270);
+    pbnGusfand->move(1000, 270);
+    pbnGusfand->setStyleSheet("QPushButton{background:transparent;}");
     pbnGusfand->setCursor(Qt::PointingHandCursor);
-    if (data->getAqol()->isBuild() == 1)
+//    if (data->getAqol()->isBuild() == 1)
         pbnGusfand->setEnabled(true);
-    else
-        pbnGusfand->setEnabled(false);
+//    else
+//        pbnGusfand->setEnabled(false);
 
-    build3 = new QPushButton("Build", this);
-    build3->setMinimumHeight(50);
-    build3->setMinimumWidth(100);
-    build3->setMaximumHeight(50);
-    build3->setMaximumWidth(100);
-    build3->move(710, 320);
-    build3->setStyleSheet("QPushButton{background:#80c342;}");
-    build3->setCursor(Qt::PointingHandCursor);
-    if (data->isCanBuildAqol())
-        build3->setEnabled(true);
-    else
-        build3->setEnabled(false);
+//    build3 = new QPushButton("Build", this);
+//    build3->setMinimumHeight(50);
+//    build3->setMinimumWidth(100);
+//    build3->setMaximumHeight(50);
+//    build3->setMaximumWidth(100);
+//    build3->move(710, 320);
+//    build3->setStyleSheet("QPushButton{background:#80c342;}");
+//    build3->setCursor(Qt::PointingHandCursor);
+//    if (data->isCanBuildAqol())
+//        build3->setEnabled(true);
+//    else
+//        build3->setEnabled(false);
 
-    pbnBack = new QPushButton("Back");
-    pbnBack->setMinimumHeight(50);
-    pbnBack->setMinimumWidth(100);
-    pbnBack->setMaximumHeight(50);
-    pbnBack->setMaximumWidth(100);
-    pbnBack->move(10, 710);
+    pbnBack = new QPushButton(this);
+    pbnBack->setMinimumHeight(90);
+    pbnBack->setMinimumWidth(90);
+    pbnBack->setMaximumHeight(90);
+    pbnBack->setMaximumWidth(90);
+    pbnBack->move(20, 30);
     pbnBack->setCursor(Qt::PointingHandCursor);
-    pbnBack->setStyleSheet("QPushButton{background:#868482;}");
+    pbnBack->setStyleSheet("QPushButton {border-image:url(:icons/back2.png);}"
+"                           QPushButton::hover{border-image:url(:icons/back22.png);} ");
 
     connect(pbnMorgh, SIGNAL(clicked()), this, SLOT(showMorghdari()));
     connect(pbnGav, SIGNAL(clicked()), this, SLOT(showGavdari()));
     connect(pbnGusfand, SIGNAL(clicked()), this, SLOT(showAghol()));
 
-    connect(build1, SIGNAL(clicked()), this, SLOT(buildM()));
-    connect(build2, SIGNAL(clicked()), this, SLOT(buildG()));
-    connect(build3, SIGNAL(clicked()), this, SLOT(buildA()));
+//    connect(build1, SIGNAL(clicked()), this, SLOT(buildM()));
+//    connect(build2, SIGNAL(clicked()), this, SLOT(buildG()));
+//    connect(build3, SIGNAL(clicked()), this, SLOT(buildA()));
 
     connect(pbnBack, SIGNAL(clicked()), this, SLOT(back()));
 }
 
 void Animals_Place::showMorghdari(){
-    Morghdari* morgh = new Morghdari(nullptr, data);
-    this->close();
-    morgh->show();
+    if (data->getMorq()->isBuild() == 1)
+    {
+        Morghdari* morgh = new Morghdari(nullptr, data);
+        this->close();
+        morgh->show();
+    }
+    else{
+        if (data->isCanBuildMorqdari() == 1)
+        {
+            QMessageBox msgBox;
+            msgBox.setInformativeText("Hen-saurus holding is not built yet do you want to build it? ");
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+            msgBox.setDefaultButton(QMessageBox::Yes);
+            msgBox.setStyleSheet("color : white; background-color : green");
+            int ret = msgBox.exec();
+
+            switch (ret) {
+               case QMessageBox::Yes:
+                    data->BuildMorq();
+                    data->getMorq()->setBuild(true);
+                   break;
+               case QMessageBox::Cancel:
+                   return;
+                   break;
+               default:
+                   break;
+             }
+        }
+        else{
+            QString str = "Hen-saurus holding is not built yet and you don't have the ability to build it yet!";
+            msg* message = new msg(nullptr, &str);
+            message->show();
+        }
+    }
 }
 
 void Animals_Place::showGavdari(){
-    Gavdari* gav = new Gavdari(nullptr, data);
-    this->close();
-    gav->show();
+    if (data->getGav()->isBuild() == 1)
+    {
+        Gavdari* gav = new Gavdari(nullptr, data);
+        this->close();
+        gav->show();
+    }
+    else{
+        if (data->isCanBuildGavdari() == 1)
+        {
+            QMessageBox msgBox;
+            msgBox.setInformativeText("Cow-saurus holding is not built yet do you want to build it? ");
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+            msgBox.setDefaultButton(QMessageBox::Yes);
+            msgBox.setStyleSheet("color : white; background-color : green");
+            int ret = msgBox.exec();
+
+            switch (ret) {
+               case QMessageBox::Yes:
+                    data->BuildGav();
+                    data->getGav()->setBuild(true);
+                   break;
+               case QMessageBox::Cancel:
+                   return;
+                   break;
+               default:
+                   break;
+             }
+        }
+        else{
+            QString str = "Cow-saurus holding is not built yet and you don't have the ability to build it yet!";
+            msg* message = new msg(nullptr, &str);
+            message->show();
+        }
+    }
 }
 
 void Animals_Place::showAghol(){
-    Aghol* gusfand = new Aghol(nullptr, data);
-    this->close();
-    gusfand->show();
+    if (data->getAqol()->isBuild() == 1)
+    {
+        Aghol* gusfand = new Aghol(nullptr, data);
+        this->close();
+        gusfand->show();
+    }
+    else{
+        if (data->isCanBuildAqol() == 1)
+        {
+            QMessageBox msgBox;
+            msgBox.setInformativeText("Sheep-saurus(Aqol) holding is not built yet do you want to build it? ");
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+            msgBox.setDefaultButton(QMessageBox::Yes);
+            msgBox.setStyleSheet("color : white; background-color : green");
+            int ret = msgBox.exec();
+
+            switch (ret) {
+               case QMessageBox::Yes:
+                    data->BuildAqol();
+                    data->getAqol()->setBuild(true);
+                   break;
+               case QMessageBox::Cancel:
+                   return;
+                   break;
+               default:
+                   break;
+             }
+        }
+        else{
+            QString str = "Sheep-saurus holding(Aqol) is not built yet and you don't have the ability to build it yet!";
+            msg* message = new msg(nullptr, &str);
+            message->show();
+        }
+    }
+
+
 }
 
-void Animals_Place::buildM(){
-    data->BuildMorq();
-    data->getMorq()->setBuild(true);
-}
+//void Animals_Place::buildM(){
+//    data->BuildMorq();
+//    data->getMorq()->setBuild(true);
+//}
 
-void Animals_Place::buildG(){
-    data->BuildGav();
-    data->getGav()->setBuild(true);
-}
+//void Animals_Place::buildG(){
+//    data->BuildGav();
+//    data->getGav()->setBuild(true);
+//}
 
-void Animals_Place::buildA(){
-    data->BuildAqol();
-    data->getAqol()->setBuild(true);
-}
+//void Animals_Place::buildA(){
+//    data->BuildAqol();
+//    data->getAqol()->setBuild(true);
+//}
 
 void Animals_Place::back()
 {
     Widget* w = new Widget(nullptr, data);
     this->close();
-    w->show();
+    w->showFullScreen();
 }
 
 Animals_Place::~Animals_Place()
