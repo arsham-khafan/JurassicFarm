@@ -4,16 +4,6 @@
 #include <msg.h>
 #include <QMessageBox>
 
-void Time(Data* _data, storage* w){
-        QThread::sleep(1);
-       _data->AddTime(1);
-        //w->set(_data->getTime());
-    if(_data->getTime()>=3600){
-        _data->setTime(0);
-    }
-    return Time(_data,w);
-}
-
 storage::storage(QWidget *parent, Data* _data) : QWidget(parent)
 {
     data = _data;
@@ -210,14 +200,11 @@ storage::storage(QWidget *parent, Data* _data) : QWidget(parent)
                           "QProgressBar::chunk {"
                           "background-color: #176C5B; }");
 
-    t = QThread::create(Time,data,this);
-    t->start();
 
 }
 
 void storage::map_menu(){
     Widget* temp = new Widget(nullptr, data);
-    t->terminate();
     temp->showFullScreen();
     this->destroy();
 }
@@ -236,10 +223,10 @@ void storage::upgrade_slot(){
 
          if(data->isCanAddLevelAnbar()){
              data->operator-= ((int)qPow(data->getAnbar()->getLevel(), 3) * 10);
-             data->addExp(data->getAnbar()->getLevel() * 3);
+             if (data->addExp(data->getAnbar()->getLevel() * 3))
+               data->UpLevel();
              data->getAnbar()->UpLevel();
-             QString str = "SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(data->getAnbar()->getLevel()))
-                     + "\n New Capacity: " + QString::fromLatin1(to_string(data->getAnbar()->getCapacity()));
+             QString str = "SUCCESSFULLY UPGRADED!";
              msg* temp = new msg(nullptr , &str);
              temp->show();
          }

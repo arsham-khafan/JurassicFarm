@@ -1,7 +1,7 @@
 #include "yonje.h"
 #include "gandom.h"
 #include "ui_yonje.h"
-
+#include<QMovie>
 Yonje::Yonje(QWidget *parent, Data*_data) :
     QWidget(parent),
     ui(new Ui::Yonje)
@@ -94,12 +94,27 @@ Yonje::Yonje(QWidget *parent, Data*_data) :
                                   "QProgressBar::chunk {"
                                   "background-color: #176C5B; }");
         time_bar->setToolTip("time passed: "/* + QString::number(data->getsilo()->getLevel())*/);
-       pb1->setParent(this);
+
+        QMovie* movie = new QMovie(":gifs/yonjeh.gif");
+        QLabel* label = new QLabel(this);
+        label->move(0,400);
+        // Make sure the GIF was loaded correctly
+        if (!movie->isValid())
+        {
+            label->setText("mammad");
+        }
+        else{
+            label->setMovie(movie);
+            movie->start();
+        }
+
+        pb1->setParent(this);
        pb2->setParent(this);
        pb3->setParent(this);
        pb4->setParent(this);
        pb5->setParent(this);
        time_bar->setParent(this);
+
 }
 
 void Yonje::back_to_map(){

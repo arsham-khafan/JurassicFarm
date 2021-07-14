@@ -20,9 +20,8 @@ khata::khata(QWidget *parent,QString tozihkhata) :
     lb1=new QLineEdit;
    lb2=new  QLabel("type of warning:");
    lb1->setText(tozihkhata);
-   lb1->setAlignment(Qt::AlignCenter);
    lb1->setEnabled(false);
-    lb1->setStyleSheet("color:black;" "background-color:yellow;" "font-size:12px;");
+    lb1->setStyleSheet("color:black;" "background-color:yellow;" "font-size:15px;");
     lb2->setStyleSheet("color:blue;" "font-size:20px;");
     lb1->setFixedSize(550,70);
     lb1->move(25,310);

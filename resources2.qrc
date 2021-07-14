@@ -1,3 +1,4 @@
+
 <RCC>
     <qresource prefix="/">
     <file>backgrounds/store2.jpg</file>
@@ -38,7 +39,6 @@
     <file>icons/milk_3.png</file>
     <file>icons/daneh.jpg</file>
     <file>icons/gando.jpg</file>
-    <file>icons/gando2.jpg</file>
     <file>icons/gandom2.jpg</file>
     <file>icons/kasht1.jpg</file>
     <file>icons/kasht2.jpg</file>
@@ -56,9 +56,10 @@
     <file>backgrounds/gandom.jpg</file>
     <file>backgrounds/warningg.jpg</file>
     <file>backgrounds/yonjeh.jpg</file>
-    <file>icons/yonjeh4.jpg</file>
     <file>gifs/farmg1.gif</file>
     <file>gifs/farmg2.gif</file>
     <file>gifs/farmg3.gif</file>
+    <file>gifs/gandom.gif</file>
+    <file>gifs/yonjeh.gif</file>
     </qresource>
 </RCC>

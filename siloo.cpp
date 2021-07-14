@@ -122,10 +122,10 @@ void siloo::upgrade_slot(){
              data->operator-= (100 * (int)qPow((2 * x), 2));
              data->getAnbar()->ChangeMikh(x*-2);
              data->getAnbar()->ChangeBil(-(x - 2));
-             data->addExp(data->getsilo()->getLevel() * 2);
+             if (data->addExp(data->getsilo()->getLevel() * 2))
+               data->UpLevel();
              data->getsilo()->UpLevel();
-             QString str = "SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(data->getsilo()->getLevel()))
-                     + "\n New Capacity: " + QString::fromLatin1(to_string(data->getsilo()->getCapacity()));
+             QString str = "SUCCESSFULLY UPGRADED!";
              msg* temp = new msg(nullptr , &str);
              temp->show();
          }

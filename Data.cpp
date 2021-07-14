@@ -1,7 +1,6 @@
 #include "Data.h"
 Data::Data(QJsonObject& obj){
     data=obj;
-    what =1;
  QJsonObject a = data["aqol"].toObject();
     aq = new AnimalsPlace(a);
     a = data["gavdari"].toObject();
@@ -88,32 +87,33 @@ bool Data::isCanBuildYonje(){
 void Data::BuildMorq(){
     this->operator-=(10);
     getAnbar()->ChangeMikh(-1);
-    addExp(5);
-}
+    if(addExp(5))
+        UpLevel();}
 
 void Data::BuildGav(){
     this->operator-=(20);
     getAnbar()->ChangeMikh(-3);
     getAnbar()->ChangeBil(-1);
-    addExp(10);
-}
+    if(addExp(10))
+        UpLevel();}
 
 void Data::BuildAqol(){
     this->operator-=(50);
     getAnbar()->ChangeMikh(-4);
     getAnbar()->ChangeBil(-2);
-    addExp(20);
-}
+    if(addExp(20))
+        UpLevel();}
 
 void Data::BuildYonje(){
     this->operator-=(15);
     getAnbar()->ChangeMikh(-1);
     getAnbar()->ChangeBil(-1);
-    addExp(6);
+    if(addExp(6))
+        UpLevel();
 }
 
-void Data::nextDay(int kind){
-    data["days"]=data["days"].toInt()+1;
+void Data::nextDay(){
+    qDebug() << data;
     for(;getAnbar()->getMilk()>0;){
         if(getDays() - getAnbar()->getFirstMilk()>10)
             getAnbar()->RemoveMilk();
@@ -145,10 +145,11 @@ void Data::quit() {
     f.write(d.toJson());
 }
 
-void Data::addExp(int i) {
+bool Data::addExp(int i) {
     data["experience"] = data["experience"].toInt() + i;
     if (data["experience"].toInt() >= data["capacity"].toInt())
-        UpLevel();
+        return true;
+    return false;
 }
 
 void Data::UpLevel() {
@@ -196,7 +197,7 @@ int AnimalsPlace::JamAvari() {
 int AnimalsPlace::Taghzie() {
     if (!getExist()) {
         setFood(true);
-        set_Time(1);
+        setTime();
         return 1;
     }
     return 0;
