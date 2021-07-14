@@ -82,5 +82,26 @@
         <file>icons/Sheep_osaurus3.png</file>
         <file>icons/Yon3.png</file>
         <file>icons/milk_3.png</file>
+        <file>icons/daneh.jpg</file>
+        <file>icons/gando.jpg</file>
+        <file>icons/gando2.jpg</file>
+        <file>icons/gandom2.jpg</file>
+        <file>icons/kasht1.jpg</file>
+        <file>icons/kasht2.jpg</file>
+        <file>icons/kh-y.jpeg</file>
+        <file>icons/khack.jpg</file>
+        <file>icons/masahat1.png</file>
+        <file>icons/masahat2.png</file>
+        <file>icons/milk_3.jpg</file>
+        <file>icons/shokhm1.jpeg</file>
+        <file>icons/shokhm2.jpg</file>
+        <file>icons/y1.jfif</file>
+        <file>icons/yonje.jpeg</file>
+        <file>icons/yonjeh2.jpg</file>
+        <file>icons/yonjeh3.jpg</file>
+        <file>backgrounds/gandom.jpg</file>
+        <file>backgrounds/warningg.jpg</file>
+        <file>backgrounds/yonjeh.jpg</file>
+        <file>icons/yonjeh4.jpg</file>
     </qresource>
 </RCC>

@@ -41,11 +41,12 @@ class Ranking : public QWidget
 
 public:
     Ranking(QWidget *parent = nullptr, Data* _data = nullptr);
-    //, Data* _data = nullptr
+    void set();
     ~Ranking();
 public slots:
     void map_menu();
 private:
+    QThread* t;
     Data* data;
     map<pair<int,int>,QString> sort;
     Ui::Ranking *ui;

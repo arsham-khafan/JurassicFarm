@@ -58,7 +58,6 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
                 pb4->setMaximumWidth(100);
                 pb4->setStyleSheet("QPushButton {border-image:url(:icons/masahat1.png);border:2px;border-radius:40px;}" "QPushButton::hover{border-image:url(:icons/masahat2.png);} ");
                 pb4->setToolTip("land area");
-                pb4->setCursor(Qt::ClosedHandCursor);
                 up_level = new QPushButton(this);
                 up_level->setMinimumHeight(166);
                 up_level->setMinimumWidth(500);
@@ -86,6 +85,8 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
                                       "QProgressBar::chunk {"
                                       "background-color: #176C5B; }");
 
+                time_bar->setFixedSize(300,20);
+
             time_bar->setToolTip("time passed: "/* + QString::number(data->getsilo()->getLevel())*/);
 
             connect(pb1, SIGNAL(clicked()), this , SLOT(back_to_map()));
@@ -96,7 +97,7 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
             time_bar->setParent(this);
             ui->setupUi(this);
 
-            ui->sabt->setStyleSheet("QPushButton {border:2px;border-radius:40px;}");
+            ui->sabt->setHidden(true);
 
             gan = new QPushButton(this);
             gan->move(20,300);
@@ -105,24 +106,44 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
             build = new QPushButton(this);
             build->setText("Build");
             build->setHidden(true);
+            build->setEnabled(false);
 
             main = new QGridLayout;
             int num = data->getGandomLand()->getArea();
             kol = new QPushButton[num];
             for(int h=0;h<num;h++){
                 if(data->getGandomLand()->at(h) == 0)
-                    setStyleSheet("QPushButton {border-image:url(:icons/masahat1.png);border:2px;border-radius:40px;}");
+                    kol[h].setStyleSheet("QPushButton {border-image:url(:icons/masahat1.png);border:2px;border-radius:40px;}"
+                    " QPushButton::hover{border-image:url(:icons/Hen _osaurus2.png);}");
                 else if(data->getGandomLand()->at(h) == 1){
-                    if(time_bar->value()>=50)
-                        setStyleSheet("QPushButton {border-image:url(:icons/masahat1.png);border:2px;border-radius:40px;}");
-                    else if(time_bar->value()>0 && time_bar->value()<50)
-                        setStyleSheet("QPushButton {border-image:url(:icons/masahat1.png);border:2px;border-radius:40px;}");
+                    if(time_bar->value()>0)
+                        kol[h].setStyleSheet("QPushButton {border-image:url(:icons/masahat1.png);border:2px;border-radius:40px;}"
+                        " QPushButton::hover{border-image:url(:icons/Hen _osaurus2.png);}");
                 }
                 else if(data->getGandomLand()->at(h) == 3)
-                    setStyleSheet("QPushButton {border-image:url(:icons/masahat1.png);border:2px;border-radius:40px;}");
+                    kol[h].setStyleSheet("QPushButton {border-image:url(:icons/gando.jpg);border:2px;border-radius:40px;}"
+                    " QPushButton::hover{border-image:url(:icons/gando.jpg);}");
+                main->addWidget(&kol[h],h/5,h%5);
+                kol[h].setFixedSize(100,100);
+                connect(&kol[h],SIGNAL(clicked()),this,SLOT(buttons()));
             }
 
+            ui->scrollArea->setLayout(main);
+            main->setSpacing(0);
 
+            if(data->getLevel()<3){
+                pb2->setStyleSheet("QPushButton {border-image:url(:backgrounds/yonjeh4.jpg);border:2px;border-radius:40px;}");
+            }
+            else{
+                if(!data->getYonjeLand()->isBuild()){
+                    build->setHidden(false);
+                    build->setEnabled(true);
+                }
+            }
+
+            connect(pb3,SIGNAL(clicked()),this,SLOT(kesht()));
+            connect(ui->sabt,SIGNAL(clicked()),this,SLOT(sabt()));
+            //connect(pb3,SIGNAL(clicked()),this,SLOT(bardasht()));
     }
 
 void Gandom::back_to_map(){
@@ -132,9 +153,21 @@ void Gandom::back_to_map(){
 }
 
 void Gandom::go_to_yonjeh_widget(){
-        Yonje* temp = new Yonje(nullptr, data);
-        temp->showFullScreen();
-        this->destroy();
+    if(data->getLevel()>=3){
+        if(data->getYonjeLand()->isBuild()){
+            Yonje* temp = new Yonje(nullptr, data);
+            temp->showFullScreen();
+            this->destroy();
+        }
+        else{
+            khata* payam = new khata(nullptr,"Not Build yet");
+            payam->show();
+        }
+    }
+    else{
+        khata* payam = new khata(nullptr,"open in level 3");
+        payam->show();
+    }
 }
 
 void Gandom::buttons(){
@@ -146,10 +179,18 @@ void Gandom::buttons(){
     }
 
     if(w == 1){
-        data->getGandomLand()->setAt(i,1);
-        kol[i].setStyleSheet("background-color: Yellow");
-        data->getGandomLand()->setKesht(true);
-        data->getGandomLand()->setBardasht(true);
+        if(data->getsilo()->getCount()){
+            data->getGandomLand()->setAt(i,1);
+            kol[i].setStyleSheet("background-color: Yellow");
+            data->getGandomLand()->setKesht(true);
+            data->getGandomLand()->setBardasht(false);
+            data->getsilo()->operator-=(1);
+            gan->setText(QString::fromLatin1(to_string(data->getsilo()->getCount())));
+        }
+        else{
+            khata* payam = new khata(nullptr,"there is no gandom in siloo");
+            payam->show();
+        }
     }
     else if(w == 2){
         if(data->getGandomLand()->at(i)==3){
@@ -160,7 +201,7 @@ void Gandom::buttons(){
                 data->getGandomLand()->setAt(i,0);
             }
             else{
-                khata* payam = new khata(this,"No Space in siloo");
+                khata* payam = new khata(nullptr,"No Space in siloo");
                 payam->show();
             }
 
@@ -173,15 +214,61 @@ void Gandom::sabt(){
     build->setEnabled(true);
     int num = data->getGandomLand()->getArea();
     for(int j=0;j<num;kol[j].setEnabled(false),j++);
+    ui->sabt->setHidden(true);
+    if(w==2){
+        int n=1;
+        for(int j=0;j<num;j++){
+            if(data->getGandomLand()->at(j)==1){
+                n=0;
+                break;
+            }
+        }
+        if(n) data->getGandomLand()->setBardasht(true);
+    }
+    if(w==1 && data->getGandomLand()->isKesht()){
 
+    }
 }
 
 void Gandom::kesht(){
-
+    if(data->getGandomLand()->isKesht()){
+        khata* payam = new khata(nullptr,"You have already planted gandom");
+        payam->show();
+    }
+    else if(!data->getGandomLand()->isBardasht()){
+        khata* payam = new khata(nullptr,"You have not yet fully harvested the gandom");
+        payam->show();
+    }
+    else{
+        if(ui->sabt->isHidden()){
+            w=1;
+            pb2->setEnabled(false);
+            build->setEnabled(false);
+            int num = data->getGandomLand()->getArea();
+            for(int j=0;j<num;kol[j].setEnabled(true),j++);
+            ui->sabt->setHidden(false);
+        }
+        else if(w==2){
+            khata* payam = new khata(nullptr,"First Accept changes");
+            payam->show();
+        }
+    }
 }
 
 void Gandom::bardasht(){
-
+    if(data->getGandomLand()->isKesht()){
+        khata* payam = new khata(nullptr,"Wait until the gandom is done");
+        payam->show();
+    }
+    else{
+        w=2;
+        pb2->setEnabled(true);
+        build->setEnabled(true);
+        pb3->setEnabled(true);
+        int num = data->getGandomLand()->getArea();
+        for(int j=0;j<num;kol[j].setEnabled(false),j++);
+        ui->sabt->setHidden(true);
+    }
 }
 
 Gandom::~Gandom()

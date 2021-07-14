@@ -9,8 +9,9 @@ class storage : public QWidget
     Q_OBJECT
 public:
     explicit storage(QWidget *parent = nullptr, Data* _data = nullptr);
-
+    void set(int i){cpc_bar->setValue(i);}
 private:
+    QThread* t;
     Data* data;
     QLabel* nail;
     QLabel* shovel;

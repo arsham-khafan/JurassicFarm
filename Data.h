@@ -54,7 +54,7 @@ public:
     int getSpace() { return data["capacity"].toInt() - data["count"].toInt();  }
     bool isCanUp() { if (data["mikh"].toInt() >= data["level"].toInt() && data["bil"].toInt() >= data["level"].toInt() - 1) return true; return false; }
     void setTime(int i) { data["time"] = i; }
-    void unsetTime(){data["time"] = -1;}
+    int get_time(){ return data["time"].toInt();}
     void AddTime(int i) { data["time"] = data["time"].toInt() + i; }
     void UpLevel();
 };
@@ -66,9 +66,10 @@ public:
     QJsonObject getData(){return data;}
     int getLevel() { return data["level"].toInt(); }
     int getCount(){return data["count"].toInt(); }
+    int getCapacity(){ return data["capacity"].toInt();}
     void setTime(int i) { data["time"] = i; }
-    void unsetTime(){data["time"] = -1;}
     void AddTime(int i) { data["time"] = data["time"].toInt() + i; }
+    int get_time(){ return data["time"].toInt();}
     void operator-=(int i) { data["count"] = data["count"].toInt() - i; }
     void operator+=(int i) { data["count"] = data["count"].toInt() + i; }
     int getSpace() { return data["capacity"].toInt() - data["count"].toInt(); }
@@ -83,22 +84,25 @@ protected:
 public:
     lands(QJsonObject& obj) { data = obj; }
     QJsonObject getData(){return data;}
-    int getCount() { return data["count"].toInt(); }
     int getArea() { return data["area"].toArray().count(); }
-    long long int get_kesht_time() { return data["kesht_time"].toString().toLongLong(); }
-    long long int get_shokhm_time() { return data["shokhm_time"].toString().toLongLong(); }
-    void setCount(int i) { data["count"] = i; }
-    void set_kesht_time(long long int i) { data["kesht_time"] = QString::fromStdString(to_string(i)); }
-    void set_shokhm_time(long long int i) { data["shokhm_time"] = QString::fromStdString(to_string(i)); }
+    int get_time() { return data["level_time"].toInt(); }
+    int get_time_work() { return data["time"].toInt(); }
+    void Add_Time(int i){data["level_time"] = data["level_time"].toInt() + i;}
+    void Add_Time_work(int i){data["time"] = data["time"].toInt() + i;}
+    void setTime(int i){data["level_time"] = i;}
+    void setTime_work(int i){data["time"] = i;}
     void setShokhm(bool i){ data["isshokhm"] = i;}
     void setKesht(bool i){ data["iskasht"] = i;}
+    bool isKesht(){return data["iskasht"].toBool();}
+    bool isShokhm(){return data["isshokhm"].toBool();}
+    bool isBardasht(){return data["isbardasht"].toBool();}
     int at(int i){ return data["area"].toArray()[i].toInt();}
     void setAt(int i, int val){ QJsonArray arr = data["area"].toArray();
                                 arr[i] = val;
                               data["area"] = arr;}
     void setBardasht(bool i){ data["isbardasht"] = i;}
-    void operator++() { data["count"] = data["count"].toInt() + 1; }
     bool isBuild(){ return data["isbuild"].toBool(); }
+    void setBuilds(bool i){data["isbuild"] = i;}
     void UpLevel();
 };
 
@@ -120,10 +124,12 @@ public:
     void setExist(bool i) { data["isexist"] = i; }
     bool getFood() { return data["isfooded"].toBool(); }
     bool getExist() { return data["isexist"].toBool(); }
-    void setTime() { data["BeginAndLastFood"] = 0; }
-    void AddTime(int i){data["BeginAndLastFood"] = data["BeginAndLastFood"].toInt() + i;}
-    void unsetTime(){data["BeginAndLastFood"] = -1;}
-    int getTime() { return data["BeginAndLastFood"].toInt(); }
+    void set_Time_food(int i) { data["BeginAndLastFood"] = i; }
+    void Add_Time_food(int i){data["BeginAndLastFood"] = data["BeginAndLastFood"].toInt() + i;}
+    int get_Time_food() { return data["BeginAndLastFood"].toInt(); }
+    void set_Time(int i) { data["level_time"] = i; }
+    void Add_Time(int i){data["level_time"] = data["level_time"].toInt() + i;}
+    int get_Time() { return data["level_time"].toInt(); }
     bool isBuild(){ return data["isbuild"].toBool(); }
     void setBuild(bool i){data["isbuild"]=i;}
     void UpLevel();
@@ -134,6 +140,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////        Main Data Structure    :)
 
 class Data {
+    int what;
     QJsonObject data;
     AnimalsPlace* aq;
     AnimalsPlace* gav;
@@ -145,6 +152,8 @@ class Data {
 public:
     Data(QJsonObject&);
     void quit();
+    void setWhat(int i){what =i;}
+    int getWhat(){return what;}
     AnimalsPlace* getAqol() { return aq; }
     AnimalsPlace* getGav() { return gav; }
     AnimalsPlace* getMorq() { return morq; }
@@ -161,6 +170,23 @@ public:
     int getExperience() { return data["experience"].toInt(); }
     int getLevel() { return data["level"].toInt(); }
     int getDays(){return data["days"].toInt();}
+    int getTime_build_morq(){ return data["build_morq"].toInt();}
+    int getTime_build_gav(){ return data["build_gav"].toInt();}
+    int getTime_build_aqol(){ return data["build_aqol"].toInt();}
+    int getTime_build_yonje(){ return data["build_yonje"].toInt();}
+    void Add_build_morq(int i){data["build_morq"] = i;}
+    void Add_build_gav(int i){data["build_gav"] = i;}
+    void Add_build_aqol(int i){data["build_aqol"] = i;}
+    void Add_build_yonje(int i){data["build_yonje"] = i;}
+    void set_build_morq(int i){data["build_morq"] = i;}
+    void set_build_gav(int i){data["build_gav"] = i;}
+    void set_build_aqol(int i){data["build_aqol"] = i;}
+    void set_build_yonje(int i){data["build_yonje"] = i;}
+    int getTime(){ return data["time"].toInt(); }
+    void AddTime(int i){data["time"] = data["time"].toInt()+i;}
+    void setTime(int i){ data["time"] = i; }
+    void AddMilk(){ getAnbar()->AddMilk(getDays());}
+    void RemvoMilk(){ getAnbar()->RemoveMilk();}
     bool isCanAddLevelSilo();
     bool isCanAddLevelAnbar();
     bool isCanAddLevelAqol();
@@ -176,12 +202,7 @@ public:
     void BuildGav();
     void BuildAqol();
     void BuildYonje();
-    int getTime(){ return data["time"].toInt(); }
-    void AddTime(int i){data["time"] = data["time"].toInt()+i;}
-    void setTime(int i){ data["time"] = i; }
-    void AddMilk(){ getAnbar()->AddMilk(getDays());}
-    void RemvoMilk(){ getAnbar()->RemoveMilk();}
-    void nextDay();
-    bool addExp(int);
+    void nextDay(int);
+    void addExp(int);
     void UpLevel();
 };

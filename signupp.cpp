@@ -199,17 +199,14 @@ void signupp::sett() {
 
         QJsonArray yon = {0,0,0,0} , gan = {0,0,0,0,0};
         gandom["area"] = gan;
-        gandom["kesht_time"] = 0;
-        gandom["count"] = 0;
+        gandom["level_time"] = 0;
         gandom["time"] = -1;
         gandom["isbuild"] = true;
-        yonje["iskasht"] = false;
-        yonje["isbardasht"] = true;
+        gandom["iskasht"] = false;
+        gandom["isbardasht"] = true;
 
         yonje["area"] = yon;
-        yonje["kesht_time"] = 0;
-        yonje["shokhm_time"] = 0;
-        yonje["count"] = 0;
+        yonje["level_time"] = 0;
         yonje["time"] = -1;
         yonje["isbuild"] = false;
         yonje["isshokhm"] = true;
@@ -220,24 +217,27 @@ void signupp::sett() {
         aq["capacity"] = 2;
         aq["level"] = 1;
         aq["BeginAndLastFood"] = -1;
+        aq["level_time"] = -1;
         aq["isfooded"] = false;
-        aq["isexist"] = false;
+        aq["isexist"] = true;
         aq["isbuild"] = false;
 
         gav["count"] = 0;
         gav["capacity"] = 2;
         gav["level"] = 1;
-        gav["BeginAndLastFood"] = "";
+        gav["BeginAndLastFood"] = -1;
+        gav["level_time"] = -1;
         gav["isfooded"] = false;
-        gav["isexist"] = false;
+        gav["isexist"] = true;
         gav["isbuild"] = false;
 
         morq["count"] = 0;
         morq["capacity"] = 2;
         morq["level"] = 1;
         morq["BeginAndLastFood"] = -1;
+        morq["level_time"] = -1;
         morq["isfooded"] = false;
-        morq["isexist"] = false;
+        morq["isexist"] = true;
         morq["isbuild"] = false;
 
         data["aqol"] = aq;
@@ -250,6 +250,11 @@ void signupp::sett() {
 
         data["days"] = 0;
         data["time"] = 0;
+
+        data["build_morq"] = -1;
+        data["build_gav"] = -1;
+        data["build_aqol"] = -1;
+        data["build_yonje"] = -1;
 
         total[li2->text()] = data;
 

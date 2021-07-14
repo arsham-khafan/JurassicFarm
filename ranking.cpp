@@ -5,6 +5,16 @@
 #include "ui_ranking.h"
 using namespace std;
 
+void Time(Data* _data, Ranking* w){
+        QThread::sleep(1);
+       _data->AddTime(1);
+        //w->set();
+    if(_data->getTime()>=3600){
+        _data->setTime(0);
+    }
+    return Time(_data,w);
+}
+
 Ranking::Ranking(QWidget *parent ,Data* _data) :
     QWidget(parent),
     ui(new Ui::Ranking)
@@ -58,6 +68,7 @@ Ranking::Ranking(QWidget *parent ,Data* _data) :
             picture->move(950,300);
 
     ui->setupUi(this);
+
     Row* r = new Row;
     map<pair<int,int>,QString>::iterator  p = sort.begin();
     for(int i=1;p!=sort.end();p++,i++){
@@ -66,6 +77,9 @@ Ranking::Ranking(QWidget *parent ,Data* _data) :
     }
 
     ui->scrollArea->setWidget(r);
+
+    t = QThread::create(Time,data,this);
+        t->start();
 }
 
 void Ranking::map_menu(){

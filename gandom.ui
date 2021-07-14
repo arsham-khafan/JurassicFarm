@@ -27,7 +27,7 @@
 border-top-color: rgb(255, 0, 127);</string>
    </property>
    <property name="frameShape">
-    <enum>QFrame::WinPanel</enum>
+    <enum>QFrame::NoFrame</enum>
    </property>
    <property name="frameShadow">
     <enum>QFrame::Plain</enum>
@@ -40,8 +40,8 @@ border-top-color: rgb(255, 0, 127);</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>587</width>
-      <height>387</height>
+      <width>591</width>
+      <height>391</height>
      </rect>
     </property>
    </widget>
