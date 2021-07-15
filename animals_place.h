@@ -25,9 +25,6 @@ public slots:
     void showMorghdari();
     void showGavdari();
     void showAghol();
-//    void buildM();
-//    void buildG();
-//    void buildA();
     void back();
 
 private:
@@ -36,9 +33,6 @@ private:
     QPushButton* pbnMorgh;
     QPushButton* pbnGav;
     QPushButton* pbnGusfand;
-//    QPushButton* build1;
-//    QPushButton* build2;
-//    QPushButton* build3;
     QPushButton* pbnBack;
 
 };

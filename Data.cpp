@@ -1,6 +1,8 @@
 #include "Data.h"
+
 Data::Data(QJsonObject& obj){
     data=obj;
+    what =1;
  QJsonObject a = data["aqol"].toObject();
     aq = new AnimalsPlace(a);
     a = data["gavdari"].toObject();
@@ -18,7 +20,7 @@ Data::Data(QJsonObject& obj){
 }
 
 bool Data::isCanAddLevelAnbar() {
-    if (getLevel() > getAnbar()->getLevel() && An->isCanUp() && getCoin() >= qPow(getLevel(),3)*10)
+    if (getLevel() > getAnbar()->getLevel() && An->isCanUp() && getCoin() >= qPow(getAnbar()->getLevel(),3)*10)
         return true;
     return false;
 }
@@ -87,33 +89,32 @@ bool Data::isCanBuildYonje(){
 void Data::BuildMorq(){
     this->operator-=(10);
     getAnbar()->ChangeMikh(-1);
-    if(addExp(5))
-        UpLevel();}
+    addExp(5);
+}
 
 void Data::BuildGav(){
     this->operator-=(20);
     getAnbar()->ChangeMikh(-3);
     getAnbar()->ChangeBil(-1);
-    if(addExp(10))
-        UpLevel();}
+    addExp(10);
+}
 
 void Data::BuildAqol(){
     this->operator-=(50);
     getAnbar()->ChangeMikh(-4);
     getAnbar()->ChangeBil(-2);
-    if(addExp(20))
-        UpLevel();}
+    addExp(20);
+}
 
 void Data::BuildYonje(){
     this->operator-=(15);
     getAnbar()->ChangeMikh(-1);
     getAnbar()->ChangeBil(-1);
-    if(addExp(6))
-        UpLevel();
+    addExp(6);
 }
 
-void Data::nextDay(){
-    qDebug() << data;
+void Data::nextDay(int kind){
+    data["days"]=data["days"].toInt()+1;
     for(;getAnbar()->getMilk()>0;){
         if(getDays() - getAnbar()->getFirstMilk()>10)
             getAnbar()->RemoveMilk();
@@ -145,11 +146,10 @@ void Data::quit() {
     f.write(d.toJson());
 }
 
-bool Data::addExp(int i) {
+void Data::addExp(int i) {
     data["experience"] = data["experience"].toInt() + i;
     if (data["experience"].toInt() >= data["capacity"].toInt())
-        return true;
-    return false;
+        UpLevel();
 }
 
 void Data::UpLevel() {
@@ -158,15 +158,19 @@ void Data::UpLevel() {
     data["capacity"] = data["capacity"].toInt() * 2 + 10;
 }
 
-void Anbar::UpLevel() {
-    data["capacity"] = data["capacity"].toInt() * 3;
-    if (data["capacity"].toInt() % 2)
-        data["capacity"] = data["capacity"].toInt() / 2 + 1;
-    else
-        data["capacity"] = data["capacity"].toInt() / 2;
-    data["mikh"] = data["mikh"].toInt() - data["level"].toInt();
-    data["bil"] = data["bil"].toInt() - data["level"].toInt() + 1;
-    data["level"] = data["level"].toInt() + 1;
+void Anbar::UpLevel(int i) {
+    if(i == 2){
+        data["capacity"] = data["capacity"].toInt() * 3;
+        if (data["capacity"].toInt() % 2)
+            data["capacity"] = data["capacity"].toInt() / 2 + 1;
+        else
+            data["capacity"] = data["capacity"].toInt() / 2;
+    }
+    else if(i == 1){
+        data["mikh"] = data["mikh"].toInt() - data["level"].toInt();
+        data["bil"] = data["bil"].toInt() - data["level"].toInt() + 1;
+        data["level"] = data["level"].toInt() + 1;
+    }
 }
 
 void silo::UpLevel() {
@@ -187,19 +191,3 @@ void AnimalsPlace::UpLevel() {
     data["level"] = data["level"].toInt() + 1;
     data["capacity"] = data["capacity"].toInt() * 2;
 }
-
-int AnimalsPlace::JamAvari() {
-    setExist(false);
-    setFood(false);
-    return getCount();
-}
-
-int AnimalsPlace::Taghzie() {
-    if (!getExist()) {
-        setFood(true);
-        setTime();
-        return 1;
-    }
-    return 0;
-}
-

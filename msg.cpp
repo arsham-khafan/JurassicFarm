@@ -17,7 +17,7 @@ msg::msg(QWidget *parent,QString* _message) : QWidget(parent)
     ok_butt->setStyleSheet("background-color : rgb(51,186,51)");
     QLabel* lbl = new QLabel("message:  ");
 
-    QTextEdit* message = new QTextEdit(*_message);
+    message = new QTextEdit(*_message);
     QPalette pal1 = palette();
     pal1.setColor(QPalette::Text, Qt::black);
     message->setAutoFillBackground(true);
@@ -48,4 +48,10 @@ msg::msg(QWidget *parent,QString* _message) : QWidget(parent)
 
 void msg::closer(){
     this->destroy();
+}
+
+
+void msg::settext(QString str){
+    message->setText(str);
+
 }

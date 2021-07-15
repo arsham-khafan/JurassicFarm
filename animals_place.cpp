@@ -109,23 +109,25 @@ Animals_Place::Animals_Place(QWidget *parent, Data* _data)
     connect(pbnMorgh, SIGNAL(clicked()), this, SLOT(showMorghdari()));
     connect(pbnGav, SIGNAL(clicked()), this, SLOT(showGavdari()));
     connect(pbnGusfand, SIGNAL(clicked()), this, SLOT(showAghol()));
-
-//    connect(build1, SIGNAL(clicked()), this, SLOT(buildM()));
-//    connect(build2, SIGNAL(clicked()), this, SLOT(buildG()));
-//    connect(build3, SIGNAL(clicked()), this, SLOT(buildA()));
-
     connect(pbnBack, SIGNAL(clicked()), this, SLOT(back()));
 }
 
 void Animals_Place::showMorghdari(){
     if (data->getMorq()->isBuild() == 1)
     {
-        Morghdari* morgh = new Morghdari(nullptr, data);
-        this->close();
-        morgh->show();
+        if(data->getTime_build_morq()<0){
+            Morghdari* morgh = new Morghdari(nullptr, data);
+            this->close();
+            morgh->show();
+        }
+        else{
+            QString str = "Wait until the construction time is complete!";
+            msg* message = new msg(nullptr, &str);
+            message->show();
+        }
     }
     else{
-        if (data->isCanBuildMorqdari() == 1)
+        if (data->isCanBuildMorqdari() == 1 && data->getMorq()->getLevel()>=2)
         {
             QMessageBox msgBox;
             msgBox.setInformativeText("Hen-saurus holding is not built yet do you want to build it? ");
@@ -138,6 +140,7 @@ void Animals_Place::showMorghdari(){
                case QMessageBox::Yes:
                     data->BuildMorq();
                     data->getMorq()->setBuild(true);
+                    data->set_build_morq(3*60);
                    break;
                case QMessageBox::Cancel:
                    return;
@@ -157,12 +160,19 @@ void Animals_Place::showMorghdari(){
 void Animals_Place::showGavdari(){
     if (data->getGav()->isBuild() == 1)
     {
-        Gavdari* gav = new Gavdari(nullptr, data);
-        this->close();
-        gav->show();
+        if(data->getTime_build_gav()<0){
+            Gavdari* gav = new Gavdari(nullptr, data);
+            this->close();
+            gav->show();
+        }
+        else{
+                    QString str = "Wait until the construction time is complete!";
+                    msg* message = new msg(nullptr, &str);
+                    message->show();
+            }
     }
     else{
-        if (data->isCanBuildGavdari() == 1)
+        if (data->isCanBuildGavdari() == 1 && data->getGav()->getLevel()>=4)
         {
             QMessageBox msgBox;
             msgBox.setInformativeText("Cow-saurus holding is not built yet do you want to build it? ");
@@ -175,6 +185,7 @@ void Animals_Place::showGavdari(){
                case QMessageBox::Yes:
                     data->BuildGav();
                     data->getGav()->setBuild(true);
+                    data->set_build_gav(5*60);
                    break;
                case QMessageBox::Cancel:
                    return;
@@ -194,12 +205,19 @@ void Animals_Place::showGavdari(){
 void Animals_Place::showAghol(){
     if (data->getAqol()->isBuild() == 1)
     {
-        Aghol* gusfand = new Aghol(nullptr, data);
-        this->close();
-        gusfand->show();
+        if(data->getTime_build_aqol()<0){
+            Aghol* gusfand = new Aghol(nullptr, data);
+            this->close();
+            gusfand->show();
+        }
+        else{
+                    QString str = "Wait until the construction time is complete!";
+                    msg* message = new msg(nullptr, &str);
+                    message->show();
+            }
     }
     else{
-        if (data->isCanBuildAqol() == 1)
+        if (data->isCanBuildAqol() == 1 && data->getAqol()->getLevel()>=6)
         {
             QMessageBox msgBox;
             msgBox.setInformativeText("Sheep-saurus(Aqol) holding is not built yet do you want to build it? ");
@@ -212,6 +230,7 @@ void Animals_Place::showAghol(){
                case QMessageBox::Yes:
                     data->BuildAqol();
                     data->getAqol()->setBuild(true);
+                    data->set_build_aqol(600);
                    break;
                case QMessageBox::Cancel:
                    return;
@@ -230,21 +249,6 @@ void Animals_Place::showAghol(){
 
 }
 
-//void Animals_Place::buildM(){
-//    data->BuildMorq();
-//    data->getMorq()->setBuild(true);
-//}
-
-//void Animals_Place::buildG(){
-//    data->BuildGav();
-//    data->getGav()->setBuild(true);
-//}
-
-//void Animals_Place::buildA(){
-//    data->BuildAqol();
-//    data->getAqol()->setBuild(true);
-//}
-
 void Animals_Place::back()
 {
     Widget* w = new Widget(nullptr, data);
@@ -256,4 +260,3 @@ Animals_Place::~Animals_Place()
 {
 
 }
-

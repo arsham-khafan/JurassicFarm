@@ -23,7 +23,7 @@ public slots:
 
 private:
     Data* data;
-
+    QLabel* time_food,* time_level;
     QLabel* lblLvl;
     QLabel* lblLvl2;
     QLabel* lblCpc;

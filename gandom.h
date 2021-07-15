@@ -28,9 +28,12 @@ private:
     QPushButton* kol;
     QPushButton* build;
     QGridLayout* main;
+    QPushButton* bar;
     Data* data;
     Ui::Gandom *ui;
 public slots:
+   void uplevel();
+   void build_();
    void sabt();
    void kesht();
    void bardasht();

@@ -14,8 +14,9 @@ class msg : public QWidget
     Q_OBJECT
 public:
     explicit msg(QWidget *parent = nullptr, QString* _message = nullptr);
+    void settext(QString);
 private:
-
+    QTextEdit* message;
 public slots:
     void closer();
 

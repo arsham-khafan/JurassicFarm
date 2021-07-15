@@ -358,7 +358,7 @@ void store::show3(){
 void store::check_buy(){
     QString str;
     if(!ui->number->text().isEmpty()){
-        int num = ui->number->text().toInt();
+        int num = ui->number->value();
         if(i==1){
             if(num<=data->getAnbar()->getSpace()){
                for(int j=0; j < num ; data->AddMilk(), j++);
@@ -620,14 +620,14 @@ void store::check_buy(){
                                QString::fromLatin1(to_string(data->getAnbar()->getSpace())));
         }
         ui->co->setText("X" +QString::fromLatin1(to_string(data->getCoin())));
-        ui->number->setText("");
+        ui->number->setValue(0);
     }
 }
 
 void store::check_sell(){
     QString str;
     if(!ui->number->text().isEmpty()){
-        int num = ui->number->text().toInt();
+        int num = ui->number->value();
         if(i==1){
             if(num<=data->getAnbar()->getMilk()){
                for(int j=0; j < num ; data->RemvoMilk(), j++);
@@ -809,7 +809,7 @@ void store::check_sell(){
                                QString::fromLatin1(to_string(data->getAnbar()->getSpace())));
         }
         ui->co->setText("X" +QString::fromLatin1(to_string(data->getCoin())));
-        ui->number->setText("");
+        ui->number->setValue(0);
     }
 }
 

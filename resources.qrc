@@ -15,7 +15,6 @@
         <file>icons/rank.png</file>
         <file>icons/2.ico</file>
         <file>icons/3.ico</file>
-        <file>backgrounds/Rank2.jpg</file>
         <file>icons/back2.png</file>
         <file>icons/back22.png</file>
         <file>icons/egg.png</file>
@@ -46,6 +45,5 @@
         <file>icons/Mikh2.png</file>
         <file>icons/milk_2.png</file>
         <file>icons/Sheep_osaurus2.png</file>
-
     </qresource>
 </RCC>

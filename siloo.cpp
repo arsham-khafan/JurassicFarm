@@ -28,8 +28,8 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
     main_bar->setStyleSheet("QProgressBar { border-image: url(:icons/silomask2.png); }"
                             "QProgressBar::chunk { background-image: url(:backgrounds/weat.jpg); }");
     main_bar->setTextVisible(false);
-    main_bar->setValue((data->getsilo()->getCount() * 68)/data->getsilo()->getSpace());
-    main_bar->setToolTip("silo level: " + QString::number(data->getsilo()->getLevel()) + "\n" + "weat volume: " + QString::number(data->getsilo()->getCount()) + "\n" + "silo capacity: " + QString::number(data->getsilo()->getSpace()));
+    main_bar->setValue((data->getsilo()->getCount() * 68)/data->getsilo()->getCapacity());
+    main_bar->setToolTip("silo level: " + QString::number(data->getsilo()->getLevel()) + "\n" + "weat volume: " + QString::number(data->getsilo()->getCount()) + "\n" + "silo capacity: " + QString::number(data->getsilo()->getCapacity()));
 ///////////////////////////////////////////////////////
     QMovie* movie = new QMovie(":gifs/farmg1.gif");
     QLabel* label = new QLabel(this);
@@ -80,24 +80,24 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
     connect(go_back, SIGNAL(clicked()), this, SLOT(back_to_map()));
     connect(upgrade, SIGNAL(clicked()), this, SLOT(upgrade_slot()));
 
-    time_bar = new QProgressBar(this);
-    time_bar->setToolTip("Time 😥😥");
-    time_bar->setMinimumHeight(12);
-    time_bar->setMinimumWidth(90);
-    time_bar->setMaximumHeight(12);
-    time_bar->setMaximumWidth(90);
-    time_bar->move(20,270);
-    time_bar->setStyleSheet("QProgressBar {"
-                          "background-color: #EEC677;"
-                          "color: #FFFFFF;"
-                          "border-style: outset;"
-                          "border-width: 2px;"
-                          "border-color: #176C5B;"
-                          "border-radius: 7px;"
-                          "text-align: left; }"
+//    time_bar = new QProgressBar(this);
+//    time_bar->setToolTip("Time 😥😥");
+//    time_bar->setMinimumHeight(12);
+//    time_bar->setMinimumWidth(90);
+//    time_bar->setMaximumHeight(12);
+//    time_bar->setMaximumWidth(90);
+//    time_bar->move(20,270);
+//    time_bar->setStyleSheet("QProgressBar {"
+//                          "background-color: #EEC677;"
+//                          "color: #FFFFFF;"
+//                          "border-style: outset;"
+//                          "border-width: 2px;"
+//                          "border-color: #176C5B;"
+//                          "border-radius: 7px;"
+//                          "text-align: left; }"
 
-                          "QProgressBar::chunk {"
-                          "background-color: #176C5B; }");
+//                          "QProgressBar::chunk {"
+//                          "background-color: #176C5B; }");
 }
 
 void siloo::back_to_map(){
@@ -107,6 +107,7 @@ void siloo::back_to_map(){
 }
 
 void siloo::upgrade_slot(){
+    if(data->getsilo()->get_time()<0){
     QMessageBox* msgBox = new QMessageBox;
 //     msgBox.setText("are you sure you want to upgrade?");
     msgBox->setText("are you sure you want to upgrade?");
@@ -122,10 +123,9 @@ void siloo::upgrade_slot(){
              data->operator-= (100 * (int)qPow((2 * x), 2));
              data->getAnbar()->ChangeMikh(x*-2);
              data->getAnbar()->ChangeBil(-(x - 2));
-             if (data->addExp(data->getsilo()->getLevel() * 2))
-               data->UpLevel();
-             data->getsilo()->UpLevel();
-             QString str = "SUCCESSFULLY UPGRADED!";
+             data->addExp(data->getsilo()->getLevel() * 2);
+             data->getsilo()->setTime(4*60);
+             QString str = "SILOO WILL BE UPGRADED IN 4 DAYS!";
              msg* temp = new msg(nullptr , &str);
              temp->show();
          }
@@ -142,4 +142,10 @@ void siloo::upgrade_slot(){
             // should never be reached
             break;
       }
+    }
+    else{
+        QString str = "SILOO ALREADY IS UPGRADING!!";
+        msg* temp = new msg(nullptr , &str);
+        temp->show();
+    }
 }

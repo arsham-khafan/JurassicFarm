@@ -5,6 +5,16 @@
 #include "ui_ranking.h"
 using namespace std;
 
+void Time(Data* _data, Ranking* w){
+        QThread::sleep(1);
+       _data->AddTime(1);
+        //w->set();
+    if(_data->getTime()>=3600){
+        _data->setTime(0);
+    }
+    return Time(_data,w);
+}
+
 Ranking::Ranking(QWidget *parent ,Data* _data) :
     QWidget(parent),
     ui(new Ui::Ranking)
@@ -20,24 +30,21 @@ Ranking::Ranking(QWidget *parent ,Data* _data) :
     for(QJsonObject::iterator  p = total.begin();p!=total.end();p++){
         o = p.value().toObject();
         pair<int,int>* val = new pair<int,int>(o["level"].toInt(),o["experience"].toInt());
-        sort[*val]=o["name"].toString();
+        pair<pair<int,int>,QString>* v = new pair<pair<int,int>,QString>(*val,o["name"].toString());
+        sort.insert(*v);
     }
 
 
-    QMovie* movie = new QMovie(":gifs/d2.gif");
-    QLabel* label = new QLabel(this);
-    if (!movie->isValid())
-    {
-        label->setText("mammad");
-    }
-    else{
-        label->setMovie(movie);
-        movie->start();
-    }
-    label->move(1000,10);
-    label->setFixedSize(300,300);
 
-    setStyleSheet("background-color: #FF007F");
+    this->setMinimumHeight(768);
+        this->setMinimumWidth(1366);
+        this->setMaximumHeight(768);
+        this->setMaximumWidth(1366);
+    setAutoFillBackground(true);
+    QPixmap pixmap=QPixmap(":backgrounds/Rank.jpg").scaled(this->size());
+    QPalette palette(this->palette());
+    palette.setBrush(this->backgroundRole(),QBrush(pixmap.scaled(this->size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
+    this->setPalette(palette);
 
         go_back = new QPushButton(this);
         go_back->setMinimumHeight(90);
@@ -51,21 +58,19 @@ Ranking::Ranking(QWidget *parent ,Data* _data) :
 
         connect(go_back, SIGNAL(clicked()), this , SLOT(map_menu()));
 
-            picture = new QLabel(this);
-            picture->setToolTip("");
-            QPixmap* temp = new QPixmap(":backgrounds/Rank2.jpg");
-            picture->setPixmap(temp->scaled(QSize(450,450)));
-            picture->move(950,300);
-
     ui->setupUi(this);
+
     Row* r = new Row;
-    map<pair<int,int>,QString>::iterator  p = sort.begin();
+    multimap<pair<int,int>,QString>::iterator  p = sort.begin();
     for(int i=1;p!=sort.end();p++,i++){
        pair<pair<int,int>,QString> value = *p;
        r->add(value.first.first,i,value.first.second,value.second,data->getName());
     }
 
     ui->scrollArea->setWidget(r);
+
+    t = QThread::create(Time,data,this);
+        t->start();
 }
 
 void Ranking::map_menu(){
@@ -101,14 +106,14 @@ void Row::add(int level_, int rank_, int exp_, QString name_, QString gold){
     level->setAlignment(Qt::AlignCenter);
     rank->setAlignment(Qt::AlignCenter);
 
-    name->setStyleSheet("color: #00FFFF");
-    level->setStyleSheet("color: #0000CC");
+    name->setStyleSheet("color: #C609CD");
+    level->setStyleSheet("color: #C609CD");
 
     if(rank_>3 && name_==gold)
-        level->setStyleSheet("background-color: #FFFF00");
+        rank->setStyleSheet("background-color: #E8CA09");
     if(name_==gold){
-        name->setStyleSheet("background-color: #FFFF00");
-        level->setStyleSheet("background-color: #FFFF00");
+        name->setStyleSheet("color: #E8CA09");
+        level->setStyleSheet("color: #E8CA09");
     }
 
     QFont fo,g;

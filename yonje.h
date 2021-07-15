@@ -18,17 +18,27 @@ public:
     ~Yonje();
 
 private:
+    int w;
+    QPushButton* yon;
     QPushButton* pb1;
     QPushButton* pb2;
     QPushButton* pb3;
     QPushButton* pb4;
     QPushButton* pb5;
     QPushButton* up_level;
-    QProgressBar* time_bar;
+    QPushButton* kol;
+    QGridLayout* main;
+    QPushButton* bardasht;
     Data* data;
     Ui::Yonje *ui;
 
 public slots:
+   void sabt();
+   void kesht();
+   void bardasht_();
+   void uplevel();
+   void buttons();
+   void shokhm();
    void back_to_map();
    void go_to_gandom_widget();
 };

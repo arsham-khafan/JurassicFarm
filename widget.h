@@ -6,7 +6,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QProgressBar>
-#include <thread>
+#include <QThread>
 #include "Data.h"
 
 
@@ -16,11 +16,10 @@ class Widget : public QWidget
 
 public:
     Widget(QWidget *parent = nullptr, Data* _data = nullptr);
-    void Time(Data* _data, Widget* w);
-    void set(){ exp_bar->setValue((data->getTime() * 100)/3600);}
+    void set(){ coins_txt->setText(QString::number(data->getTime()));}
     ~Widget();
 private:
-    //std::thread t;
+    QThread* t;
     Data* data;
     QPushButton* siloo_butt;
     QPushButton* store_butt;
@@ -48,5 +47,7 @@ public slots:
     void back_slot();
     void store_slot();
     void rank_slot();
+    void forward_slot();
+    void animals_slot();
 };
 #endif // WIDGET_H

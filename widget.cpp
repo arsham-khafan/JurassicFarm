@@ -6,26 +6,203 @@
 #include <store.h>
 #include <ranking.h>
 #include "gandom.h"
+#include "animals_place.h"
+#include "msg.h"
 #define AAA
 
-void Widget::Time(Data* _data, Widget* w){
-    for(;_data->getTime()<3600;){
-        std::this_thread::sleep_for(1000ms);
+void Time(Data* _data, Widget* w){
+        QThread::sleep(1);
        _data->AddTime(1);
-       w->set();
-       qDebug() << _data->getTime();
+
+       if(_data->getTime_build_aqol()>0)
+           _data->Add_build_aqol(-1);
+       if(_data->getTime_build_aqol()==0){
+            _data->getAqol()->setBuild(true);
+            _data->set_build_aqol(-1);
+            QString str = "Aqol build Successfully";
+            //msg* payam = new msg(nullptr, &str);
+            //payam->show();
+       }
+
+       if(_data->getTime_build_gav()>0)
+           _data->Add_build_gav(-1);
+       if(_data->getTime_build_gav()==0){
+           _data->set_build_gav(-1);
+           _data->getGav()->setBuild(true);
+           QString str = "Gavdari build Successfully";
+           //msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getTime_build_morq()>0)
+           _data->Add_build_morq(-1);
+       if(_data->getTime_build_morq()==0){
+           _data->getMorq()->setBuild(true);
+           _data->set_build_morq(-1);
+           QString str = "Morqdari build Successfully";
+           //msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getTime_build_yonje()>0)
+           _data->Add_build_yonje(-1);
+       if(_data->getTime_build_yonje()==0){
+           _data->set_build_yonje(-1);
+           _data->getYonjeLand()->setBuilds(true);
+           QString str = "Yonje land build Successfully";
+           //msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getAqol()->get_Time()>0)
+           _data->getAqol()->Add_Time(-1);
+       if(_data->getAqol()->get_Time()==0){
+           _data->getAqol()->UpLevel();
+           _data->getAqol()->set_Time(-1);
+           QString str = "Aqol SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getAqol()->getLevel())
+                   + "\n New Area: " + QString::number(_data->getAqol()->getCapacity());
+           //msg* payam = new msg(nullptr, &str);
+          // payam->show();
+       }
+
+       if(_data->getAqol()->get_Time_food()>0)
+           _data->getAqol()->Add_Time_food(-1);
+       if(_data->getAqol()->get_Time_food()==0){
+           _data->getAqol()->setExist(true);
+           _data->getAqol()->setFood(false);
+           _data->getAqol()->set_Time_food(-1);
+           QString str = "The sheep_osarus are ready to be bred";
+          // msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getGav()->get_Time()>0)
+           _data->getGav()->Add_Time(-1);
+       if(_data->getGav()->get_Time()==0){
+           /////////////////////////
+           _data->getGav()->set_Time(-1);
+           QString str = "Aqol Level up Successfully";
+           //msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getGav()->get_Time_food()>0)
+           _data->getGav()->Add_Time_food(-1);
+       if(_data->getGav()->get_Time_food()==0){
+           _data->getGav()->setExist(true);
+           _data->getGav()->setFood(false);
+           _data->getGav()->set_Time_food(-1);
+           QString str = "The cow_osarus are ready to be bred";
+           //msg* payam = new msg(nullptr, &str);
+          // payam->show();
+       }
+
+       if(_data->getMorq()->get_Time()>0)
+           _data->getMorq()->Add_Time(-1);
+       if(_data->getMorq()->get_Time()==0){
+           //////////////////
+           _data->getMorq()->set_Time(-1);
+           QString str = "Aqol Level up Successfully";
+          // msg* payam = new msg(nullptr, &str);
+          // payam->show();
+       }
+
+       if(_data->getMorq()->get_Time_food()>0)
+           _data->getMorq()->Add_Time_food(-1);
+       if(_data->getMorq()->get_Time_food()==0){
+           _data->getMorq()->setExist(true);
+           _data->getMorq()->setFood(false);
+           _data->getMorq()->set_Time_food(-1);
+           QString str = "The hen_osarus are ready to be bred";
+          // msg* payam = new msg(nullptr, &str);
+          // payam->show();
+       }
+
+       if(_data->getAnbar()->get_time()>0)
+           _data->getAnbar()->AddTime(-1);
+       if(_data->getAnbar()->get_time()==0){
+           _data->getAnbar()->UpLevel(2);
+           _data->getAnbar()->setTime(-1);
+           QString str = "STORAGE SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(_data->getAnbar()->getLevel()))
+                   + "\n New Capacity: " + QString::fromLatin1(to_string(_data->getAnbar()->getCapacity()));;
+           //msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getsilo()->get_time()>0)
+           _data->getsilo()->AddTime(-1);
+       if(_data->getsilo()->get_time()==0){
+           _data->getsilo()->UpLevel();
+           _data->getsilo()->setTime(-1);
+           QString str = "SILOO SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(_data->getsilo()->getLevel()))
+                   + "\n New Capacity: " + QString::fromLatin1(to_string(_data->getsilo()->getCapacity()));
+           //msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getGandomLand()->get_time()>0)
+           _data->getGandomLand()->Add_Time(-1);
+       if(_data->getGandomLand()->get_time()==0){
+           _data->getGandomLand()->UpLevel();
+           _data->getGandomLand()->setTime(-1);
+           QString str = "Gandom land Level up Successfully";
+          // msg* payam = new msg(nullptr, &str);
+          // payam->show();
+       }
+
+
+       if(_data->getGandomLand()->get_time_work()>0)
+           _data->getGandomLand()->Add_Time_work(-1);
+       if(_data->getGandomLand()->get_time_work()==0){
+           //////////////////////
+           _data->getGandomLand()->setTime_work(-1);
+           QString str = "";
+           //msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getYonjeLand()->get_time()>0)
+           _data->getYonjeLand()->Add_Time(-1);
+       if(_data->getYonjeLand()->get_time()==0){
+           _data->getYonjeLand()->UpLevel();
+           _data->getYonjeLand()->setTime(-1);
+           QString str = "Yonje Land SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getYonjeLand()->getLevel())
+                   + "\n New Area: " + QString::number(_data->getYonjeLand()->getArea());
+           //msg* payam = new msg(nullptr, &str);
+           //payam->show();
+       }
+
+       if(_data->getYonjeLand()->get_time_work()>0)
+                  _data->getYonjeLand()->Add_Time_work(-1);
+              if(_data->getYonjeLand()->get_time_work()==0){
+                  //////////////////////
+                  QString str;
+                  _data->getYonjeLand()->setTime_work(-1);
+                  if(_data->getYonjeLand()->isShokhm())
+                      str = "Yonje land was successfully plowed";
+                  else
+                      str = "Yonje was successfully cultivated";
+
+                  //msg* payam = new msg(nullptr, &str);
+                  //payam->show();
+              }
+
+        w->set();
+    if(_data->getTime()>=60){
+        _data->nextDay(2);
+        _data->setTime(0);
+        QString str = "1 day passed! we are in Tomorrow!!";
+        //msg* payam = new msg(nullptr, &str);
+        //payam->show();
     }
-           _data->setTime(0);
+    return Time(_data,w);
 }
 
 Widget::Widget(QWidget *parent, Data* _data)
     : QWidget(parent)
 {
     data = _data;
-    //std::thread qw(&Widget::Time);
-    //std::thread t([&](Widget* view){ view->Time(data,this); });
 
-    //t.join();
     this->setMinimumHeight(768);
     this->setMinimumWidth(1366);
     this->setMaximumHeight(768);
@@ -231,6 +408,10 @@ Widget::Widget(QWidget *parent, Data* _data)
     connect(store_butt, SIGNAL(clicked()), this, SLOT(store_slot()));
     connect(rankings, SIGNAL(clicked()), this, SLOT(rank_slot()));
     connect(lands_butt, SIGNAL(clicked()), this, SLOT(lands_slot()));
+    connect(places_butt, SIGNAL(clicked()), this, SLOT(animals_slot()));
+
+    t = QThread::create(Time,data,this);
+    t->start();
 
 }
 
@@ -242,35 +423,53 @@ Widget::~Widget()
 void Widget::storage_slot(){
     storage* temp = new storage(nullptr, data);
     temp->showFullScreen();
+    t->terminate();
     this->destroy();
 }
 
 void Widget::siloo_slot(){
     siloo* temp = new siloo(nullptr, data);
     temp->showFullScreen();
+    t->terminate();
     this->destroy();
 }
 
 void Widget::back_slot(){
     aval* temp = new aval;
     temp->showFullScreen();
+    t->terminate();
+    data->quit();
     this->destroy();
 }
 
 void Widget::store_slot(){
    store* temp = new store(nullptr, data);
    temp->showFullScreen();
+   t->terminate();
    this->destroy();
 }
 
 void Widget::rank_slot(){
     Ranking* temp = new Ranking(nullptr, data);
     temp->showFullScreen();
+    t->terminate();
     this->destroy();
 }
 
 void Widget::lands_slot(){
     Gandom* temp = new Gandom(nullptr, data);
     temp->showFullScreen();
+    t->terminate();
     this->destroy();
+}
+
+void Widget::animals_slot(){
+    Animals_Place* temp = new Animals_Place(nullptr,data);
+    temp->showFullScreen();
+    t->terminate();
+    this->destroy();
+}
+
+void Widget::forward_slot(){
+    data->nextDay(1);
 }

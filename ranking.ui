@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:1, stop:0.10929 rgba(0, 0, 0, 255), stop:0.306011 rgba(255, 0, 0, 255), stop:0.721311 rgba(255, 0, 0, 255), stop:0.879781 rgba(0, 0, 0, 255));</string>
+   <string notr="true"/>
   </property>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
@@ -29,7 +29,7 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 255, 255, 0), stop:1 rgba(255, 255, 255, 0));</string>
    </property>
    <property name="frameShape">
     <enum>QFrame::NoFrame</enum>

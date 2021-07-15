@@ -9,12 +9,16 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    aghol.cpp \
+    animals_place.cpp \
     aval.cpp \
     gandom.cpp \
+    gavdari.cpp \
     khata.cpp \
     main.cpp \
     Data.cpp \
     mainwindow.cpp \
+    morghdari.cpp \
     msg.cpp \
     ranking.cpp \
     signupp.cpp \
@@ -26,10 +30,14 @@ SOURCES += \
 
 HEADERS += \
     Data.h \
+    aghol.h \
+    animals_place.h \
     aval.h \
     gandom.h \
+    gavdari.h \
     khata.h \
     mainwindow.h \
+    morghdari.h \
     msg.h \
     ranking.h \
     signupp.h \

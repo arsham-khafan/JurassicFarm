@@ -1,10 +1,14 @@
 #include "morghdari.h"
+#include "msg.h"
 
 Morghdari::Morghdari(QWidget *parent, Data* _data)
     : QWidget(parent)
 {
     setWindowTitle("Hen_osaurus Place");
     data = _data;
+
+    time_level = new QLabel;
+    time_food = new QLabel;
 
     this->setMinimumHeight(768);
     this->setMinimumWidth(1366);
@@ -76,25 +80,108 @@ Morghdari::Morghdari(QWidget *parent, Data* _data)
 
 void Morghdari::upgrd()
 {
-    if(data->isCanAddLevelMorqdari() == 1)
-        data->getMorq()->UpLevel();
-    //else
+    if(data->getMorq()->get_Time()<0){
+        QMessageBox msgBox;
+    //     msgBox.setText("are you sure you want to upgrade?");
+        msgBox.setInformativeText("are you sure you want to upgrade?");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Yes);
+        msgBox.setStyleSheet("color : white; background-color : red");
+        int ret = msgBox.exec();
+
+        switch (ret) {
+           case QMessageBox::Yes:
+
+            if(data->isCanAddLevelMorqdari()){
+                data->getAnbar()->ChangeMikh(-1);
+                data->operator-=(10);
+                data->addExp(5);
+                data->getMorq()->set_Time(180);
+                time_level->setText("Time to Level up: " + QString::number(data->getMorq()->get_Time()/60) + ":"
+                 +QString::number(data->getMorq()->get_Time()%60));
+                time_level->setHidden(false);
+                QString str = "Aqol WILL BE UPGRADED IN 3 DAYS!";
+                msg* temp = new msg(nullptr , &str);
+                temp->show();
+            }
+            else{
+                QString str = "CHECK YOUR RESOURCES OR LEVEL FIRST!!";
+                msg* temp = new msg(nullptr , &str);
+                temp->show();
+            }
+               break;
+           case QMessageBox::Cancel:
+               return;
+               // Don't Save was clicked
+               break;
+           default:
+               // should never be reached
+               break;
+         }
+        }
+        else{
+                QString str = "MORGHDARI ALREADY IS UPGRADING!!";
+                msg* temp = new msg(nullptr , &str);
+                temp->show();
+            }
 
 }
 
 void Morghdari::feed()
 {
-
+    if(data->getAqol()->isFood()){
+        QString str = "The animals have eaten!!";
+        msg* temp = new msg(nullptr , &str);
+        temp->show();
+    }
+    else{
+        if(data->getsilo()->getCount()>=data->getMorq()->getCount()){
+            data->getMorq()->setFood(true);
+            QString str = "The animals ate successfully!!";
+            data->getsilo()->operator-=(data->getMorq()->getCount());
+            data->addExp(1);
+            data->getMorq()->set_Time_food(120);
+            time_food->setText("Time to Egg: " + QString::number(data->getMorq()->get_Time_food()/60) + ":"
+             +QString::number(data->getMorq()->get_Time_food()%60));
+            time_food->setHidden(false);
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
+        else{
+            QString str = "NO ENOUGH GANDOM IN SILOO";
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
+    }
 }
 
 void Morghdari::egg()
 {
-
+    if(data->getMorq()->isExist()){
+            QString str = "The eggs were collected successfully!!";
+            data->getAnbar()->ChangeEgg(data->getMorq()->getCount());
+            data->addExp(2);
+            data->getAqol()->setExist(false);
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+    }
+    else{
+        if(data->getMorq()->get_Time_food()>=0){
+            QString str = "It is not time to give egg!!";
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
+        else{
+            QString str = "Animals are not fed!!";
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
+    }
 }
 
 void Morghdari::back()
 {
     Animals_Place* animals = new Animals_Place;
     this->close();
-    animals->show();
+    animals->showFullScreen();
 }
