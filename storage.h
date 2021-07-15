@@ -28,7 +28,7 @@ private:
     QPushButton* go_back;
     QPushButton* up_level;
     QProgressBar* cpc_bar;
-    QProgressBar* time_bar;
+    QLabel* time_lbl;
 public slots:
     void map_menu();
     void upgrade_slot();

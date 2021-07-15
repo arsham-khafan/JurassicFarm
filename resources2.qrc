@@ -60,5 +60,8 @@
         <file>gifs/farmg3.gif</file>
         <file>icons/shokhm.jpg</file>
         <file>backgrounds/animals_place.png</file>
+        <file>backgrounds/cow.jpg</file>
+        <file>backgrounds/ddd.jpg</file>
+        <file>backgrounds/mammut.jpg</file>
     </qresource>
 </RCC>

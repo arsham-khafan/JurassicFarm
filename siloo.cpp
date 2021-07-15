@@ -80,6 +80,14 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
     connect(go_back, SIGNAL(clicked()), this, SLOT(back_to_map()));
     connect(upgrade, SIGNAL(clicked()), this, SLOT(upgrade_slot()));
 
+    time_lbl = new QLabel("days passed goes here!",this);
+    QFont font3 = time_lbl->font();
+    font3.setBold(true);
+    font3.setPointSize(15);
+    time_lbl->setFont(font3);
+    time_lbl->setStyleSheet("color: rgb(153,153,0)");
+    time_lbl->move(20,270);
+
 //    time_bar = new QProgressBar(this);
 //    time_bar->setToolTip("Time 😥😥");
 //    time_bar->setMinimumHeight(12);

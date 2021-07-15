@@ -8,6 +8,9 @@
 #include "gandom.h"
 #include "animals_place.h"
 #include "msg.h"
+#include "gavdari.h"
+#include "morghdari.h"
+#include "aghol.h"
 #define AAA
 
 void Time(Data* _data, Widget* w){
@@ -365,23 +368,32 @@ Widget::Widget(QWidget *parent, Data* _data)
     exp_bar->setValue((data->getExperience() * 100)/data->getCapacity());
 #endif
 
-    time_bar = new QProgressBar(this);
-    time_bar->setMinimumHeight(12);
-    time_bar->setMinimumWidth(160);
-    time_bar->setMaximumHeight(12);
-    time_bar->setMaximumWidth(160);
-    time_bar->move(75,92);
-    time_bar->setStyleSheet("QProgressBar {"
-                          "background-color: #EEC677;"
-                          "color: #FFFFFF;"
-                          "border-style: outset;"
-                          "border-width: 2px;"
-                          "border-color: #176C5B;"
-                          "border-radius: 7px;"
-                          "text-align: left; }"
+    time_lbl = new QLabel(this);
+    time_lbl->move(75,92);
+    time_lbl->setStyleSheet("color: #176C5B");
+    time_lbl->setText(QString::number(data->getDays()));
+    QFont font4 = time_lbl->font();
+    font4.setBold(true);
+    font4.setPointSize(15);
+    time_lbl->setFont(font4);
 
-                          "QProgressBar::chunk {"
-                          "background-color: #176C5B; }");
+//    time_bar = new QProgressBar(this);
+//    time_bar->setMinimumHeight(12);
+//    time_bar->setMinimumWidth(160);
+//    time_bar->setMaximumHeight(12);
+//    time_bar->setMaximumWidth(160);
+//    time_bar->move(75,92);
+//    time_bar->setStyleSheet("QProgressBar {"
+//                          "background-color: #EEC677;"
+//                          "color: #FFFFFF;"
+//                          "border-style: outset;"
+//                          "border-width: 2px;"
+//                          "border-color: #176C5B;"
+//                          "border-radius: 7px;"
+//                          "text-align: left; }"
+
+//                          "QProgressBar::chunk {"
+//                          "background-color: #176C5B; }");
 
     connect(storage_butt, SIGNAL(clicked()), this, SLOT(storage_slot()));
 

@@ -16,7 +16,7 @@ Aghol::Aghol(QWidget *parent, Data* _data)
     this->setMaximumWidth(1366);
 
    setAutoFillBackground(true);
-    QPixmap pixmap=QPixmap(":icons/sheep.jpg").scaled(this->size());
+    QPixmap pixmap=QPixmap(":backgrounds/mammut.jpg").scaled(this->size());
     QPalette palette(this->palette());
     palette.setBrush(this->backgroundRole(),QBrush(pixmap.scaled(this->size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
     this->setPalette(palette);
