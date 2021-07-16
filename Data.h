@@ -181,9 +181,9 @@ public:
     int getTime_build_gav(){ return data["build_gav"].toInt();}
     int getTime_build_aqol(){ return data["build_aqol"].toInt();}
     int getTime_build_yonje(){ return data["build_yonje"].toInt();}
-    void Add_build_morq(int i){data["build_morq"] = i;}
-    void Add_build_gav(int i){data["build_gav"] = i;}
-    void Add_build_aqol(int i){data["build_aqol"] = i;}
+    void Add_build_morq(int i){data["build_morq"] = data["build_morq"].toInt() + i;}
+    void Add_build_gav(int i){data["build_gav"] = data["build_gav"].toInt() + i;}
+    void Add_build_aqol(int i){data["build_aqol"] = data["build_aqol"].toInt() + i;}
     void Add_build_yonje(int i){data["build_yonje"] = i;}
     void set_build_morq(int i){data["build_morq"] = i;}
     void set_build_gav(int i){data["build_gav"] = i;}

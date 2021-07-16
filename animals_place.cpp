@@ -360,7 +360,7 @@ void Animals_Place::showMorghdari(){
         }
     }
     else{
-        if (data->isCanBuildMorqdari() == 1 && data->getMorq()->getLevel()>=2)
+        if ((data->isCanBuildMorqdari() == 1) && (data->getLevel())>=2)
         {
             QMessageBox msgBox;
             msgBox.setInformativeText("Hen-saurus holding is not built yet do you want to build it? ");
@@ -406,7 +406,7 @@ void Animals_Place::showGavdari(){
             }
     }
     else{
-        if (data->isCanBuildGavdari() == 1 && data->getGav()->getLevel()>=4)
+        if (data->isCanBuildGavdari() == 1 && data->getLevel()>=4)
         {
             QMessageBox msgBox;
             msgBox.setInformativeText("Cow-saurus holding is not built yet do you want to build it? ");
@@ -458,7 +458,7 @@ void Animals_Place::showAghol(){
             }
     }
     else{
-        if (data->isCanBuildAqol() == 1 && data->getAqol()->getLevel()>=6)
+        if (data->isCanBuildAqol() == 1 && data->getLevel()>=6)
         {
             QMessageBox msgBox;
             msgBox.setInformativeText("Sheep-saurus(Aqol) holding is not built yet do you want to build it? ");

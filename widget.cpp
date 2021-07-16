@@ -370,7 +370,7 @@ Widget::Widget(QWidget *parent, Data* _data)
         exp = new QLabel(this);
             exp->move(75,135);
             exp->setStyleSheet("color: #176C5B");
-            exp->setText("Experiencr: " + QString::number(data->getExperience()) + " / " +
+            exp->setText("Experience: " + QString::number(data->getExperience()) + " / " +
                               QString::number(data->getCapacity()));
             exp->setFont(font4);
 

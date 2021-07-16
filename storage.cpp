@@ -286,7 +286,7 @@ storage::storage(QWidget *parent, Data* _data) : QWidget(parent)
         whool_txt = new QLabel(QString::number(data->getAnbar()->getPashm()) + "   X  " ,this);
         whool_txt->setStyleSheet("color : white;"
                                 "font: 18pt;");
-        whool_txt->move(1150,540);
+        whool_txt->move(1150,660);
     }
     else{
         temp6 = new QPixmap(":icons/whool2.png");
