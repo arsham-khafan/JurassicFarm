@@ -311,7 +311,7 @@ Animals_Place::Animals_Place(QWidget *parent, Data* _data)
             build_Aqol->setStyleSheet("color: rgb(153,153,0)");
             build_Aqol->move(20,150);
 
-            build_Aqol->setText("Time to Build: " + QString::number(data->getTime_build_aqol()/60) +
+            build_Aqol->setText("Time to Build Sheep_osrous: " + QString::number(data->getTime_build_aqol()/60) +
                                                     ":" + QString::number(data->getTime_build_aqol()%60));
 
             if(data->getTime_build_aqol()<0)
@@ -324,7 +324,7 @@ Animals_Place::Animals_Place(QWidget *parent, Data* _data)
                 build_morq->setStyleSheet("color: rgb(153,153,0)");
                 build_morq->move(20,170);
 
-                build_morq->setText("Time to Build: " + QString::number(data->getTime_build_morq()/60) +
+                build_morq->setText("Time to Build Hen_osrous: " + QString::number(data->getTime_build_morq()/60) +
                                                         ":" + QString::number(data->getTime_build_morq()%60));
 
                 if(data->getTime_build_morq()<0)
@@ -337,7 +337,7 @@ Animals_Place::Animals_Place(QWidget *parent, Data* _data)
                     build_gav->setStyleSheet("color: rgb(153,153,0)");
                     build_gav->move(20,190);
 
-                    build_gav->setText("Time to Build: " + QString::number(data->getTime_build_gav()/60) +
+                    build_gav->setText("Time to Build Cow_osrous: " + QString::number(data->getTime_build_gav()/60) +
                                                             ":" + QString::number(data->getTime_build_gav()%60));
 
                     if(data->getTime_build_gav()<0)
@@ -374,6 +374,7 @@ void Animals_Place::showMorghdari(){
                     data->BuildMorq();
                     data->getMorq()->setBuild(true);
                     data->set_build_morq(3*60);
+                    build_morq->setHidden(true);
                    break;
                case QMessageBox::Cancel:
                    return;
@@ -420,6 +421,7 @@ void Animals_Place::showGavdari(){
                     data->BuildGav();
                     data->getGav()->setBuild(true);
                     data->set_build_gav(5*60);
+                    build_gav->setHidden(true);
                    break;
                case QMessageBox::Cancel:
                    return;
@@ -472,6 +474,7 @@ void Animals_Place::showAghol(){
                     data->BuildAqol();
                     data->getAqol()->setBuild(true);
                     data->set_build_aqol(600);
+                    build_Aqol->setHidden(true);
                    break;
                case QMessageBox::Cancel:
                    return;
