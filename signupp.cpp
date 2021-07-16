@@ -78,7 +78,7 @@ signupp::signupp(QWidget *parent) :
          pb2->setStyleSheet("QPushButton {border-image:url(:icons/back2.png);}"
      "                           QPushButton::hover{border-image:url(:icons/back22.png);} ");
          pb2->setToolTip("back to map");
-            pb1->move(520,610);
+            pb1->move(1220,30);
             pb1->setMinimumHeight(110);
             pb1->setMinimumWidth(110);
               pb1->setMaximumHeight(110);
@@ -159,7 +159,7 @@ void signupp::sett() {
     QJsonDocument d = QJsonDocument::fromJson(b);
     QJsonObject data, aq, gav, morq, An, sil, gandom, yonje;
     QJsonObject total = d.object();
-    if((li1->text()=="")&&(li2->text()=="")&&(li3->text()=="")) {
+    if((li1->text()=="")||(li2->text()=="")||(li3->text()=="")) {
         khata*ab=new khata(NULL,"Compulsory fields are empty");
         ab->show();
     }

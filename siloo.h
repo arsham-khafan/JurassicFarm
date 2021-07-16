@@ -9,7 +9,12 @@ class siloo : public QWidget
     Q_OBJECT
 public:
     explicit siloo(QWidget *parent = nullptr, Data* _data = nullptr);
+    void set(){time_lbl->setText("Time to Upgrade: " + QString::number(data->getsilo()->get_time()/60) +
+                                 ":" + QString::number(data->getsilo()->get_time()%60));
+              }
+    void check(){time_lbl->setHidden(true);}
 private:
+    QThread* t;
     Data* data;
     QProgressBar* main_bar;
     QPushButton* go_back;

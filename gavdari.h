@@ -14,7 +14,12 @@ class Gavdari : public QWidget
 
 public:
     Gavdari(QWidget *parent = nullptr, Data* _data = nullptr);
-
+    void check(){if(data->getGav()->get_Time()<0) time_level->setHidden(true);
+                     if(data->getGav()->get_Time_food()<0) time_food->setHidden(true);}
+        void set(){time_food->setText("Time to Upgrade: " + QString::number(data->getGav()->get_Time_food()/60) +
+                                      ":" + QString::number(data->getGav()->get_Time_food()%60));
+                   time_level->setText("Time to Upgrade: " + QString::number(data->getGav()->get_Time()/60) +
+                                                               ":" + QString::number(data->getGav()->get_Time()%60));}
 public slots:
     void upgrd();
     void feed();
@@ -22,6 +27,7 @@ public slots:
     void back();
 
 private:
+    QThread* t;
     Data* data;
     QLabel* time_food,* time_level;
     QLabel* lblLvl;

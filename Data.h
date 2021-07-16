@@ -142,6 +142,7 @@ public:
 
 class Data {
     int what;
+    multimap<QString,int> payam;
     QJsonObject data;
     AnimalsPlace* aq;
     AnimalsPlace* gav;
@@ -155,6 +156,11 @@ public:
     void quit();
     void setWhat(int i){what =i;}
     int getWhat(){return what;}
+    void Add_message(QString str, int kind){pair<QString,int> v(str,kind);
+                                           payam.insert(v);}
+    void Exp_Day();
+    void level_Day();
+    QString get_Message(int);
     AnimalsPlace* getAqol() { return aq; }
     AnimalsPlace* getGav() { return gav; }
     AnimalsPlace* getMorq() { return morq; }

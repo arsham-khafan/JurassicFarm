@@ -41,7 +41,6 @@ class Ranking : public QWidget
 
 public:
     Ranking(QWidget *parent = nullptr, Data* _data = nullptr);
-    void set();
     ~Ranking();
 public slots:
     void map_menu();

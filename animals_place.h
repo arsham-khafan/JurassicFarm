@@ -19,6 +19,8 @@ class Animals_Place : public QWidget
 
 public:
     Animals_Place(QWidget *parent = nullptr, Data* _data = nullptr);
+    void check();
+    void set(){}
     ~Animals_Place();
 
 public slots:
@@ -26,10 +28,12 @@ public slots:
     void showGavdari();
     void showAghol();
     void back();
-
 private:
     Data* data;
-
+    QThread* t;
+    QLabel* build_Aqol;
+    QLabel* build_gav;
+    QLabel* build_morq;
     QPushButton* pbnMorgh;
     QPushButton* pbnGav;
     QPushButton* pbnGusfand;

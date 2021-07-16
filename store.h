@@ -40,6 +40,7 @@ public slots:
     void gandom_();
     void map_menu();
 private:
+    QThread* t;
     Data* data;
     int i,counter;
     QMovie* movie;

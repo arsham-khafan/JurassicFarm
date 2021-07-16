@@ -7,11 +7,9 @@
 #include <ranking.h>
 #include "gandom.h"
 #include "animals_place.h"
-#include "msg.h"
-#include "gavdari.h"
-#include "morghdari.h"
-#include "aghol.h"
 #define AAA
+
+QString str;
 
 void Time(Data* _data, Widget* w){
         QThread::sleep(1);
@@ -22,9 +20,8 @@ void Time(Data* _data, Widget* w){
        if(_data->getTime_build_aqol()==0){
             _data->getAqol()->setBuild(true);
             _data->set_build_aqol(-1);
-            QString str = "Aqol build Successfully";
-            //msg* payam = new msg(nullptr, &str);
-            //payam->show();
+            str = "Aqol build Successfully\n";
+            _data->Add_message(str,1);
        }
 
        if(_data->getTime_build_gav()>0)
@@ -32,9 +29,8 @@ void Time(Data* _data, Widget* w){
        if(_data->getTime_build_gav()==0){
            _data->set_build_gav(-1);
            _data->getGav()->setBuild(true);
-           QString str = "Gavdari build Successfully";
-           //msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "Gavdari build Successfully\n";
+           _data->Add_message(str,1);
        }
 
        if(_data->getTime_build_morq()>0)
@@ -42,9 +38,8 @@ void Time(Data* _data, Widget* w){
        if(_data->getTime_build_morq()==0){
            _data->getMorq()->setBuild(true);
            _data->set_build_morq(-1);
-           QString str = "Morqdari build Successfully";
-           //msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "Morqdari build Successfully\n";
+           _data->Add_message(str,1);
        }
 
        if(_data->getTime_build_yonje()>0)
@@ -52,9 +47,8 @@ void Time(Data* _data, Widget* w){
        if(_data->getTime_build_yonje()==0){
            _data->set_build_yonje(-1);
            _data->getYonjeLand()->setBuilds(true);
-           QString str = "Yonje land build Successfully";
-           //msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "Yonje land build Successfully\n";
+           _data->Add_message(str,1);
        }
 
        if(_data->getAqol()->get_Time()>0)
@@ -62,10 +56,9 @@ void Time(Data* _data, Widget* w){
        if(_data->getAqol()->get_Time()==0){
            _data->getAqol()->UpLevel();
            _data->getAqol()->set_Time(-1);
-           QString str = "Aqol SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getAqol()->getLevel())
-                   + "\n New Area: " + QString::number(_data->getAqol()->getCapacity());
-           //msg* payam = new msg(nullptr, &str);
-          // payam->show();
+           str = "Aqol SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getAqol()->getLevel())
+                   + "\n New Area: " + QString::number(_data->getAqol()->getCapacity()) + "\n";
+           _data->Add_message(str,2);
        }
 
        if(_data->getAqol()->get_Time_food()>0)
@@ -74,19 +67,18 @@ void Time(Data* _data, Widget* w){
            _data->getAqol()->setExist(true);
            _data->getAqol()->setFood(false);
            _data->getAqol()->set_Time_food(-1);
-           QString str = "The sheep_osarus are ready to be bred";
-          // msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "The sheep_osarus are ready to be bred\n";
+           _data->Add_message(str,2);
        }
 
        if(_data->getGav()->get_Time()>0)
            _data->getGav()->Add_Time(-1);
        if(_data->getGav()->get_Time()==0){
-           /////////////////////////
+           _data->getGav()->UpLevel();
            _data->getGav()->set_Time(-1);
-           QString str = "Aqol Level up Successfully";
-           //msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "Gavdari SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getGav()->getLevel())
+                   + "\n New Area: " + QString::number(_data->getGav()->getCapacity()) + "\n";
+           _data->Add_message(str,3);
        }
 
        if(_data->getGav()->get_Time_food()>0)
@@ -95,19 +87,18 @@ void Time(Data* _data, Widget* w){
            _data->getGav()->setExist(true);
            _data->getGav()->setFood(false);
            _data->getGav()->set_Time_food(-1);
-           QString str = "The cow_osarus are ready to be bred";
-           //msg* payam = new msg(nullptr, &str);
-          // payam->show();
+           str = "The cow_osarus are ready to be bred\n";
+           _data->Add_message(str,3);
        }
 
        if(_data->getMorq()->get_Time()>0)
            _data->getMorq()->Add_Time(-1);
        if(_data->getMorq()->get_Time()==0){
-           //////////////////
+           _data->getMorq()->UpLevel();
            _data->getMorq()->set_Time(-1);
-           QString str = "Aqol Level up Successfully";
-          // msg* payam = new msg(nullptr, &str);
-          // payam->show();
+           str = "Morqdari SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getMorq()->getLevel())
+                   + "\n New Area: " + QString::number(_data->getMorq()->getCapacity()) + "\n";
+           _data->Add_message(str,4);
        }
 
        if(_data->getMorq()->get_Time_food()>0)
@@ -116,9 +107,8 @@ void Time(Data* _data, Widget* w){
            _data->getMorq()->setExist(true);
            _data->getMorq()->setFood(false);
            _data->getMorq()->set_Time_food(-1);
-           QString str = "The hen_osarus are ready to be bred";
-          // msg* payam = new msg(nullptr, &str);
-          // payam->show();
+           str = "The hen_osarus are ready to be bred\n";
+           _data->Add_message(str,4);
        }
 
        if(_data->getAnbar()->get_time()>0)
@@ -126,10 +116,9 @@ void Time(Data* _data, Widget* w){
        if(_data->getAnbar()->get_time()==0){
            _data->getAnbar()->UpLevel(2);
            _data->getAnbar()->setTime(-1);
-           QString str = "STORAGE SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(_data->getAnbar()->getLevel()))
-                   + "\n New Capacity: " + QString::fromLatin1(to_string(_data->getAnbar()->getCapacity()));;
-           //msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "STORAGE SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(_data->getAnbar()->getLevel()))
+                   + "\n New Capacity: " + QString::fromLatin1(to_string(_data->getAnbar()->getCapacity())) + "\n";
+           _data->Add_message(str,5);
        }
 
        if(_data->getsilo()->get_time()>0)
@@ -137,10 +126,9 @@ void Time(Data* _data, Widget* w){
        if(_data->getsilo()->get_time()==0){
            _data->getsilo()->UpLevel();
            _data->getsilo()->setTime(-1);
-           QString str = "SILOO SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(_data->getsilo()->getLevel()))
-                   + "\n New Capacity: " + QString::fromLatin1(to_string(_data->getsilo()->getCapacity()));
-           //msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "SILOO SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(_data->getsilo()->getLevel()))
+                   + "\n New Capacity: " + QString::fromLatin1(to_string(_data->getsilo()->getCapacity())) + "\n";
+           _data->Add_message(str,6);
        }
 
        if(_data->getGandomLand()->get_time()>0)
@@ -148,20 +136,18 @@ void Time(Data* _data, Widget* w){
        if(_data->getGandomLand()->get_time()==0){
            _data->getGandomLand()->UpLevel();
            _data->getGandomLand()->setTime(-1);
-           QString str = "Gandom land Level up Successfully";
-          // msg* payam = new msg(nullptr, &str);
-          // payam->show();
+           str = "Gandom land Level up Successfully\n";
+           _data->Add_message(str,7);
        }
 
 
        if(_data->getGandomLand()->get_time_work()>0)
            _data->getGandomLand()->Add_Time_work(-1);
        if(_data->getGandomLand()->get_time_work()==0){
-           //////////////////////
+           _data->getGandomLand()->setKesht(false);
            _data->getGandomLand()->setTime_work(-1);
-           QString str = "";
-           //msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "Gandom Land is Ready to Bardasht!!!!\n";
+           _data->Add_message(str,7);
        }
 
        if(_data->getYonjeLand()->get_time()>0)
@@ -169,35 +155,35 @@ void Time(Data* _data, Widget* w){
        if(_data->getYonjeLand()->get_time()==0){
            _data->getYonjeLand()->UpLevel();
            _data->getYonjeLand()->setTime(-1);
-           QString str = "Yonje Land SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getYonjeLand()->getLevel())
-                   + "\n New Area: " + QString::number(_data->getYonjeLand()->getArea());
-           //msg* payam = new msg(nullptr, &str);
-           //payam->show();
+           str = "Yonje Land SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getYonjeLand()->getLevel())
+                   + "\n New Area: " + QString::number(_data->getYonjeLand()->getArea()) + "\n";
+           _data->Add_message(str,8);
        }
 
        if(_data->getYonjeLand()->get_time_work()>0)
                   _data->getYonjeLand()->Add_Time_work(-1);
               if(_data->getYonjeLand()->get_time_work()==0){
-                  //////////////////////
-                  QString str;
                   _data->getYonjeLand()->setTime_work(-1);
-                  if(_data->getYonjeLand()->isShokhm())
-                      str = "Yonje land was successfully plowed";
-                  else
-                      str = "Yonje was successfully cultivated";
-
-                  //msg* payam = new msg(nullptr, &str);
-                  //payam->show();
+                  if(_data->getYonjeLand()->isShokhm()){
+                      str = "Yonje land was successfully plowed\n";
+                      _data->getYonjeLand()->setShokhm(false);
+                      _data->Add_message(str,8);
+                  }
+                  else{
+                      _data->getYonjeLand()->setKesht(false);
+                      _data->getYonjeLand()->setBardasht(false);
+                      str = "Yonje was successfully cultivated\n";
+                      _data->Add_message(str,8);
+                  }
               }
 
         w->set();
     if(_data->getTime()>=60){
         _data->nextDay(2);
         _data->setTime(0);
-        QString str = "1 day passed! we are in Tomorrow!!";
-        //msg* payam = new msg(nullptr, &str);
-        //payam->show();
+        str += "1 day passed! we are in Tomorrow!!";
     }
+
     return Time(_data,w);
 }
 
@@ -343,47 +329,13 @@ Widget::Widget(QWidget *parent, Data* _data)
     rankings->setStyleSheet("QPushButton {border-image:url(:icons/rank.png);}");
     rankings->setToolTip("see players rankings");
 
-    exp_bar = new QProgressBar(this);
-    exp_bar->setMinimumHeight(12);
-    exp_bar->setMinimumWidth(160);
-    exp_bar->setMaximumHeight(12);
-    exp_bar->setMaximumWidth(160);
-    exp_bar->move(75,150);
-    exp_bar->setStyleSheet("QProgressBar {"
-                          "background-color: #EEC677;"
-                          "color: #FFFFFF;"
-                          "border-style: outset;"
-                          "border-width: 2px;"
-                          "border-color: #176C5B;"
-                          "border-radius: 7px;"
-                          "text-align: left; }"
-
-                          "QProgressBar::chunk {"
-                          "background-color: #176C5B; }");
-    exp_bar->setValue(80);
-
-
-#ifdef AAA
-    exp_bar->setValue((data->getTime() * 100)/3600);
-    exp_bar->setValue((data->getExperience() * 100)/data->getCapacity());
-#endif
-
-    time_lbl = new QLabel(this);
-    time_lbl->move(75,92);
-    time_lbl->setStyleSheet("color: #176C5B");
-    time_lbl->setText(QString::number(data->getDays()));
-    QFont font4 = time_lbl->font();
-    font4.setBold(true);
-    font4.setPointSize(15);
-    time_lbl->setFont(font4);
-
-//    time_bar = new QProgressBar(this);
-//    time_bar->setMinimumHeight(12);
-//    time_bar->setMinimumWidth(160);
-//    time_bar->setMaximumHeight(12);
-//    time_bar->setMaximumWidth(160);
-//    time_bar->move(75,92);
-//    time_bar->setStyleSheet("QProgressBar {"
+//    exp_bar = new QProgressBar(this);
+//    exp_bar->setMinimumHeight(12);
+//    exp_bar->setMinimumWidth(160);
+//    exp_bar->setMaximumHeight(12);
+//    exp_bar->setMaximumWidth(160);
+//    exp_bar->move(75,150);
+//    exp_bar->setStyleSheet("QProgressBar {"
 //                          "background-color: #EEC677;"
 //                          "color: #FFFFFF;"
 //                          "border-style: outset;"
@@ -394,6 +346,33 @@ Widget::Widget(QWidget *parent, Data* _data)
 
 //                          "QProgressBar::chunk {"
 //                          "background-color: #176C5B; }");
+//    exp_bar->setValue(80);
+
+
+#ifdef AAA
+//    exp_bar->setValue((data->getTime() * 100)/3600);
+//    exp_bar->setValue((data->getExperience() * 100)/data->getCapacity());
+#endif
+
+    time_lbl = new QLabel(this);
+        time_lbl->move(75,75);
+        time_lbl->setStyleSheet("color: #176C5B");
+        time_lbl->setText("Days: " + QString::number(data->getDays()) + " Time: " +
+                          QString::number(data->getTime()/60) +
+                          ":" + QString::number(data->getTime()%60));
+        QFont font4 = time_lbl->font();
+        font4.setBold(true);
+        font4.setPointSize(15);
+        time_lbl->setFixedSize(200,40);
+        time_lbl->setFont(font4);
+
+
+        exp = new QLabel(this);
+            exp->move(75,135);
+            exp->setStyleSheet("color: #176C5B");
+            exp->setText("Experiencr: " + QString::number(data->getExperience()) + " / " +
+                              QString::number(data->getCapacity()));
+            exp->setFont(font4);
 
     connect(storage_butt, SIGNAL(clicked()), this, SLOT(storage_slot()));
 

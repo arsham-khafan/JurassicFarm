@@ -8,6 +8,7 @@
 #include <QProgressBar>
 #include <QThread>
 #include "Data.h"
+#include "msg.h"
 
 
 class Widget : public QWidget
@@ -16,7 +17,13 @@ class Widget : public QWidget
 
 public:
     Widget(QWidget *parent = nullptr, Data* _data = nullptr);
-    void set(){ coins_txt->setText(QString::number(data->getTime()));}
+    void set(){ time_lbl->setText("Days: " + QString::number(data->getDays()) + " Time: " +
+                                  QString::number(data->getTime()/60) +
+                                  ":" + QString::number(data->getTime()%60));
+                lvl_txt->setText(QString::number(data->getLevel()));
+                        exp->setText("Experiencr: " + QString::number(data->getExperience()) + " / " +
+                                          QString::number(data->getCapacity()));
+              }
     ~Widget();
 private:
     QThread* t;
@@ -38,8 +45,7 @@ private:
     QPushButton* back_to_main_menu;
     QPushButton* one_day_forward;
     QPushButton* rankings;
-    QProgressBar* exp_bar;
-//    QProgressBar* time_bar;
+    QLabel* exp;
     QLabel* time_lbl;
 public slots:
     void lands_slot();

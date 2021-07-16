@@ -14,7 +14,12 @@ class Morghdari : public QWidget
 
 public:
     Morghdari(QWidget *parent = nullptr ,Data* _data = nullptr);
-
+    void check(){if(data->getMorq()->get_Time()<0) time_level->setHidden(true);
+                 if(data->getMorq()->get_Time_food()<0) time_food->setHidden(true);}
+    void set(){time_food->setText("Time to Upgrade: " + QString::number(data->getMorq()->get_Time_food()/60) +
+                                  ":" + QString::number(data->getMorq()->get_Time_food()%60));
+               time_level->setText("Time to Upgrade: " + QString::number(data->getMorq()->get_Time()/60) +
+                                                           ":" + QString::number(data->getMorq()->get_Time()%60));}
 public slots:
     void upgrd();
     void feed();
@@ -22,6 +27,7 @@ public slots:
     void back();
 
 private:
+    QThread* t;
     Data* data;
     QLabel* time_level, *time_food;
     QLabel* lblLvl;

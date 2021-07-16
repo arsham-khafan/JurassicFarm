@@ -1,4 +1,5 @@
 #include "Data.h"
+#include "msg.h"
 
 Data::Data(QJsonObject& obj){
     data=obj;
@@ -121,6 +122,176 @@ void Data::nextDay(int kind){
         else
             break;
     }
+    if(kind == 2){
+        Exp_Day();
+    }
+    if(kind == 1){
+
+        QString str;
+        addExp(1);
+        if(getTime_build_aqol()>0)
+            set_build_aqol(-60);
+        if(getTime_build_aqol()<=0){
+            getAqol()->setBuild(true);
+            set_build_aqol(-1);
+            str = "Aqol build Successfully\n";
+            Add_message(str,1);
+        }
+
+        if(getTime_build_gav()>0)
+            set_build_gav(-60);
+        if(getTime_build_gav()<=0){
+            set_build_gav(-1);
+            getGav()->setBuild(true);
+            str = "Gavdari build Successfully\n";
+            Add_message(str,1);
+        }
+
+        if(getTime_build_morq()>0)
+            set_build_morq(-60);
+        if(getTime_build_morq()<=0){
+            getMorq()->setBuild(true);
+            set_build_morq(-1);
+            str = "Morqdari build Successfully\n";
+            Add_message(str,1);
+        }
+
+        if(getTime_build_yonje()>0)
+            set_build_yonje(-60);
+        if(getTime_build_yonje()<=0){
+            set_build_yonje(-1);
+            getYonjeLand()->setBuilds(true);
+            str = "Yonje land build Successfully\n";
+            Add_message(str,1);
+        }
+
+        if(getAnbar()->get_time()>0)
+            getAnbar()->AddTime(-60);
+        if(getAnbar()->get_time()<=0){
+            getAnbar()->UpLevel(2);
+            getAnbar()->setTime(-1);
+            str = "STORAGE SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(getAnbar()->getLevel()))
+                    + "\n New Capacity: " + QString::fromLatin1(to_string(getAnbar()->getCapacity())) + "\n";
+            Add_message(str,5);
+        }
+
+        if(getsilo()->get_time()>0)
+            getsilo()->AddTime(-60);
+        if(getsilo()->get_time()<=0){
+            getsilo()->UpLevel();
+            getsilo()->setTime(-1);
+            str = "SILOO SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(getsilo()->getLevel()))
+                    + "\n New Capacity: " + QString::fromLatin1(to_string(getsilo()->getCapacity())) + "\n";
+            Add_message(str,6);
+        }
+
+        if(getAqol()->get_Time()>0)
+            getAqol()->Add_Time(-60);
+        if(getAqol()->get_Time()<=0){
+            getAqol()->UpLevel();
+            getAqol()->set_Time(-1);
+            str = "Aqol SUCCESSFULLY UPGRADED!\n Level: " + QString::number(getAqol()->getLevel())
+                    + "\n New Area: " + QString::number(getAqol()->getCapacity()) + "\n";
+            Add_message(str,2);
+        }
+
+        if(getAqol()->get_Time_food()>0)
+            getAqol()->Add_Time_food(-60);
+        if(getAqol()->get_Time_food()<=0){
+            getAqol()->setExist(true);
+            getAqol()->setFood(false);
+            getAqol()->set_Time_food(-1);
+            str = "The sheep_osarus are ready to be bred\n";
+            Add_message(str,2);
+        }
+
+        if(getGav()->get_Time()>0)
+            getGav()->Add_Time(-60);
+        if(getGav()->get_Time()<=0){
+            getGav()->UpLevel();
+            getGav()->set_Time(-1);
+            str = "Gavdari SUCCESSFULLY UPGRADED!\n Level: " + QString::number(getGav()->getLevel())
+                    + "\n New Area: " + QString::number(getGav()->getCapacity()) + "\n";
+            Add_message(str,3);
+        }
+
+        if(getGav()->get_Time_food()>0)
+            getGav()->Add_Time_food(-60);
+        if(getGav()->get_Time_food()<=0){
+            getGav()->setExist(true);
+            getGav()->setFood(false);
+            getGav()->set_Time_food(-1);
+            str = "The cow_osarus are ready to be bred\n";
+            Add_message(str,3);
+        }
+
+        if(getMorq()->get_Time()>0)
+            getMorq()->Add_Time(-60);
+        if(getMorq()->get_Time()<=0){
+            getMorq()->UpLevel();
+            getMorq()->set_Time(-1);
+            str = "Morqdari SUCCESSFULLY UPGRADED!\n Level: " + QString::number(getMorq()->getLevel())
+                    + "\n New Area: " + QString::number(getMorq()->getCapacity()) + "\n";
+            Add_message(str,4);
+        }
+
+        if(getMorq()->get_Time_food()>0)
+            getMorq()->Add_Time_food(-60);
+        if(getMorq()->get_Time_food()<=0){
+            getMorq()->setExist(true);
+            getMorq()->setFood(false);
+            getMorq()->set_Time_food(-1);
+            str = "The hen_osarus are ready to be bred\n";
+            Add_message(str,4);
+        }
+
+        if(getGandomLand()->get_time()>0)
+            getGandomLand()->Add_Time(-60);
+        if(getGandomLand()->get_time()<=0){
+            getGandomLand()->UpLevel();
+            getGandomLand()->setTime(-1);
+            str = "Gandom land Level up Successfully\n";
+            Add_message(str,7);
+        }
+
+        if(getGandomLand()->get_time_work()>0)
+            getGandomLand()->Add_Time_work(-60);
+        if(getGandomLand()->get_time_work()<=0){
+            getGandomLand()->setKesht(false);
+            getGandomLand()->setTime_work(-1);
+            str = "Gandom Land is Ready to Bardasht!!!!\n";
+            Add_message(str,7);
+        }
+
+        if(getYonjeLand()->get_time()>0)
+            getYonjeLand()->Add_Time(-60);
+        if(getYonjeLand()->get_time()<=0){
+            getYonjeLand()->UpLevel();
+            getYonjeLand()->setTime(-1);
+            str = "Yonje Land SUCCESSFULLY UPGRADED!\n Level: " + QString::number(getYonjeLand()->getLevel())
+                    + "\n New Area: " + QString::number(getYonjeLand()->getArea()) + "\n";
+            Add_message(str,8);
+        }
+
+        if(getYonjeLand()->get_time_work()>0)
+            getYonjeLand()->Add_Time_work(-60);
+        if(getYonjeLand()->get_time_work()<=0){
+            getYonjeLand()->setTime_work(-1);
+            if(getYonjeLand()->isShokhm()){
+                str = "Yonje land was successfully plowed\n";
+                getYonjeLand()->setShokhm(false);
+                Add_message(str,8);
+            }
+            else{
+                getYonjeLand()->setKesht(false);
+                getYonjeLand()->setBardasht(false);
+                str = "Yonje was successfully cultivated\n";
+                Add_message(str,8);
+            }
+        }
+
+
+    }
 }
 
 void Data::quit() {
@@ -156,6 +327,23 @@ void Data::UpLevel() {
     data["level"] = data["level"].toInt() + 1;
     data["experience"] = data["experience"].toInt() - data["capacity"].toInt();
     data["capacity"] = data["capacity"].toInt() * 2 + 10;
+
+    QString str = "congratulations! Your level has been upgraded";
+    msg* payam = new msg(nullptr,&str);
+    payam->show();
+}
+
+void Data::Exp_Day(){
+    data["experience"] = data["experience"].toInt() + 1;
+    if (data["experience"].toInt() >= data["capacity"].toInt())
+        level_Day();
+}
+
+void Data::level_Day(){
+    data["level"] = data["level"].toInt() + 1;
+    data["experience"] = data["experience"].toInt() - data["capacity"].toInt();
+    data["capacity"] = data["capacity"].toInt() * 2 + 10;
+
 }
 
 void Anbar::UpLevel(int i) {
@@ -190,4 +378,16 @@ void lands::UpLevel(){
 void AnimalsPlace::UpLevel() {
     data["level"] = data["level"].toInt() + 1;
     data["capacity"] = data["capacity"].toInt() * 2;
+}
+
+QString Data::get_Message(int i){
+    QString str;
+    pair<QString,int> v;
+    multimap<QString,int>::iterator p = payam.begin();
+    for(;p!=payam.end();p++){
+        v=*p;
+        if(v.second==i)
+            str+=v.first;
+    }
+    return str;
 }
