@@ -374,7 +374,7 @@ void Animals_Place::showMorghdari(){
                     data->BuildMorq();
                     data->getMorq()->setBuild(true);
                     data->set_build_morq(3*60);
-                    build_morq->setHidden(true);
+                    build_morq->setHidden(false);
                    break;
                case QMessageBox::Cancel:
                    return;
@@ -421,7 +421,7 @@ void Animals_Place::showGavdari(){
                     data->BuildGav();
                     data->getGav()->setBuild(true);
                     data->set_build_gav(5*60);
-                    build_gav->setHidden(true);
+                    build_gav->setHidden(false);
                    break;
                case QMessageBox::Cancel:
                    return;
@@ -474,7 +474,7 @@ void Animals_Place::showAghol(){
                     data->BuildAqol();
                     data->getAqol()->setBuild(true);
                     data->set_build_aqol(600);
-                    build_Aqol->setHidden(true);
+                    build_Aqol->setHidden(false);
                    break;
                case QMessageBox::Cancel:
                    return;
