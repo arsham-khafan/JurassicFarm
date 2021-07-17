@@ -64,5 +64,8 @@
         <file>backgrounds/ddd.jpg</file>
         <file>backgrounds/mammut.jpg</file>
         <file>icons/ref.png</file>
+         <file>icons/saveee.jpg</file>
+         <file>backgrounds/logo1.PNG</file>
+        <file>backgrounds/khali.jpeg</file>
     </qresource>
 </RCC>

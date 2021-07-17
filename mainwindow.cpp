@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
         this->setMaximumHeight(768);
         this->setMaximumWidth(1366);
     setAutoFillBackground(true);
-    QPixmap pixmap=QPixmap(":backgrounds/start.jpg").scaled(this->size());
+    QPixmap pixmap=QPixmap(":backgrounds/khali.jpeg").scaled(this->size());
     QPalette palette(this->palette());
     palette.setBrush(this->backgroundRole(),QBrush(pixmap.scaled(this->size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
     this->setPalette(palette);
@@ -30,10 +30,20 @@ MainWindow::MainWindow(QWidget *parent)
                            "text-align: right;");
     pb->setFixedSize(600,30);
     pb->move(400,20);
+    talk = new QLabel;
+    QPixmap* temp = new QPixmap(":backgrounds/logo1.PNG");
+    talk->setPixmap(temp->scaled(QSize(600,400)));
+    talk->move(430,350);
+    talk->setHidden(true);
     pb->setParent(this);
+    talk->setParent(this);
 }
 void MainWindow::opdatee(){
     pb->setValue(pb->value()+1);
+    if(pb->value()==50)
+    {
+       talk->setHidden(false);
+    }
    if(pb->value()==100)
    {
        aval *av;

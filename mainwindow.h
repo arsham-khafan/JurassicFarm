@@ -23,6 +23,7 @@ private:
     QTimer*tm;
     QProgressBar*pb;
     QLabel* ql;
+    QLabel* talk;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

@@ -41,6 +41,10 @@ aval::aval(QWidget *parent) :
     lg1->move(450,100);
     lg1->setFixedSize(500,60);
     lg1->setCursor(Qt::ClosedHandCursor);
+    QFont font2;
+       font2 = lg1->font();
+       font2.setBold(true);
+       lg1->setFont(font2);
     lg1->setParent(this);
     connect(lg1,SIGNAL(clicked()),this,SLOT(loginn()));
     lg2=new QPushButton("Sign up");
@@ -48,6 +52,9 @@ aval::aval(QWidget *parent) :
     lg2->move(450,200);
     lg2->setFixedSize(500,60);
     lg2->setCursor(Qt::ClosedHandCursor);
+       font2 = lg2->font();
+       font2.setBold(true);
+       lg2->setFont(font2);
     lg2->setParent(this);
     lg3=new QPushButton("Exit");
     lg4=new QPushButton("check information");
@@ -64,8 +71,15 @@ aval::aval(QWidget *parent) :
     lg3->move(450,300);
     lg3->setFixedSize(500,60);
     lg3->setCursor(Qt::ClosedHandCursor);
+       font2 = lg3->font();
+       font2.setBold(true);
+       lg3->setFont(font2);
     lg3->setParent(this);
     connect(lg3,SIGNAL(clicked()),this,SLOT(close()));
+
+
+
+
     ui->setupUi(this);
 
 
@@ -134,9 +148,13 @@ void aval::vorood() {
                temp->showFullScreen();
                this->close();
             }
+            else{
+                            khata* abc=new khata(NULL,"the password entered is incorrect");
+                            abc->show();
+                        }
         }
         else{
-            khata* abc=new khata(NULL,"User or Password is incorrect");
+             khata* abc=new khata(NULL,"there is no user with this username");
             abc->show();
         }
     }

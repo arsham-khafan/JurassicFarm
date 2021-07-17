@@ -15,7 +15,7 @@ class khata : public QWidget
     Q_OBJECT
 
 public:
-    explicit khata(QWidget *parent = nullptr,QString tozihkhata=nullptr);
+    explicit khata(QWidget *parent = nullptr,QString tozihkhata=NULL);
     ~khata();
 
 private:
