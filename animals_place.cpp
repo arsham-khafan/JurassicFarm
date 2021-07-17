@@ -307,7 +307,7 @@ Animals_Place::Animals_Place(QWidget *parent, Data* _data)
             QFont font3 = build_Aqol->font();
             font3.setBold(true);
             font3.setPointSize(15);
-
+            build_Aqol->setStyleSheet("color: Red");
             build_Aqol->setFont(font3);
             build_Aqol->setStyleSheet("color: rgb(153,153,0)");
             build_Aqol->move(20,150);
@@ -324,25 +324,28 @@ Animals_Place::Animals_Place(QWidget *parent, Data* _data)
                 build_morq->setFont(font3);
                 build_morq->setStyleSheet("color: rgb(153,153,0)");
                 build_morq->move(20,170);
-
+                build_morq->setStyleSheet("color: Red");
                 build_morq->setText("Time to Build Hen_osrous: " + QString::number(data->getTime_build_morq()/60) +
                                                         ":" + QString::number(data->getTime_build_morq()%60));
 
                 if(data->getTime_build_morq()<0)
                     build_morq->setHidden(true);
 
-
                 build_gav = new QLabel("days passed goes here!",this);
 
                     build_gav->setFont(font3);
                     build_gav->setStyleSheet("color: rgb(153,153,0)");
                     build_gav->move(20,190);
-
+                    build_gav->setStyleSheet("color: Red");
                     build_gav->setText("Time to Build Cow_osrous: " + QString::number(data->getTime_build_gav()/60) +
                                                             ":" + QString::number(data->getTime_build_gav()%60));
 
                     if(data->getTime_build_gav()<0)
                         build_gav->setHidden(true);
+
+                    build_Aqol->setFixedSize(300,40);
+                    build_gav->setFixedSize(300,40);
+                    build_morq->setFixedSize(300,40);
 }
 
 void Animals_Place::showMorghdari(){

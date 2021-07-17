@@ -374,6 +374,8 @@ storage::storage(QWidget *parent, Data* _data) : QWidget(parent)
     if(data->getAnbar()->get_time()<0)
         time_lbl->setHidden(true);
 
+    time_lbl->setFixedSize(300,40);
+
 //    time_bar = new QProgressBar(this);
 //    time_bar->setToolTip("Time 😥😥");
 //    time_bar->setMinimumHeight(12);

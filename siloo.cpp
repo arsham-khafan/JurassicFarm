@@ -268,12 +268,14 @@ siloo::siloo(QWidget *parent, Data* _data) : QWidget(parent)
     font3.setPointSize(15);
     time_lbl->setFont(font3);
     time_lbl->setStyleSheet("color: rgb(153,153,0)");
-    time_lbl->move(20,270);
+    time_lbl->move(20,370);
     if(data->getsilo()->get_time()<0)
         time_lbl->setHidden(true);
 
     time_lbl->setText("Time to Upgrade: " + QString::number(data->getsilo()->get_time()/60) +
                                         ":" + QString::number(data->getsilo()->get_time()%60));
+
+    time_lbl->setFixedSize(300,40);
 
 //    time_bar = new QProgressBar(this);
 //    time_bar->setToolTip("Time 😥😥");

@@ -27,6 +27,7 @@ signupp::signupp(QWidget *parent) :
     lb3=new QLabel("<b>PASSWORD</b>");
     lb4=new QLabel("<b>PASSWORD(repeat)</b>");
     lb5=new QLabel("<b>EMAIL ADDRESS(optional)</b>");
+
     pb1=new QPushButton;
     pb2=new QPushButton;
      li1->setFixedSize(350,50);
