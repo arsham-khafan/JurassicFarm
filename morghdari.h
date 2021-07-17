@@ -14,12 +14,25 @@ class Morghdari : public QWidget
 
 public:
     Morghdari(QWidget *parent = nullptr ,Data* _data = nullptr);
-    void check(){if(data->getMorq()->get_Time()<0) time_level->setHidden(true);
-                 if(data->getMorq()->get_Time_food()<0) time_food->setHidden(true);}
-    void set(){time_food->setText("Time to Upgrade: " + QString::number(data->getMorq()->get_Time_food()/60) +
+    void check(){if(data->getMorq()->get_Time()<0) time_level->setText("");
+                 if(data->getMorq()->get_Time_food()<0) time_food->setText("");}
+    void set(){
+        if(data->getMorq()->get_Time()<0)
+            time_level->setText("");
+        else
+            time_level->setText("Time to Upgrade: " + QString::number(data->getMorq()->get_Time()/60) +
+                                                        ":" + QString::number(data->getMorq()->get_Time()%60));
+
+        if(data->getMorq()->get_Time_food()<0)
+            time_food->setText("");
+        else
+            time_food->setText("Time to get egg: " + QString::number(data->getMorq()->get_Time_food()/60) +
                                   ":" + QString::number(data->getMorq()->get_Time_food()%60));
-               time_level->setText("Time to Upgrade: " + QString::number(data->getMorq()->get_Time()/60) +
-                                                           ":" + QString::number(data->getMorq()->get_Time()%60));}
+
+                      lblCpc2->setNum(data->getMorq()->getCapacity());
+                      lblLvl2->setNum(data->getMorq()->getLevel());
+
+              }
 public slots:
     void upgrd();
     void feed();

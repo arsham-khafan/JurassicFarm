@@ -21,7 +21,7 @@ public:
                                   QString::number(data->getTime()/60) +
                                   ":" + QString::number(data->getTime()%60));
                 lvl_txt->setText(QString::number(data->getLevel()));
-                        exp->setText("Experiencr: " + QString::number(data->getExperience()) + " / " +
+                        exp->setText("Experience: " + QString::number(data->getExperience()) + " / " +
                                           QString::number(data->getCapacity()));
               }
     ~Widget();

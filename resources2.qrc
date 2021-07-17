@@ -63,5 +63,6 @@
         <file>backgrounds/cow.jpg</file>
         <file>backgrounds/ddd.jpg</file>
         <file>backgrounds/mammut.jpg</file>
+        <file>icons/ref.png</file>
     </qresource>
 </RCC>

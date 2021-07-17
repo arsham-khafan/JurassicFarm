@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1265</width>
+    <width>1375</width>
     <height>1114</height>
    </rect>
   </property>
@@ -16,8 +16,8 @@
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>390</y>
+     <x>390</x>
+     <y>370</y>
      <width>591</width>
      <height>391</height>
     </rect>
@@ -75,8 +75,8 @@ color: rgb(0, 0, 0);</string>
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>90</y>
-     <width>151</width>
+     <y>40</y>
+     <width>251</width>
      <height>61</height>
     </rect>
    </property>
@@ -95,9 +95,9 @@ color: rgb(0, 0, 0);</string>
   <widget class="QLabel" name="up">
    <property name="geometry">
     <rect>
-     <x>680</x>
-     <y>90</y>
-     <width>151</width>
+     <x>700</x>
+     <y>40</y>
+     <width>241</width>
      <height>61</height>
     </rect>
    </property>
@@ -116,9 +116,9 @@ color: rgb(0, 0, 0);</string>
   <widget class="QLabel" name="level">
    <property name="geometry">
     <rect>
-     <x>1000</x>
-     <y>90</y>
-     <width>151</width>
+     <x>640</x>
+     <y>280</y>
+     <width>191</width>
      <height>61</height>
     </rect>
    </property>
@@ -137,9 +137,9 @@ color: rgb(0, 0, 0);</string>
   <widget class="QLabel" name="area">
    <property name="geometry">
     <rect>
-     <x>990</x>
-     <y>280</y>
-     <width>151</width>
+     <x>1170</x>
+     <y>540</y>
+     <width>201</width>
      <height>61</height>
     </rect>
    </property>

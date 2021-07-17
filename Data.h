@@ -84,7 +84,7 @@ protected:
 public:
     lands(QJsonObject& obj) { data = obj; }
     QJsonObject getData(){return data;}
-    int getArea() { return data["area"].toArray().count(); }
+    int getArea() { return data["area"].toArray().count(); qDebug()<<data;}
     int getLevel(){ return data["level"].toInt();}
     int get_time() { return data["level_time"].toInt(); }
     int get_time_work() { return data["time"].toInt(); }
@@ -184,7 +184,7 @@ public:
     void Add_build_morq(int i){data["build_morq"] = data["build_morq"].toInt() + i;}
     void Add_build_gav(int i){data["build_gav"] = data["build_gav"].toInt() + i;}
     void Add_build_aqol(int i){data["build_aqol"] = data["build_aqol"].toInt() + i;}
-    void Add_build_yonje(int i){data["build_yonje"] = i;}
+    void Add_build_yonje(int i){data["build_yonje"] = data["build_yonje"].toInt() + i;}
     void set_build_morq(int i){data["build_morq"] = i;}
     void set_build_gav(int i){data["build_gav"] = i;}
     void set_build_aqol(int i){data["build_aqol"] = i;}
@@ -211,5 +211,7 @@ public:
     void BuildYonje();
     void nextDay(int);
     void addExp(int);
+    void done(int);
+    void shokhm();
     void UpLevel();
 };

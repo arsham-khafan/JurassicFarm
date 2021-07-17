@@ -145,6 +145,7 @@ void Time(Data* _data, Ranking* w){
                   _data->getGandomLand()->setTime_work(-1);
                   str = "Gandom Land is Ready to Bardasht!!!!\n";
                   _data->Add_message(str,7);
+                  _data->done(1);
               }
 
               if(_data->getYonjeLand()->get_time()>0)
@@ -165,20 +166,22 @@ void Time(Data* _data, Ranking* w){
                              str = "Yonje land was successfully plowed\n";
                              _data->getYonjeLand()->setShokhm(false);
                              _data->Add_message(str,8);
+                             _data->shokhm();
                          }
                          else{
                              _data->getYonjeLand()->setKesht(false);
                              _data->getYonjeLand()->setBardasht(false);
                              str = "Yonje was successfully cultivated\n";
                              _data->Add_message(str,8);
+                             _data->done(2);
                          }
                      }
-
 
     if(_data->getTime()>=60){
         _data->nextDay(2);
         _data->setTime(0);
         str += "1 day passed! we are in Tomorrow!!";
+        _data->Add_message(str,0);
     }
 
     return Time(_data,w);
@@ -231,7 +234,7 @@ Ranking::Ranking(QWidget *parent ,Data* _data) :
 
     Row* r = new Row;
     multimap<pair<int,int>,QString>::iterator  p = sort.begin();
-    for(int i=1;p!=sort.end();p++,i++){
+    for(int i=sort.size();p!=sort.end();p++,i--){
        pair<pair<int,int>,QString> value = *p;
        r->add(value.first.first,i,value.first.second,value.second,data->getName());
     }
@@ -268,9 +271,9 @@ void Row::add(int level_, int rank_, int exp_, QString name_, QString gold){
     level = new QLabel("level: " + QString::fromLatin1(to_string(level_)));
 
     rank->setFixedSize(50,60);
-    name->setFixedSize(120,60);
+    name->setFixedSize(160,60);
     level->setFixedSize(60,60);
-    exp->setFixedSize(500,30);
+    exp->setFixedSize(450,30);
 
     name->setAlignment(Qt::AlignCenter);
     level->setAlignment(Qt::AlignCenter);
@@ -335,5 +338,5 @@ void Row::add(int level_, int rank_, int exp_, QString name_, QString gold){
     h->addWidget(level);
     h->addWidget(name);
     h->addWidget(exp);
-    main->addRow(h);
+    main->insertRow(0,h);
 }

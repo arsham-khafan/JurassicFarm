@@ -346,6 +346,32 @@ void Data::level_Day(){
 
 }
 
+void Data::done(int h){
+    if(h==1){
+        int num = getGandomLand()->getArea();
+        for(int i=0; i < num;i++){
+            if(getGandomLand()->at(i) == 1)
+                getGandomLand()->setAt(i,3);
+        }
+    }
+    else{
+        int num = getYonjeLand()->getArea();
+        for(int i=0; i < num;i++){
+            if(getYonjeLand()->at(i) == 1)
+                getYonjeLand()->setAt(i,3);
+        }
+    }
+}
+
+void Data::shokhm(){
+    int num = getGandomLand()->getArea();
+    for(int i=0;i<num;i++){
+        if(getGandomLand()->at(i) == 0){
+            getGandomLand()->setAt(i,2);
+        }
+    }
+}
+
 void Anbar::UpLevel(int i) {
     if(i == 2){
         data["capacity"] = data["capacity"].toInt() * 3;
@@ -386,8 +412,10 @@ QString Data::get_Message(int i){
     multimap<QString,int>::iterator p = payam.begin();
     for(;p!=payam.end();p++){
         v=*p;
-        if(v.second==i)
+        if(v.second==i){
             str+=v.first;
+            payam.erase(p);
+        }
     }
     return str;
 }

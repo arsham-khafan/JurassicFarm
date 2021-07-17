@@ -14,12 +14,25 @@ class Gavdari : public QWidget
 
 public:
     Gavdari(QWidget *parent = nullptr, Data* _data = nullptr);
-    void check(){if(data->getGav()->get_Time()<0) time_level->setHidden(true);
-                     if(data->getGav()->get_Time_food()<0) time_food->setHidden(true);}
-        void set(){time_food->setText("Time to Upgrade: " + QString::number(data->getGav()->get_Time_food()/60) +
+    void check(){if(data->getGav()->get_Time()<0) time_level->setText("");
+                     if(data->getGav()->get_Time_food()<0) time_food->setText("");}
+
+    void set(){
+        if(data->getGav()->get_Time()<0)
+            time_level->setText("");
+        else
+            time_level->setText("Time to Upgrade: " + QString::number(data->getGav()->get_Time()/60) +
+                                                        ":" + QString::number(data->getGav()->get_Time()%60));
+
+        if(data->getGav()->get_Time_food()<0)
+            time_food->setText("");
+        else
+            time_food->setText("Time to get Milk: " + QString::number(data->getGav()->get_Time_food()/60) +
                                       ":" + QString::number(data->getGav()->get_Time_food()%60));
-                   time_level->setText("Time to Upgrade: " + QString::number(data->getGav()->get_Time()/60) +
-                                                               ":" + QString::number(data->getGav()->get_Time()%60));}
+
+                          lblCpc2->setNum(data->getGav()->getCapacity());
+                                 lblLvl2->setNum(data->getGav()->getLevel());
+                  }
 public slots:
     void upgrd();
     void feed();

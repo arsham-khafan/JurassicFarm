@@ -123,7 +123,7 @@ void Time(Data* _data, siloo* w){
                   _data->getsilo()->setTime(-1);
                   str = "SILOO SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(_data->getsilo()->getLevel()))
                           + "\n New Capacity: " + QString::fromLatin1(to_string(_data->getsilo()->getCapacity())) + "\n";
-                  _data->Add_message(str,6);
+                  w->check();
               }
 
               if(_data->getGandomLand()->get_time()>0)
@@ -143,6 +143,7 @@ void Time(Data* _data, siloo* w){
                   _data->getGandomLand()->setTime_work(-1);
                   str = "Gandom Land is Ready to Bardasht!!!!\n";
                   _data->Add_message(str,7);
+                  _data->done(1);
               }
 
               if(_data->getYonjeLand()->get_time()>0)
@@ -163,21 +164,23 @@ void Time(Data* _data, siloo* w){
                              str = "Yonje land was successfully plowed\n";
                              _data->getYonjeLand()->setShokhm(false);
                              _data->Add_message(str,8);
+                             _data->shokhm();
                          }
                          else{
                              _data->getYonjeLand()->setKesht(false);
                              _data->getYonjeLand()->setBardasht(false);
                              str = "Yonje was successfully cultivated\n";
                              _data->Add_message(str,8);
+                             _data->done(2);
                          }
                      }
-
 
         w->set();
     if(_data->getTime()>=60){
         _data->nextDay(2);
         _data->setTime(0);
         str += "1 day passed! we are in Tomorrow!!";
+        _data->Add_message(str,0);
     }
 
     return Time(_data,w);

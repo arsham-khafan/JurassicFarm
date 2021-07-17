@@ -9,10 +9,14 @@ class storage : public QWidget
     Q_OBJECT
 public:
     explicit storage(QWidget *parent = nullptr, Data* _data = nullptr);
-    void set(){ time_lbl->setText("Time to Upgrade: " + QString::number(data->getAnbar()->get_time()/60) +
+    void set(){
+        if(data->getAnbar()->get_time()<0)
+            time_lbl->setText("");
+        else
+            time_lbl->setText("Time to Upgrade: " + QString::number(data->getAnbar()->get_time()/60) +
                                        ":" + QString::number(data->getAnbar()->get_time()%60));
                    }
-    void check(){time_lbl->setHidden(true);}
+    void check(){time_lbl->setText("");}
 private:
     QThread* t;
     Data* data;

@@ -148,6 +148,7 @@ void Time(Data* _data, Widget* w){
            _data->getGandomLand()->setTime_work(-1);
            str = "Gandom Land is Ready to Bardasht!!!!\n";
            _data->Add_message(str,7);
+           _data->done(1);
        }
 
        if(_data->getYonjeLand()->get_time()>0)
@@ -168,12 +169,14 @@ void Time(Data* _data, Widget* w){
                       str = "Yonje land was successfully plowed\n";
                       _data->getYonjeLand()->setShokhm(false);
                       _data->Add_message(str,8);
+                      _data->shokhm();
                   }
                   else{
                       _data->getYonjeLand()->setKesht(false);
                       _data->getYonjeLand()->setBardasht(false);
                       str = "Yonje was successfully cultivated\n";
                       _data->Add_message(str,8);
+                      _data->done(2);
                   }
               }
 
@@ -363,16 +366,17 @@ Widget::Widget(QWidget *parent, Data* _data)
         QFont font4 = time_lbl->font();
         font4.setBold(true);
         font4.setPointSize(15);
-        time_lbl->setFixedSize(200,40);
+        time_lbl->setFixedSize(250,40);
         time_lbl->setFont(font4);
 
 
         exp = new QLabel(this);
             exp->move(75,135);
             exp->setStyleSheet("color: #176C5B");
-            exp->setText("Experience: " + QString::number(data->getExperience()) + " / " +
+            exp->setText("Experiencr: " + QString::number(data->getExperience()) + " / " +
                               QString::number(data->getCapacity()));
             exp->setFont(font4);
+            exp->setFixedSize(250,40);
 
     connect(storage_butt, SIGNAL(clicked()), this, SLOT(storage_slot()));
 
@@ -400,9 +404,16 @@ Widget::Widget(QWidget *parent, Data* _data)
     connect(rankings, SIGNAL(clicked()), this, SLOT(rank_slot()));
     connect(lands_butt, SIGNAL(clicked()), this, SLOT(lands_slot()));
     connect(places_butt, SIGNAL(clicked()), this, SLOT(animals_slot()));
+    connect(one_day_forward, SIGNAL(clicked()), this, SLOT(forward_slot()));
 
     t = QThread::create(Time,data,this);
     t->start();
+
+    QString str = data->get_Message(0);
+    if(!str.isEmpty()){
+        msg* payam = new msg(nullptr,&str);
+        payam->show();
+    }
 
 }
 

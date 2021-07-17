@@ -71,7 +71,6 @@ void Time(Data* _data, Gavdari* w){
            _data->getGav()->set_Time(-1);
            str = "Gavdari SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getGav()->getLevel())
                               + "\n New Area: " + QString::number(_data->getGav()->getCapacity()) + "\n";
-           _data->Add_message(str,3);
            w->check();
        }
 
@@ -82,7 +81,6 @@ void Time(Data* _data, Gavdari* w){
            _data->getGav()->setFood(false);
            _data->getGav()->set_Time_food(-1);
            str = "The cow_osarus are ready to be bred\n";
-           _data->Add_message(str,3);
            w->check();
        }
 
@@ -143,6 +141,7 @@ void Time(Data* _data, Gavdari* w){
            _data->getGandomLand()->setTime_work(-1);
            str = "Gandom Land is Ready to Bardasht!!!!\n";
            _data->Add_message(str,7);
+           _data->done(1);
        }
 
        if(_data->getYonjeLand()->get_time()>0)
@@ -163,20 +162,22 @@ void Time(Data* _data, Gavdari* w){
                       str = "Yonje land was successfully plowed\n";
                       _data->getYonjeLand()->setShokhm(false);
                       _data->Add_message(str,8);
+                      _data->shokhm();
                   }
                   else{
                       _data->getYonjeLand()->setKesht(false);
                       _data->getYonjeLand()->setBardasht(false);
                       str = "Yonje was successfully cultivated\n";
                       _data->Add_message(str,8);
+                      _data->done(2);
                   }
               }
-
         w->set();
     if(_data->getTime()>=60){
         _data->nextDay(2);
         _data->setTime(0);
         str += "1 day passed! we are in Tomorrow!!";
+        _data->Add_message(str,0);
     }
 
     return Time(_data,w);
@@ -274,7 +275,7 @@ Gavdari::Gavdari(QWidget *parent, Data* _data)
         time_food->setStyleSheet("color: rgb(153,153,0)");
         time_food->move(20,170);
 
-        time_food->setText("Time to Upgrade: " + QString::number(data->getGav()->get_Time_food()/60) +
+        time_food->setText("Time to Milk: " + QString::number(data->getGav()->get_Time_food()/60) +
                                                 ":" + QString::number(data->getGav()->get_Time_food()%60));
 
         if(data->getGav()->get_Time_food()<0)

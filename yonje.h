@@ -15,11 +15,12 @@ class Yonje : public QWidget
 
 public:
     explicit Yonje(QWidget *parent = nullptr, Data*_data=nullptr);
+    void set();
+    void check();
     ~Yonje();
 
 private:
     int w;
-    QPushButton* yon;
     QPushButton* pb1;
     QPushButton* pb2;
     QPushButton* pb3;

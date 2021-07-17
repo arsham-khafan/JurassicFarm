@@ -14,14 +14,16 @@ class Gandom : public QWidget
 
 public:
     explicit Gandom(QWidget *parent = nullptr, Data* _data = nullptr);
+    void set();
+    void check();
     ~Gandom();
 
 private:
     int w;
-    QPushButton* gan;
+    QThread* t;
     QPushButton* pb1;
     QPushButton* up_level;
-    QProgressBar* time_bar;
+    QLabel* time_build;
     QPushButton* pb2;
     QPushButton* pb3;
     QPushButton* pb4;
@@ -29,11 +31,13 @@ private:
     QPushButton* build;
     QGridLayout* main;
     QPushButton* bar;
+    QPushButton* ref;
     Data* data;
     Ui::Gandom *ui;
 public slots:
    void uplevel();
    void build_();
+   void check2();
    void sabt();
    void kesht();
    void bardasht();

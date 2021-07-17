@@ -14,7 +14,6 @@ void Time(Data* _data, Animals_Place* w){
             _data->getAqol()->setBuild(true);
             _data->set_build_aqol(-1);
             str = "Aqol build Successfully\n";
-            _data->Add_message(str,1);
             w->check();
        }
 
@@ -24,7 +23,6 @@ void Time(Data* _data, Animals_Place* w){
            _data->set_build_gav(-1);
            _data->getGav()->setBuild(true);
            str = "Gavdari build Successfully\n";
-           _data->Add_message(str,1);
            w->check();
        }
 
@@ -34,7 +32,6 @@ void Time(Data* _data, Animals_Place* w){
            _data->getMorq()->setBuild(true);
            _data->set_build_morq(-1);
            str = "Morqdari build Successfully\n";
-           _data->Add_message(str,1);
            w->check();
        }
 
@@ -44,7 +41,7 @@ void Time(Data* _data, Animals_Place* w){
            _data->set_build_yonje(-1);
            _data->getYonjeLand()->setBuilds(true);
            str = "Yonje land build Successfully\n";
-           _data->Add_message(str,1);
+           _data->Add_message(str,7);
        }
 
        if(_data->getAqol()->get_Time()>0)
@@ -54,7 +51,7 @@ void Time(Data* _data, Animals_Place* w){
            _data->getAqol()->set_Time(-1);
            str = "Aqol SUCCESSFULLY UPGRADED!\n Level: " + QString::number(_data->getAqol()->getLevel())
                    + "\n New Area: " + QString::number(_data->getAqol()->getCapacity()) + "\n";
-           _data->Add_message(str,7);
+           _data->Add_message(str,2);
        }
 
        if(_data->getAqol()->get_Time_food()>0)
@@ -144,6 +141,7 @@ void Time(Data* _data, Animals_Place* w){
            _data->getGandomLand()->setTime_work(-1);
            str = "Gandom Land is Ready to Bardasht!!!!\n";
            _data->Add_message(str,7);
+           _data->done(1);
        }
 
        if(_data->getYonjeLand()->get_time()>0)
@@ -164,12 +162,14 @@ void Time(Data* _data, Animals_Place* w){
                       str = "Yonje land was successfully plowed\n";
                       _data->getYonjeLand()->setShokhm(false);
                       _data->Add_message(str,8);
+                      _data->shokhm();
                   }
                   else{
                       _data->getYonjeLand()->setKesht(false);
                       _data->getYonjeLand()->setBardasht(false);
                       str = "Yonje was successfully cultivated\n";
                       _data->Add_message(str,8);
+                      _data->done(2);
                   }
               }
 
@@ -178,6 +178,7 @@ void Time(Data* _data, Animals_Place* w){
         _data->nextDay(2);
         _data->setTime(0);
         str += "1 day passed! we are in Tomorrow!!";
+        _data->Add_message(str,0);
     }
 
     return Time(_data,w);
@@ -373,6 +374,7 @@ void Animals_Place::showMorghdari(){
                case QMessageBox::Yes:
                     data->BuildMorq();
                     data->getMorq()->setBuild(true);
+                    data->addExp(5);
                     data->set_build_morq(3*60);
                     build_morq->setHidden(false);
                    break;
@@ -421,6 +423,7 @@ void Animals_Place::showGavdari(){
                     data->BuildGav();
                     data->getGav()->setBuild(true);
                     data->set_build_gav(5*60);
+                    data->addExp(10);
                     build_gav->setHidden(false);
                    break;
                case QMessageBox::Cancel:
@@ -439,9 +442,9 @@ void Animals_Place::showGavdari(){
 }
 
 void Animals_Place::check(){
-    if(data->getTime_build_aqol()==0) build_Aqol->setHidden(true);
-    if(data->getTime_build_morq()==0) build_morq->setHidden(true);
-    if(data->getTime_build_gav()==0) build_gav->setHidden(true);
+    if(data->getTime_build_aqol()<=0) build_Aqol->setText("");
+    if(data->getTime_build_morq()<=0) build_morq->setText("");
+    if(data->getTime_build_gav()<=0) build_gav->setText("");
 }
 
 void Animals_Place::showAghol(){
@@ -474,6 +477,7 @@ void Animals_Place::showAghol(){
                     data->BuildAqol();
                     data->getAqol()->setBuild(true);
                     data->set_build_aqol(600);
+                    data->addExp(20);
                     build_Aqol->setHidden(false);
                    break;
                case QMessageBox::Cancel:

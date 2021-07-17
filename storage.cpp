@@ -112,7 +112,6 @@ void Time(Data* _data, storage* w){
            _data->getAnbar()->setTime(-1);
            str = "STORAGE SUCCESSFULLY UPGRADED!\n Level: " + QString::fromLatin1(to_string(_data->getAnbar()->getLevel()))
                    + "\n New Capacity: " + QString::fromLatin1(to_string(_data->getAnbar()->getCapacity())) + "\n";
-           _data->Add_message(str,5);
            w->check();
        }
 
@@ -143,6 +142,7 @@ void Time(Data* _data, storage* w){
            _data->getGandomLand()->setTime_work(-1);
            str = "Gandom Land is Ready to Bardasht!!!!\n";
            _data->Add_message(str,7);
+           _data->done(1);
        }
 
        if(_data->getYonjeLand()->get_time()>0)
@@ -163,12 +163,14 @@ void Time(Data* _data, storage* w){
                       str = "Yonje land was successfully plowed\n";
                       _data->getYonjeLand()->setShokhm(false);
                       _data->Add_message(str,8);
+                      _data->shokhm();
                   }
                   else{
                       _data->getYonjeLand()->setKesht(false);
                       _data->getYonjeLand()->setBardasht(false);
                       str = "Yonje was successfully cultivated\n";
                       _data->Add_message(str,8);
+                      _data->done(2);
                   }
               }
         w->set();
@@ -176,6 +178,7 @@ void Time(Data* _data, storage* w){
         _data->nextDay(2);
         _data->setTime(0);
         str += "1 day passed! we are in Tomorrow!!";
+        _data->Add_message(str,0);
     }
 
     return Time(_data,w);
