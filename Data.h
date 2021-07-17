@@ -141,7 +141,6 @@ public:
 ////////////////////////////////////////////////////////////////////////////////////////////////////        Main Data Structure    :)
 
 class Data {
-    int what;
     multimap<QString,int> payam;
     QJsonObject data;
     AnimalsPlace* aq;
@@ -152,10 +151,9 @@ class Data {
     silo* s;
     Anbar* An;
 public:
+    int what;
     Data(QJsonObject&);
     void quit();
-    void setWhat(int i){what =i;}
-    int getWhat(){return what;}
     void Add_message(QString str, int kind){pair<QString,int> v(str,kind);
                                            payam.insert(v);}
     void Exp_Day();

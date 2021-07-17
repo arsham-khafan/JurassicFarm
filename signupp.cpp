@@ -207,7 +207,7 @@ void signupp::sett() {
         yonje["level"] = 1;
         yonje["time"] = -1;
         yonje["isbuild"] = false;
-        yonje["isshokhm"] = true;
+        yonje["isshokhm"] = false;
         yonje["iskasht"] = false;
         yonje["isbardasht"] = true;
 

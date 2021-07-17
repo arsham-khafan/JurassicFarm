@@ -28,7 +28,6 @@
         <file>icons/time.jpeg</file>
         <file>icons/uplevel2.png</file>
         <file>icons/xpp.jpeg</file>
-        <file>backgrounds/start.jpg</file>
         <file>icons/cow_osaurus3.jpg</file>
         <file>icons/egg_3.png</file>
         <file>icons/Hen _osaurus3.png</file>
@@ -64,8 +63,9 @@
         <file>backgrounds/ddd.jpg</file>
         <file>backgrounds/mammut.jpg</file>
         <file>icons/ref.png</file>
-         <file>icons/saveee.jpg</file>
-         <file>backgrounds/logo1.PNG</file>
+        <file>icons/saveee.jpg</file>
+        <file>backgrounds/logo1.PNG</file>
         <file>backgrounds/khali.jpeg</file>
+        <file>icons/yonje_last.jpeg</file>
     </qresource>
 </RCC>

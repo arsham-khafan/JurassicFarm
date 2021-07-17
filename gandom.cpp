@@ -202,7 +202,8 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
     time_build->setText("Time to Build: " + QString::number(data->getTime_build_yonje()/60)+":"+ QString::number(data->getTime_build_yonje()%60));
     if(data->getTime_build_yonje()<=0)
         time_build->setHidden(true);
-    time_build->move(100,260);
+    time_build->move(20,260);
+    time_build->setFixedSize(200,30);
 
     this->setMinimumHeight(768);
             this->setMinimumWidth(1366);
@@ -372,7 +373,7 @@ void Gandom::back_to_map(){
 
 void Gandom::go_to_yonjeh_widget(){
     if(data->getLevel()>=3){
-        if(data->getYonjeLand()->isBuild()){
+        if(data->getYonjeLand()->isBuild() && data->getTime_build_yonje()<0){
             Yonje* temp = new Yonje(nullptr, data);
             temp->showFullScreen();
             t->terminate();
@@ -513,6 +514,7 @@ void Gandom::build_(){
                 data->getYonjeLand()->setBuilds(true);
                 data->set_build_yonje(180);
                 data->addExp(6);
+                build->setHidden(true);
                 time_build->setHidden(false);
                break;
            case QMessageBox::Cancel:
@@ -545,9 +547,9 @@ void Gandom::uplevel(){
             data->getAnbar()->ChangeBil(-2);
             data->operator-=(5);
             data->addExp(3);
-            data->getYonjeLand()->setTime(120);
+            data->getGandomLand()->setTime(120);
             ui->up->setHidden(false);
-            QString str = "Gandom LAND WILL BE UPGRADED IN 3 DAYS!";
+            QString str = "Gandom LAND WILL BE UPGRADED IN 2 DAYS!";
             msg* temp = new msg(nullptr , &str);
             temp->show();
         }

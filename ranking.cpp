@@ -180,7 +180,7 @@ void Time(Data* _data, Ranking* w){
     if(_data->getTime()>=60){
         _data->nextDay(2);
         _data->setTime(0);
-        str += "1 day passed! we are in Tomorrow!!";
+        str = "1 day passed! we are in Tomorrow!!";
         _data->Add_message(str,0);
     }
 

@@ -364,10 +364,10 @@ void Data::done(int h){
 }
 
 void Data::shokhm(){
-    int num = getGandomLand()->getArea();
+    int num = getYonjeLand()->getArea();
     for(int i=0;i<num;i++){
-        if(getGandomLand()->at(i) == 0){
-            getGandomLand()->setAt(i,2);
+        if(getYonjeLand()->at(i) == 2){
+            getYonjeLand()->setAt(i,4);
         }
     }
 }
@@ -414,7 +414,7 @@ QString Data::get_Message(int i){
         v=*p;
         if(v.second==i){
             str+=v.first;
-            payam.erase(p);
+            //payam.erase(p);
         }
     }
     return str;
