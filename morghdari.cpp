@@ -217,37 +217,49 @@ Morghdari::Morghdari(QWidget *parent, Data* _data)
     lblNum->move(150, 190);
     lblNum2->move(220, 190);
 
-    pbnUpgrd = new QPushButton("Upgrade", this);
-    pbnUpgrd->setMinimumHeight(40);
-    pbnUpgrd->setMinimumWidth(100);
-    pbnUpgrd->setMaximumHeight(40);
-    pbnUpgrd->setMaximumWidth(100);
-    pbnUpgrd->move(1250, 100);
+
+    pbnUpgrd = new QPushButton(this);
+    pbnUpgrd->setMinimumHeight(166);
+    pbnUpgrd->setMinimumWidth(500);
+    pbnUpgrd->setMaximumHeight(166);
+    pbnUpgrd->setMaximumWidth(500);
+    pbnUpgrd->move(433, 20);
+   pbnUpgrd->setStyleSheet("QPushButton {border-image:url(:icons/upgrade.png);}"
+"                           QPushButton::hover{border-image:url(:icons/upgrade2.png);} ");
+    pbnUpgrd->setToolTip("Upgrade aviculture");
     pbnUpgrd->setCursor(Qt::PointingHandCursor);
 
-    pbnFeed = new QPushButton("Feeding", this);
-    pbnFeed->setMinimumHeight(40);
+    pbnFeed = new QPushButton(this);
+    pbnFeed->setMinimumHeight(100);
     pbnFeed->setMinimumWidth(100);
-    pbnFeed->setMaximumHeight(40);
+    pbnFeed->setMaximumHeight(100);
     pbnFeed->setMaximumWidth(100);
-    pbnFeed->move(1250, 150);
+    pbnFeed->move(1200, 200);
+    pbnFeed->setStyleSheet("QPushButton {border-image:url(:icons/ghaza1.jpg);}"
+"                           QPushButton::hover{border-image:url(:icons/ghaza2.jpg);} ");
+    pbnFeed->setToolTip("feeding");
     pbnFeed->setCursor(Qt::PointingHandCursor);
 
-    pbnEgg = new QPushButton("Collecting Eggs", this);
-    pbnEgg->setMinimumHeight(40);
+    pbnEgg = new QPushButton(this);
+    pbnEgg->setMinimumHeight(100);
     pbnEgg->setMinimumWidth(100);
-    pbnEgg->setMaximumHeight(40);
+    pbnEgg->setMaximumHeight(100);
     pbnEgg->setMaximumWidth(100);
-    pbnEgg->move(1250, 200);
+    pbnEgg->move(1200, 80);
+    pbnEgg->setStyleSheet("QPushButton {border-image:url(:icons/tokhm1.jpg);}"
+"                           QPushButton::hover{border-image:url(:icons/tokhm2.jpg);} ");
+    pbnEgg->setToolTip("collect eggs");
     pbnEgg->setCursor(Qt::PointingHandCursor);
 
-    pbnBack = new QPushButton("Back", this);
-    pbnBack->setMinimumHeight(40);
+    pbnBack = new QPushButton(this);
+    pbnBack->move(10,10);
+    pbnBack->setMinimumHeight(100);
     pbnBack->setMinimumWidth(100);
-    pbnBack->setMaximumHeight(40);
-    pbnBack->setMaximumWidth(100);
-    pbnBack->move(10, 710);
-    pbnBack->setCursor(Qt::PointingHandCursor);
+      pbnBack->setMaximumHeight(100);
+      pbnBack->setMaximumWidth(100);
+      pbnBack->setStyleSheet("QPushButton {border-image:url(:icons/back2.png);}""QPushButton::hover{border-image:url(:icons/back22.png);} ");
+      pbnBack->setToolTip("back to map");
+      pbnBack->setCursor(Qt::ClosedHandCursor);
 
     connect(pbnUpgrd, SIGNAL(clicked()), this, SLOT(upgrd()));
     connect(pbnFeed, SIGNAL(clicked()), this, SLOT(feed()));

@@ -1,7 +1,6 @@
 #include "signupp.h"
 #include <time.h>
 #include "ui_signupp.h"
-
 signupp::signupp(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::signupp)
@@ -27,7 +26,6 @@ signupp::signupp(QWidget *parent) :
     lb3=new QLabel("<b>PASSWORD</b>");
     lb4=new QLabel("<b>PASSWORD(repeat)</b>");
     lb5=new QLabel("<b>EMAIL ADDRESS(optional)</b>");
-
     pb1=new QPushButton;
     pb2=new QPushButton;
      li1->setFixedSize(350,50);
@@ -52,6 +50,8 @@ signupp::signupp(QWidget *parent) :
          lb3->setStyleSheet("color:pink;" "font-size:20px;");
          lb4->setStyleSheet("color:pink;" "font-size:20px;");
          lb5->setStyleSheet("color:pink;" "font-size:20px;");
+         li3->setEchoMode(QLineEdit::Password);
+         li4->setEchoMode(QLineEdit::Password);
          lb1->move(400,110);
          lb2->move(400,210);
          lb3->move(400,310);
@@ -208,7 +208,7 @@ void signupp::sett() {
         yonje["level"] = 1;
         yonje["time"] = -1;
         yonje["isbuild"] = false;
-        yonje["isshokhm"] = false;
+        yonje["isshokhm"] = true;
         yonje["iskasht"] = false;
         yonje["isbardasht"] = true;
 

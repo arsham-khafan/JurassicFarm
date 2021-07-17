@@ -21,10 +21,6 @@ public:
 
 private:
     int w;
-    QThread* t;
-    QPushButton* ref;
-    QLabel* up;
-    QLabel* work;
     QPushButton* pb1;
     QPushButton* pb2;
     QPushButton* pb3;
@@ -36,8 +32,8 @@ private:
     QPushButton* bardasht;
     Data* data;
     Ui::Yonje *ui;
+
 public slots:
-   void check2();
    void sabt();
    void kesht();
    void bardasht_();

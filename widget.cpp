@@ -466,7 +466,7 @@ void Widget::lands_slot(){
 }
 
 void Widget::animals_slot(){
-    Animals_Place* temp = new Animals_Place(nullptr,data);
+    Morghdari* temp = new Morghdari(nullptr,data);
     temp->showFullScreen();
     t->terminate();
     this->destroy();

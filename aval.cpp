@@ -35,6 +35,7 @@ aval::aval(QWidget *parent) :
       lv1->setStyleSheet("background-color:skyblue;");
       lv2->setStyleSheet("background-color:pink;");
        lb2->setStyleSheet("color:red;" "font-size:40px;");
+       lv2->setEchoMode(QLineEdit::Password);
      lv1->setParent(this);
      lv2->setParent(this);
     lg1=new QPushButton("Login");
@@ -58,8 +59,9 @@ aval::aval(QWidget *parent) :
     lg2->setParent(this);
     lg3=new QPushButton("Exit");
     lg4=new QPushButton("check information");
-    lg4->move(500,400);
-    lg4->setStyleSheet("QPushButton{background-color:red;color:white;font-size:28px;border:0px;border-radius:40px;min-height:80px; min-width:80px}\QPushButton::hover{color:black;background-color:yellow}");
+    lg4->move(480,400);
+
+     lg4->setStyleSheet("QPushButton{background-color:red;color:white;font-size:28px;border:0px;border-radius:40px;min-height:80px; min-width:80px}\QPushButton::hover{color:black;background-color:yellow}");
     lg4->setHidden(true);
     lg4->setFixedSize(600,80);
     lg4->setCursor(Qt::ClosedHandCursor);
