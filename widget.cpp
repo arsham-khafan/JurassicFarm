@@ -6,6 +6,7 @@
 #include <store.h>
 #include <ranking.h>
 #include "gandom.h"
+#include "yonje.h"
 #include "animals_place.h"
 #define AAA
 
@@ -459,14 +460,22 @@ void Widget::rank_slot(){
 }
 
 void Widget::lands_slot(){
-    Gandom* temp = new Gandom(nullptr, data);
-    temp->showFullScreen();
-    t->terminate();
-    this->destroy();
+    if(data->what == 1){
+        Gandom* temp = new Gandom(nullptr, data);
+        temp->showFullScreen();
+        t->terminate();
+        this->destroy();
+    }
+    else{
+        Yonje* temp = new Yonje(nullptr, data);
+        temp->showFullScreen();
+        t->terminate();
+        this->destroy();
+    }
 }
 
 void Widget::animals_slot(){
-    Morghdari* temp = new Morghdari(nullptr,data);
+    Animals_Place* temp = new Animals_Place(nullptr,data);
     temp->showFullScreen();
     t->terminate();
     this->destroy();

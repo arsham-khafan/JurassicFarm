@@ -197,12 +197,17 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
     ref->setFixedSize(50,50);
     ref->setStyleSheet("QPushButton {border-image:url(:icons/ref.png);border:2px;border-radius:40px;}");
 
+    QFont f("Comic Sans MS");
+        f.setPointSize(15);
+        f.setBold(true);
 
     time_build = new QLabel(this);
     time_build->setText("Time to Build: " + QString::number(data->getTime_build_yonje()/60)+":"+ QString::number(data->getTime_build_yonje()%60));
     if(data->getTime_build_yonje()<=0)
         time_build->setHidden(true);
     time_build->move(20,260);
+    time_build->setFont(f);
+    time_build->setStyleSheet("color: #E910F0");
     time_build->setFixedSize(200,30);
 
     this->setMinimumHeight(768);
@@ -273,23 +278,29 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
             ui->setupUi(this);
 
             ui->sabt->setHidden(true);
+            ui->sabt->setFont(f);
+            ui->sabt->setFixedSize(100,40);
+            ui->sabt->setStyleSheet("color: #E910F0");
+            ui->sabt->setStyleSheet("background-color: Green");
 
             ui->area->setText("Area: " + QString::number(data->getGandomLand()->getArea()));
             ui->level->setText("Level: " + QString::number(data->getGandomLand()->getLevel()));
+            ui->area->setFont(f);
+                ui->area->setStyleSheet("color: #8F10F0");
+                ui->level->setFont(f);
+                    ui->level->setStyleSheet("color: #E910F0");
 
             ui->up->setText("Time to Level up: " + QString::number(data->getGandomLand()->get_time()/60) + ":" +
                             QString::number(data->getGandomLand()->get_time()%60));
+            ui->up->setFont(f);
+                ui->up->setStyleSheet("color: #E910F0");
 
             ui->work->setText("Time to get gandom: " + QString::number(data->getGandomLand()->get_time_work()/60) + ":" +
                             QString::number(data->getGandomLand()->get_time_work()%60));
+            ui->work->setFont(f);
+                ui->work->setStyleSheet("color: #E910F0");
 
-            QFont font3 = ui->area->font();
-            font3.setBold(true);
-            font3.setPointSize(15);
-            ui->area->setFont(font3);
-            ui->up->setFont(font3);
-            ui->level->setFont(font3);
-            ui->work->setFont(font3);
+
 
             if(data->getGandomLand()->get_time()<0)
                 ui->up->setHidden(true);
@@ -341,7 +352,7 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
             bar->setMinimumWidth(100);
               bar->setMaximumHeight(100);
               bar->setMaximumWidth(100);
-              bar->setStyleSheet("QPushButton {border-image:url(:icons/yonjeh3.jpg);border:2px;border-radius:40px;}" "QPushButton::hover{border-image:url(:icons/kasht2.jpg);} ");
+              bar->setStyleSheet("QPushButton {border-image:url(:icons/yonjeh3.jpg);border:2px;border-radius:40px;}");
               bar->setToolTip("Bardasht");
               bar->setText("Bardasht");
               bar->setCursor(Qt::ClosedHandCursor);
@@ -365,6 +376,7 @@ Gandom::Gandom(QWidget *parent, Data* _data) :
     }
 
 void Gandom::back_to_map(){
+    data->what=1;
         Widget* temp = new Widget(nullptr, data);
         temp->showFullScreen();
         t->terminate();
@@ -399,7 +411,7 @@ void Gandom::buttons(){
     }
 
     if(w == 1){
-        if(data->getsilo()->getCount()){
+        if(data->getsilo()->getCount()>=1){
             data->getGandomLand()->setAt(i,1);
             kol[i].setStyleSheet("QPushButton {border-image:url(:icons/y1.jfif);border:2px;border-radius:40px;}");
             data->getGandomLand()->setKesht(true);
@@ -611,15 +623,20 @@ void Gandom::check(){
 
 void Gandom::check2(){
     int num = data->getGandomLand()->getArea();
+    kol = new QPushButton[40];
     for(int h=0;h<num;h++){
         if(data->getGandomLand()->at(h) == 0)
-        kol[h].setStyleSheet("QPushButton {border-image:url(:icons/kh-y.jpeg);border:2px;border-radius:40px;}");
-    else if(data->getGandomLand()->at(h) == 1)
-            kol[h].setStyleSheet("QPushButton {border-image:url(:icons/y1.jfif);border:2px;border-radius:40px;}");
-    else if(data->getGandomLand()->at(h) == 3)
-        kol[h].setStyleSheet("QPushButton {border-image:url(:icons/gando.jpg);border:2px;border-radius:40px;}"
-        " QPushButton::hover{border-image:url(:icons/gando2.jpg);}");
+            kol[h].setStyleSheet("QPushButton {border-image:url(:icons/kh-y.jpeg);border:2px;border-radius:40px;}");
+        else if(data->getGandomLand()->at(h) == 1)
+                kol[h].setStyleSheet("QPushButton {border-image:url(:icons/y1.jfif);border:2px;border-radius:40px;}");
+        else if(data->getGandomLand()->at(h) == 3)
+            kol[h].setStyleSheet("QPushButton {border-image:url(:icons/gando.jpg);border:2px;border-radius:40px;}"
+            " QPushButton::hover{border-image:url(:icons/gando2.jpg);}");
+        main->addWidget(&kol[h],h/5,h%5);
+        kol[h].setFixedSize(100,100);
+        connect(&kol[h],SIGNAL(clicked()),this,SLOT(buttons()));
     }
+
 }
 
 Gandom::~Gandom()

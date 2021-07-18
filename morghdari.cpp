@@ -202,51 +202,60 @@ Morghdari::Morghdari(QWidget *parent, Data* _data)
     lblLvl = new QLabel("Level: ", this);
     lblLvl2 = new QLabel(this);
     lblLvl2->setNum(data->getMorq()->getLevel());
-    lblLvl->move(150, 130);
-    lblLvl2->move(220, 130);
+    lblLvl->move(1200, 370);
+    lblLvl2->move(1260, 370);
 
     lblCpc = new QLabel("Capacity: ", this);
     lblCpc2 = new QLabel(this);
     lblCpc2->setNum(data->getMorq()->getCapacity());
-    lblCpc->move(150, 160);
-    lblCpc2->move(220, 160);
+    lblCpc->move(1200, 400);
+    lblCpc2->move(1300, 400);
 
     lblNum = new QLabel("Number: ", this);
     lblNum2 = new QLabel(this);
     lblNum2->setNum(data->getMorq()->getCount());
-    lblNum->move(150, 190);
-    lblNum2->move(220, 190);
+    lblNum->move(1200, 430);
+    lblNum2->move(1300, 430);
 
+    QFont f("Comic Sans MS");
+    f.setPointSize(15);
+    f.setBold(true);
+    lblLvl->setFont(f);
+    lblLvl2->setFont(f);
+    lblCpc->setFont(f);
+    lblCpc2->setFont(f);
+    lblNum->setFont(f);
+    lblNum2->setFont(f);
+
+    lblLvl->setStyleSheet("color: rgb(153,153,0)");
+    lblLvl2->setStyleSheet("color: rgb(153,153,0)");
+    lblCpc->setStyleSheet("color: rgb(153,153,0)");
+    lblCpc2->setStyleSheet("color: rgb(153,153,0)");
+    lblNum->setStyleSheet("color: rgb(153,153,0)");
+    lblNum2->setStyleSheet("color: rgb(153,153,0)");
 
     pbnUpgrd = new QPushButton(this);
-    pbnUpgrd->setMinimumHeight(166);
-    pbnUpgrd->setMinimumWidth(500);
-    pbnUpgrd->setMaximumHeight(166);
-    pbnUpgrd->setMaximumWidth(500);
-    pbnUpgrd->move(433, 20);
-   pbnUpgrd->setStyleSheet("QPushButton {border-image:url(:icons/upgrade.png);}"
-"                           QPushButton::hover{border-image:url(:icons/upgrade2.png);} ");
-    pbnUpgrd->setToolTip("Upgrade aviculture");
+        pbnUpgrd->setMinimumHeight(90);
+        pbnUpgrd->setMinimumWidth(90);
+        pbnUpgrd->setMaximumHeight(90);
+        pbnUpgrd->setMaximumWidth(90);
+        pbnUpgrd->move(20, 150);
+        pbnUpgrd->setStyleSheet("QPushButton {border-image:url(:icons/uplevel.png);}"
+    "                           QPushButton::hover{border-image:url(:icons/uplevel2.png);} ");
+        pbnUpgrd->setToolTip("level up silo");
     pbnUpgrd->setCursor(Qt::PointingHandCursor);
 
     pbnFeed = new QPushButton(this);
-    pbnFeed->setMinimumHeight(100);
-    pbnFeed->setMinimumWidth(100);
-    pbnFeed->setMaximumHeight(100);
-    pbnFeed->setMaximumWidth(100);
+    pbnFeed->setFixedSize(100,100);
     pbnFeed->move(1200, 200);
-    pbnFeed->setStyleSheet("QPushButton {border-image:url(:icons/ghaza1.jpg);}"
-"                           QPushButton::hover{border-image:url(:icons/ghaza2.jpg);} ");
+    pbnFeed->setStyleSheet("QPushButton {border-image:url(:icons/food_hen.jpg);border:2px;border-radius:40px;}");
     pbnFeed->setToolTip("feeding");
     pbnFeed->setCursor(Qt::PointingHandCursor);
 
     pbnEgg = new QPushButton(this);
-    pbnEgg->setMinimumHeight(100);
-    pbnEgg->setMinimumWidth(100);
-    pbnEgg->setMaximumHeight(100);
-    pbnEgg->setMaximumWidth(100);
+    pbnEgg->setFixedSize(100,100);
     pbnEgg->move(1200, 80);
-    pbnEgg->setStyleSheet("QPushButton {border-image:url(:icons/tokhm1.jpg);}"
+    pbnEgg->setStyleSheet("QPushButton {border-image:url(:icons/tokhm1.jpg);border:2px;border-radius:40px;}"
 "                           QPushButton::hover{border-image:url(:icons/tokhm2.jpg);} ");
     pbnEgg->setToolTip("collect eggs");
     pbnEgg->setCursor(Qt::PointingHandCursor);
@@ -273,8 +282,8 @@ Morghdari::Morghdari(QWidget *parent, Data* _data)
 
     time_level->setFont(font3);
     time_level->setStyleSheet("color: rgb(153,153,0)");
-    time_level->move(20,150);
-
+    time_level->move(20,300);
+    time_level->setFixedSize(300,40);
     time_level->setText("Time to Upgrade: " + QString::number(data->getMorq()->get_Time()/60) +
                                             ":" + QString::number(data->getMorq()->get_Time()%60));
 
@@ -284,8 +293,8 @@ Morghdari::Morghdari(QWidget *parent, Data* _data)
     time_food = new QLabel("days passed goes here!",this);
     time_food->setFont(font3);
     time_food->setStyleSheet("color: rgb(153,153,0)");
-    time_food->move(20,170);
-
+    time_food->move(20,400);
+    time_food->setFixedSize(300,40);
     time_food->setText("Time to egg: " + QString::number(data->getMorq()->get_Time_food()/60) +
                                             ":" + QString::number(data->getMorq()->get_Time_food()%60));
 
@@ -354,11 +363,17 @@ void Morghdari::upgrd()
 
 void Morghdari::feed()
 {
-    if(data->getAqol()->isFood()){
+    if(data->getAqol()->getCount()>0){
+    if(data->getMorq()->isFood()){
         QString str = "The animals have eaten!!";
         msg* temp = new msg(nullptr , &str);
         temp->show();
     }
+    else if(data->getMorq()->isExist()){
+            QString str = "First collect!!";
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
     else{
         if(data->getsilo()->getCount()>=data->getMorq()->getCount()){
             data->getMorq()->setFood(true);
@@ -373,22 +388,35 @@ void Morghdari::feed()
             temp->show();
         }
         else{
-            QString str = "NO ENOUGH GANDOM IN SILOO";
+            QString str = "NO ENOUGH GANDOM IN Anbar";
             msg* temp = new msg(nullptr , &str);
             temp->show();
         }
     }
+    }
+        else{
+            QString str = "NO Sheep-osarous yet";
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
 }
 
 void Morghdari::egg()
 {
     if(data->getMorq()->isExist()){
+        if(data->getAnbar()->getSpace()>=data->getMorq()->getCount()){
             QString str = "The eggs were collected successfully!!";
             data->getAnbar()->ChangeEgg(data->getMorq()->getCount());
             data->addExp(2);
-            data->getAqol()->setExist(false);
+            data->getMorq()->setExist(false);
             msg* temp = new msg(nullptr , &str);
             temp->show();
+        }
+        else{
+            QString str = "NO Space in Storage!!";
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
     }
     else{
         if(data->getMorq()->get_Time_food()>=0){
@@ -406,7 +434,7 @@ void Morghdari::egg()
 
 void Morghdari::back()
 {
-    Animals_Place* animals = new Animals_Place;
+    Animals_Place* animals = new Animals_Place(nullptr,data);
     this->close();
     t->terminate();
     animals->showFullScreen();

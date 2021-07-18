@@ -191,6 +191,27 @@ Yonje::Yonje(QWidget *parent, Data*_data) :
 {
     ui->setupUi(this);
     data = _data;
+
+    QFont f("Comic Sans MS");
+        f.setPointSize(15);
+        f.setBold(true);
+
+    ref = new QPushButton(this);
+    ref->move(30,300);
+    ref->setFixedSize(50,50);
+    ref->setStyleSheet("QPushButton {border-image:url(:icons/ref.png);border:2px;border-radius:40px;}");
+
+    up = new QLabel(this);
+    work = new QLabel(this);
+    up->setFixedSize(400,40);
+    work->setFixedSize(400,40);
+    up->move(740,40);
+    work->move(420,40);
+    up->setFont(f);
+        up->setStyleSheet("color: #E910F0");
+        work->setFont(f);
+            work->setStyleSheet("color: #E910F0");
+
    this->setMinimumHeight(768);
    this->setMinimumWidth(1366);
    this->setMaximumHeight(768);
@@ -277,6 +298,10 @@ Yonje::Yonje(QWidget *parent, Data*_data) :
        pb5->setParent(this);
 
        ui->sabt->setHidden(true);
+       ui->sabt->setFont(f);
+       ui->sabt->setFixedSize(100,40);
+       ui->sabt->setStyleSheet("color: #E910F0");
+       ui->sabt->setStyleSheet("background-color: Green");
 
        main = new QGridLayout;
        int num = data->getYonjeLand()->getArea();
@@ -291,25 +316,31 @@ Yonje::Yonje(QWidget *parent, Data*_data) :
                kol[h].setStyleSheet("QPushButton {border-image:url(:icons/shokhm.jpg);border:2px;border-radius:40px;}");
            else if(data->getYonjeLand()->at(h) == 3)
                kol[h].setStyleSheet("QPushButton {border-image:url(:icons/Yon_last.jpg);border:2px;border-radius:40px;}");
+           else if(data->getYonjeLand()->at(h) == 4)
+               kol[h].setStyleSheet("QPushButton {border-image:url(:icons/kh-y.jpeg);border:2px;border-radius:40px;}");
            main->addWidget(&kol[h],h/5,h%5);
            kol[h].setFixedSize(100,100);
            connect(&kol[h],SIGNAL(clicked()),this,SLOT(buttons()));
        }
 
        ui->scrollArea->setLayout(main);
-       ui->area->setText("area: " + QString::number(data->getYonjeLand()->getArea()));
+       ui->area->setText("Area: " + QString::number(data->getYonjeLand()->getArea()));
        ui->level->setText("level: " + QString::number(data->getYonjeLand()->getLevel()));
+       ui->area->setFont(f);
+           ui->area->setStyleSheet("color: #E910F0");
+           ui->level->setFont(f);
+               ui->level->setStyleSheet("color: #E910F0");
 
        main->setVerticalSpacing(0);
        QWidget* w = new QWidget;
        w->setLayout(main);
        ui->scrollArea->setWidget(w);
 
-       if(!data->getYonjeLand()->isKesht() && !data->getYonjeLand()->isShokhm())
-           ui->work->setHidden(true);
+       if(data->getYonjeLand()->get_time_work() <= 0)
+           work->setHidden(true);
 
        if(data->getYonjeLand()->get_time()<0)
-           ui->up->setHidden(true);
+           up->setHidden(true);
 
        pb3->setText("kasht");
        pb5->setText("shokhm");
@@ -320,6 +351,10 @@ Yonje::Yonje(QWidget *parent, Data*_data) :
        connect(ui->sabt,SIGNAL(clicked()),this,SLOT(sabt()));
        connect(bardasht,SIGNAL(clicked()),this,SLOT(bardasht_()));
        connect(up_level,SIGNAL(clicked()),this,SLOT(uplevel()));
+       connect(ref,SIGNAL(clicked()),this,SLOT(check2()));
+
+       t = QThread::create(Time,data,this);
+       t->start();
 
 }
 
@@ -332,8 +367,8 @@ void Yonje::buttons(){
     }
 
     if(w == 1){
-        if(data->getYonjeLand()->at(i)==2){
-            if(data->getAnbar()->getYonje()){
+        if(data->getYonjeLand()->at(i)==4){
+            if(data->getAnbar()->getYonje()>=1){
                 data->getYonjeLand()->setAt(i,1);
                 kol[i].setStyleSheet("QPushButton {border-image:url(:icons/y1.jfif);border:2px;border-radius:40px;}");
                 data->getYonjeLand()->setKesht(true);
@@ -356,7 +391,7 @@ void Yonje::buttons(){
     else if(w == 2){
         if(data->getYonjeLand()->at(i)==3){
             if(data->getsilo()->getSpace()>=2){
-                kol[i].setStyleSheet("QPushButton {border-image:url(:icons/khack.jpeg);border:2px;border-radius:40px;}");
+                kol[i].setStyleSheet("QPushButton {border-image:url(:icons/khack.jpg);border:2px;border-radius:40px;}");
                 data->getAnbar()->ChangeYonje(2);
                 pb3->setToolTip("Yonje: " + QString::number(data->getAnbar()->getYonje()));
                 data->getYonjeLand()->setAt(i,0);
@@ -371,12 +406,13 @@ void Yonje::buttons(){
 
     else if(w == 3){
         if(data->getCoin()>=5){
-            data->getYonjeLand()->setAt(i,2);
-            kol[i].setStyleSheet("QPushButton {border-image:url(:icons/shokhm.jpg);border:2px;border-radius:40px;}");
-            data->getYonjeLand()->setKesht(false);
-            data->getYonjeLand()->setShokhm(true);
-            data->getYonjeLand()->setBardasht(false);
-            data->operator-=(5);
+            if(data->getYonjeLand()->at(i)==0){
+                data->getYonjeLand()->setAt(i,2);
+                kol[i].setStyleSheet("QPushButton {border-image:url(:icons/shokhm.jpg);border:2px;border-radius:40px;}");
+                data->getYonjeLand()->setKesht(false);
+                data->getYonjeLand()->setShokhm(true);
+                data->operator-=(5);
+            }
         }
         else{
             khata* payam = new khata(nullptr,"No enough coins");
@@ -400,10 +436,12 @@ void Yonje::sabt(){
         if(n) data->getYonjeLand()->setBardasht(true);
     }
     if(w==1 && data->getYonjeLand()->isKesht()){
-        data->getYonjeLand()->setTime_work(4*60);
+        data->getYonjeLand()->setTime_work(240);
+            work->setHidden(false);
     }
     else if(w==3 && data->getYonjeLand()->isShokhm()){
         data->getYonjeLand()->setTime_work(60);
+            work->setHidden(false);
     }
 }
 
@@ -492,6 +530,7 @@ void Yonje::uplevel(){
             data->operator-=(5);
             data->addExp(3);
             data->getYonjeLand()->setTime(180);
+            up->setHidden(false);
             QString str = "YONJE LAND WILL BE UPGRADED IN 3 DAYS!";
             msg* temp = new msg(nullptr , &str);
             temp->show();
@@ -519,46 +558,67 @@ void Yonje::uplevel(){
 }
 
 void Yonje::back_to_map(){
+    data->what=2;
    Widget* temp = new Widget(nullptr, data);
    temp->showFullScreen();
+   t->terminate();
    this->destroy();
 }
 
 void Yonje::set(){
-    ui->area->setText("Area: " + QString::number(data->getYonjeLand()->getArea()));
-    ui->level->setText("Level: " + QString::number(data->getYonjeLand()->getLevel()));
+    if(data->getYonjeLand()->get_time()<0)
+        up->setText("");
+    else
+        up->setText("Time to Level up: " + QString::number(data->getYonjeLand()->get_time()/60) + ":" +
+                     QString::number(data->getYonjeLand()->get_time()%60));
 
-    ui->up->setText("Time to Level up: " + QString::number(data->getYonjeLand()->get_time()/60) + ":" +
-                    QString::number(data->getYonjeLand()->get_time()%60));
-
-    ui->work->setText("Time to get Yonje: " + QString::number(data->getYonjeLand()->get_time_work()/60) + ":" +
-                    QString::number(data->getYonjeLand()->get_time_work()%60));
-}
-
-void Yonje::check(){
-    if(data->getYonjeLand()->get_time()<=0)
-        ui->up->setHidden(true);
-    if(data->getYonjeLand()->get_time_work()<=0)
-        ui->work->setHidden(true);
-
-    int num = data->getYonjeLand()->getArea();
-    for(int h=0;h<num;h++){
-               if(data->getYonjeLand()->at(h) == 0)
-                   kol[h].setStyleSheet("QPushButton {border-image:url(:icons/khack.jpg);border:2px;border-radius:40px;}");
-               else if(data->getYonjeLand()->at(h) == 1){
-                       kol[h].setStyleSheet("QPushButton {border-image:url(:icons/y1.jfif);border:2px;border-radius:40px;}");
-               }
-               else if(data->getYonjeLand()->at(h) == 2)
-                   kol[h].setStyleSheet("QPushButton {border-image:url(:icons/shokhm.jpg);border:2px;border-radius:40px;}");
-               else if(data->getYonjeLand()->at(h) == 3)
-                   kol[h].setStyleSheet("QPushButton {border-image:url(:icons/Yon_last.jpg);border:2px;border-radius:40px;}");
+    if(data->getYonjeLand()->get_time_work()<0)
+        work->setText("");
+    else{
+        if(data->getYonjeLand()->isShokhm())
+            work->setText("Time to Shokhm: " + QString::number(data->getYonjeLand()->get_time_work()/60) + ":" +
+                        QString::number(data->getYonjeLand()->get_time_work()%60));
+        else if(data->getYonjeLand()->isKesht())
+            work->setText("Time to get Yonje: " + QString::number(data->getYonjeLand()->get_time_work()/60) + ":" +
+                        QString::number(data->getYonjeLand()->get_time_work()%60));
     }
 }
 
+void Yonje::check(){
+    ui->area->setText("Area: " + QString::number(data->getYonjeLand()->getArea()));
+    ui->level->setText("Level: " + QString::number(data->getYonjeLand()->getLevel()));
+
+    if(data->getYonjeLand()->get_time()<=0)
+        up->setText("");
+    if(data->getYonjeLand()->get_time_work()<=0)
+        work->setText("");
+}
+
+void Yonje::check2(){
+    int num = data->getYonjeLand()->getArea();
+    kol = new QPushButton[num];
+    for(int h=0;h<num;h++){
+        if(data->getYonjeLand()->at(h) == 0)
+            kol[h].setStyleSheet("QPushButton {border-image:url(:icons/khack.jpg);border:2px;border-radius:40px;}");
+        else if(data->getYonjeLand()->at(h) == 1){
+                kol[h].setStyleSheet("QPushButton {border-image:url(:icons/y1.jfif);border:2px;border-radius:40px;}");
+        }
+        else if(data->getYonjeLand()->at(h) == 2)
+            kol[h].setStyleSheet("QPushButton {border-image:url(:icons/shokhm.jpg);border:2px;border-radius:40px;}");
+        else if(data->getYonjeLand()->at(h) == 3)
+            kol[h].setStyleSheet("QPushButton {border-image:url(:icons/Yon_last.jpg);border:2px;border-radius:40px;}");
+        else if(data->getYonjeLand()->at(h) == 4)
+            kol[h].setStyleSheet("QPushButton {border-image:url(:icons/kh-y.jpeg);border:2px;border-radius:40px;}");
+        main->addWidget(&kol[h],h/5,h%5);
+        kol[h].setFixedSize(100,100);
+        connect(&kol[h],SIGNAL(clicked()),this,SLOT(buttons()));
+    }
+}
 
 void Yonje::go_to_gandom_widget(){
    Gandom* temp = new Gandom(nullptr, data);
    temp->showFullScreen();
+   t->terminate();
    this->destroy();
 }
 

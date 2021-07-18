@@ -343,9 +343,9 @@ Animals_Place::Animals_Place(QWidget *parent, Data* _data)
                     if(data->getTime_build_gav()<0)
                         build_gav->setHidden(true);
 
-                    build_Aqol->setFixedSize(300,40);
-                    build_gav->setFixedSize(300,40);
-                    build_morq->setFixedSize(300,40);
+                    build_Aqol->setFixedSize(400,40);
+                    build_gav->setFixedSize(400,40);
+                    build_morq->setFixedSize(400,40);
 }
 
 void Animals_Place::showMorghdari(){

@@ -7,6 +7,12 @@ signupp::signupp(QWidget *parent) :
 {
     ui->setupUi(this);
     i=0;
+
+    QFont f("Comic Sans MS");
+        f.setPointSize(15);
+        f.setBold(true);
+
+
     this->setMinimumHeight(768);
         this->setMinimumWidth(1366);
         this->setMaximumHeight(768);
@@ -21,11 +27,21 @@ signupp::signupp(QWidget *parent) :
     li3=new QLineEdit;
     li4=new QLineEdit;
     li5=new QLineEdit;
+    li1->setFont(f);
+    li2->setFont(f);
+    li3->setFont(f);
+    li4->setFont(f);
+    li5->setFont(f);
     lb1=new QLabel("<b>FIRST NAME AND LAST NAME</b>");
     lb2=new QLabel("<b>USER NAME</b>");
     lb3=new QLabel("<b>PASSWORD</b>");
     lb4=new QLabel("<b>PASSWORD(repeat)</b>");
     lb5=new QLabel("<b>EMAIL ADDRESS(optional)</b>");
+    lb1->setFont(f);
+    lb2->setFont(f);
+    lb3->setFont(f);
+    lb4->setFont(f);
+    lb5->setFont(f);
     pb1=new QPushButton;
     pb2=new QPushButton;
      li1->setFixedSize(350,50);
@@ -45,7 +61,7 @@ signupp::signupp(QWidget *parent) :
          lb5->setHidden(true);
          pb1->setHidden(true);
          pb2->setHidden(true);
-         lb1->setStyleSheet("color:pink;" "font-size:20px;");
+         lb1->setStyleSheet("color:pink;" "font-size:17px;");
          lb2->setStyleSheet("color:pink;" "font-size:20px;");
          lb3->setStyleSheet("color:pink;" "font-size:20px;");
          lb4->setStyleSheet("color:pink;" "font-size:20px;");

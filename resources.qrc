@@ -45,5 +45,8 @@
         <file>icons/Mikh2.png</file>
         <file>icons/milk_2.png</file>
         <file>icons/Sheep_osaurus2.png</file>
+        <file>icons/Yon_last.jpg</file>
+        <file>icons/col_milk.jfif</file>
+        <file>icons/food_cow.jfif</file>
     </qresource>
 </RCC>

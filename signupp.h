@@ -11,7 +11,6 @@
 #include<QJsonArray>
 #include<aval.h>
 #include"khata.h"
-#include"msg2.h"
 namespace Ui {
 class signupp;
 }

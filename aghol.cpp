@@ -203,51 +203,72 @@ Aghol::Aghol(QWidget *parent, Data* _data)
     lblLvl = new QLabel("Level: ", this);
     lblLvl2 = new QLabel(this);
     lblLvl2->setNum(data->getAqol()->getLevel());
-    lblLvl->move(10, 250);
-    lblLvl2->move(70, 250);
+    lblLvl->move(800, 20);
+    lblLvl2->move(870, 20);
 
     lblCpc = new QLabel("Capacity: ", this);
     lblCpc2 = new QLabel(this);
     lblCpc2->setNum(data->getAqol()->getCapacity());
-    lblCpc->move(10, 280);
-    lblCpc2->move(70, 280);
+    lblCpc->move(800, 70);
+    lblCpc2->move(890, 70);
     lblNum = new QLabel("Number: ", this);
     lblNum2 = new QLabel(this);
     lblNum2->setNum(data->getAqol()->getCount());
-    lblNum->move(10, 310);
-    lblNum2->move(70, 310);
+    lblNum->move(800, 120);
+    lblNum2->move(890, 120);
 
-    pbnUpgrd = new QPushButton("Upgrade", this);
-    pbnUpgrd->setMinimumHeight(40);
-    pbnUpgrd->setMinimumWidth(100);
-    pbnUpgrd->setMaximumHeight(40);
-    pbnUpgrd->setMaximumWidth(100);
-    pbnUpgrd->move(1250, 250);
-    pbnUpgrd->setCursor(Qt::PointingHandCursor);
+    QFont f("Comic Sans MS");
+    f.setPointSize(15);
+    f.setBold(true);
+    lblLvl->setFont(f);
+    lblLvl2->setFont(f);
+    lblCpc->setFont(f);
+    lblCpc2->setFont(f);
+    lblNum->setFont(f);
+    lblNum2->setFont(f);
 
-    pbnFeed = new QPushButton("Feeding", this);
-    pbnFeed->setMinimumHeight(40);
-    pbnFeed->setMinimumWidth(100);
-    pbnFeed->setMaximumHeight(40);
-    pbnFeed->setMaximumWidth(100);
-    pbnFeed->move(1250, 300);
+    lblLvl->setStyleSheet("color: #E910F0");
+    lblLvl2->setStyleSheet("color: #E910F0");
+    lblCpc->setStyleSheet("color: #E910F0");
+    lblCpc2->setStyleSheet("color: #E910F0");
+    lblNum->setStyleSheet("color: #E910F0");
+    lblNum2->setStyleSheet("color: #E910F0");
+
+    pbnUpgrd = new QPushButton(this);
+            pbnUpgrd->setMinimumHeight(90);
+            pbnUpgrd->setMinimumWidth(90);
+            pbnUpgrd->setMaximumHeight(90);
+            pbnUpgrd->setMaximumWidth(90);
+            pbnUpgrd->move(20, 150);
+            pbnUpgrd->setStyleSheet("QPushButton {border-image:url(:icons/uplevel.png);}"
+        "                           QPushButton::hover{border-image:url(:icons/uplevel2.png);} ");
+            pbnUpgrd->setToolTip("level up silo");
+        pbnUpgrd->setCursor(Qt::PointingHandCursor);
+
+    pbnFeed = new QPushButton(this);
+    pbnFeed->setFixedSize(100,100);
+    pbnFeed->move(1200, 140);
+    pbnFeed->setStyleSheet("QPushButton {border-image:url(:icons/ghaza1.jpg);border:2px;border-radius:40px;}"
+    "                           QPushButton::hover{border-image:url(:icons/ghaza2.jpg);} ");
+    pbnFeed->setToolTip("Feeding");
     pbnFeed->setCursor(Qt::PointingHandCursor);
 
-    pbnShr = new QPushButton("Shearing", this);
-    pbnShr->setMinimumHeight(40);
-    pbnShr->setMinimumWidth(100);
-    pbnShr->setMaximumHeight(40);
-    pbnShr->setMaximumWidth(100);
-    pbnShr->move(1250, 350);
+    pbnShr = new QPushButton(this);
+    pbnShr->setFixedSize(100,100);
+    pbnShr->move(1200, 30);
+    pbnShr->setStyleSheet("QPushButton {border-image:url(:icons/p.jfif);border:2px;border-radius:40px;}");
+    pbnShr->setToolTip("Shearing");
     pbnShr->setCursor(Qt::PointingHandCursor);
 
-    pbnBack = new QPushButton("Back", this);
-    pbnBack->setMinimumHeight(40);
-    pbnBack->setMinimumWidth(100);
-    pbnBack->setMaximumHeight(40);
-    pbnBack->setMaximumWidth(100);
-    pbnBack->move(10, 710);
-    pbnBack->setCursor(Qt::PointingHandCursor);
+    pbnBack = new QPushButton(this);
+       pbnBack->move(10,10);
+       pbnBack->setMinimumHeight(100);
+       pbnBack->setMinimumWidth(100);
+         pbnBack->setMaximumHeight(100);
+         pbnBack->setMaximumWidth(100);
+         pbnBack->setStyleSheet("QPushButton {border-image:url(:icons/back2.png);}""QPushButton::hover{border-image:url(:icons/back22.png);} ");
+         pbnBack->setToolTip("back to map");
+         pbnBack->setCursor(Qt::ClosedHandCursor);
 
     connect(pbnUpgrd, SIGNAL(clicked()), this, SLOT(upgrd()));
     connect(pbnFeed, SIGNAL(clicked()), this, SLOT(feed()));
@@ -260,8 +281,9 @@ Aghol::Aghol(QWidget *parent, Data* _data)
     font3.setPointSize(15);
 
     time_level->setFont(font3);
-    time_level->setStyleSheet("color: rgb(153,153,0)");
-    time_level->move(20,150);
+    time_level->setStyleSheet("color: #E910F0");
+    time_level->move(20,300);
+    time_level->setFixedSize(300,40);
 
     time_level->setText("Time to Upgrade: " + QString::number(data->getAqol()->get_Time()/60) +
                                             ":" + QString::number(data->getAqol()->get_Time()%60));
@@ -271,8 +293,9 @@ Aghol::Aghol(QWidget *parent, Data* _data)
 
     time_food = new QLabel("days passed goes here!",this);
     time_food->setFont(font3);
-    time_food->setStyleSheet("color: rgb(153,153,0)");
-    time_food->move(20,170);
+    time_food->setStyleSheet("color: #E910F0");
+    time_food->move(20,400);
+    time_food->setFixedSize(300,40);
 
     time_food->setText("Time to pashm: " + QString::number(data->getAqol()->get_Time_food()/60) +
                                             ":" + QString::number(data->getAqol()->get_Time_food()%60));
@@ -341,8 +364,14 @@ void Aghol::upgrd()
 
 void Aghol::feed()
 {
+    if(data->getAqol()->getCount()>0){
     if(data->getAqol()->isFood()){
         QString str = "The animals have eaten!!";
+        msg* temp = new msg(nullptr , &str);
+        temp->show();
+    }
+    else if(data->getAqol()->isExist()){
+        QString str = "First Shearing!!";
         msg* temp = new msg(nullptr , &str);
         temp->show();
     }
@@ -365,19 +394,32 @@ void Aghol::feed()
             temp->show();
         }
     }
+    }
+    else{
+        QString str = "NO Sheep-osarous yet";
+        msg* temp = new msg(nullptr , &str);
+        temp->show();
+    }
 }
 
 void Aghol::shr()
 {
     if(data->getAqol()->isExist()){
         if(data->getCoin()>=data->getAqol()->getCount()){
-            QString str = "The sheep were successfully bred!!";
-            data->operator-=(data->getAqol()->getCount());
-            data->getAnbar()->ChangePashm(data->getAqol()->getCount());
-            data->addExp(9);
-            data->getAqol()->setExist(false);
-            msg* temp = new msg(nullptr , &str);
-            temp->show();
+            if(data->getAnbar()->getSpace()>=data->getAqol()->getCount()){
+                QString str = "The sheep were successfully bred!!";
+                data->operator-=(data->getAqol()->getCount());
+                data->getAnbar()->ChangePashm(data->getAqol()->getCount());
+                data->addExp(9);
+                data->getAqol()->setExist(false);
+                msg* temp = new msg(nullptr , &str);
+                temp->show();
+            }
+            else{
+                QString str = "NO Space in Storage!!";
+                msg* temp = new msg(nullptr , &str);
+                temp->show();
+            }
         }
         else{
             QString str = "NO ENOUGH COINS!!";

@@ -11,14 +11,22 @@ aval::aval(QWidget *parent) :
         this->setMaximumWidth(1366);
     setAutoFillBackground(true);
 
+    QFont f("Comic Sans MS");
+            f.setPointSize(15);
+            f.setBold(true);
+
     QPixmap pixmap=QPixmap(":backgrounds/aval.jpeg").scaled(this->size());
     QPalette palette(this->palette());
     palette.setBrush(this->backgroundRole(),QBrush(pixmap.scaled(this->size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation)));
     this->setPalette(palette);
      lb1=new QLabel("User name");
     lb2=new QLabel("Password");
+    lb2->setFont(f);
+    lb1->setFont(f);
      lv1=new QLineEdit;
      lv2=new QLineEdit;
+     lv1->setFont(f);
+     lv2->setFont(f);
      lb1->setHidden(true);
      lb2->setHidden(true);
      lv1->setHidden(true);
@@ -29,8 +37,8 @@ aval::aval(QWidget *parent) :
      lv2->move(700,310);
      lb1->setParent(this);
      lb2->setParent(this);
-     lv1->setFixedSize(400,30);
-      lv2->setFixedSize(400,30);
+     lv1->setFixedSize(350,50);
+      lv2->setFixedSize(350,50);
       lb1->setStyleSheet("color:blue;" "font-size:40px;");
       lv1->setStyleSheet("background-color:skyblue;");
       lv2->setStyleSheet("background-color:pink;");

@@ -220,7 +220,7 @@ store::store(QWidget *parent, Data* _data) :
     cow->setStyleSheet("QPushButton {border-image:url(:icons/cow_osaurus.jpg);}"
 "                           QPushButton::hover{border-image:url(:icons/cow_osaurus2.jpg);} ");
 
-    hen->setStyleSheet("QPushButton {border-image:url(:icons/Hen_osaurus.png);}"
+    hen->setStyleSheet("QPushButton {border-image:url(:icons/Hen _osaurus.png);}"
 "                           QPushButton::hover{border-image:url(:icons/Hen _osaurus2.png);} ");
 
     sheep->setStyleSheet("QPushButton {border-image:url(:icons/Sheep_osaurus.png);}"
@@ -358,14 +358,25 @@ store::store(QWidget *parent, Data* _data) :
     ui->setupUi(this);
     ui->gandom->move(155,270);
     ui->bill->move(155,110);
-    ui->yonje->move(520,270);
+    ui->yonje->move(460,270);
     ui->mikh->move(510,110);
-    ui->egg->move(155,400);
-    ui->hen->move(520,400);
-    ui->milk->move(155,520);
-    ui->cow->move(525,520);
-    ui->pashm->move(155,670);
-    ui->sheep->move(525,670);
+    ui->egg->move(95,400);
+    ui->hen->move(470,400);
+    ui->milk->move(95,520);
+    ui->cow->move(475,520);
+    ui->pashm->move(95,670);
+    ui->sheep->move(465,670);
+
+    ui->gandom->setAlignment(Qt::AlignCenter);
+    ui->bill->setAlignment(Qt::AlignCenter);
+    ui->yonje->setAlignment(Qt::AlignCenter);
+    ui->mikh->setAlignment(Qt::AlignCenter);
+    ui->egg->setAlignment(Qt::AlignCenter);
+    ui->hen->setAlignment(Qt::AlignCenter);
+    ui->milk->setAlignment(Qt::AlignCenter);
+    ui->cow->setAlignment(Qt::AlignCenter);
+    ui->pashm->setAlignment(Qt::AlignCenter);
+    ui->sheep->setAlignment(Qt::AlignCenter);
 
     ui->egg->setHidden(true);
         ui->milk->setHidden(true);
@@ -562,7 +573,7 @@ void store::check_buy(){
                                QString::fromLatin1(to_string(data->getAnbar()->getSpace())));
         }
         else if(i==2){
-
+            if(num<=data->getAnbar()->getSpace()){
                 if(data->getCoin()>=num*70){
                     data->getGav()->operator+=(num);
                     str = QString::fromLatin1(to_string(num))+" cow-osarus Successfully purchased";
@@ -574,6 +585,9 @@ void store::check_buy(){
                     +QString::fromLatin1(to_string(data->getCoin()));
                     str = k  + s;
                 }
+            }
+            else
+                str = "No enough Space";
                 ui->label->setText("Mojoodi: "+ QString::fromLatin1(to_string(data->getGav()->getCount())) + "\n\nSpace: "+
                                    QString::fromLatin1(to_string(data->getGav()->getSpace())));
 
@@ -584,6 +598,7 @@ void store::check_buy(){
                                QString::fromLatin1(to_string(data->getAnbar()->getSpace())));
         }
         else if(i==4){
+            if(num<=data->getGav()->getSpace()){
                 if(data->getCoin()>=num*20){
                     data->getMorq()->operator+=(num);
                     str = QString::fromLatin1(to_string(num))+" hen-osarus Successfully purchased";
@@ -595,6 +610,9 @@ void store::check_buy(){
                     +QString::fromLatin1(to_string(data->getCoin()));
                     str = k  + s;
                 }
+            }
+            else
+                str = "No enough Space";
                 ui->label->setText("Mojoodi: "+ QString::fromLatin1(to_string(data->getMorq()->getCount())) + "\n\nSpace: "+
                                    QString::fromLatin1(to_string(data->getMorq()->getSpace())));
 
@@ -607,6 +625,7 @@ void store::check_buy(){
                                        QString::fromLatin1(to_string(data->getAnbar()->getSpace())));
         }
         else if(i==6){
+            if(num<=data->getAqol()->getSpace()){
                 if(data->getCoin()>=num*80){
                     data->getAqol()->operator+=(num);
                     str = QString::fromLatin1(to_string(num))+" Sheep-osarus Successfully purchased";
@@ -618,11 +637,15 @@ void store::check_buy(){
                     +QString::fromLatin1(to_string(data->getCoin()));
                     str = k  + s;
                 }
+            }
+            else
+                            str = "No enough Space";
 
             ui->label->setText("Mojoodi: "+ QString::fromLatin1(to_string(data->getAqol()->getCount())) + "\n\nSpace: "+
                                QString::fromLatin1(to_string(data->getAqol()->getSpace())));
         }
         else if(i==7){
+            if(num<=data->getsilo()->getSpace()){
                            if(data->getCoin()>=num*3){
                                data->getsilo()->operator+=(num);
                                str = QString::fromLatin1(to_string(num))+" gandom Successfully purchased";
@@ -634,11 +657,15 @@ void store::check_buy(){
                                +QString::fromLatin1(to_string(data->getCoin()));
                                str = k  + s;
                            }
+            }
+            else
+                            str = "No enough Space";
 
             ui->label->setText("Mojoodi: "+ QString::fromLatin1(to_string(data->getsilo()->getCount())) + "\n\nSpace: "+
                                QString::fromLatin1(to_string(data->getsilo()->getSpace())));
         }
         else if(i==8){
+            if(num<=data->getAnbar()->getSpace()){
                            if(data->getCoin()>=num*6){
                                data->getAnbar()->ChangeYonje(num);
                                str = QString::fromLatin1(to_string(num))+" Yonje Successfully purchased";
@@ -650,11 +677,15 @@ void store::check_buy(){
                                +QString::fromLatin1(to_string(data->getCoin()));
                                str = k  + s;
                            }
+            }
+            else
+                            str = "No enough Space";
 
             ui->label->setText("Mojoodi: "+ QString::fromLatin1(to_string(data->getAnbar()->getYonje())) + "\n\nSpace: "+
                                QString::fromLatin1(to_string(data->getAnbar()->getSpace())));
         }
         else if(i==9){
+            if(num<data->getAnbar()->getSpace()){
             if(data->getCoin()>=num*50){
                 data->getAnbar()->ChangeBil(num);
                 str = QString::fromLatin1(to_string(num))+" Bill Successfully purchased";
@@ -666,11 +697,15 @@ void store::check_buy(){
                 +QString::fromLatin1(to_string(data->getCoin()));
                 str = k  + s;
             }
+            }
+            else
+                            str = "No enough Space";
 
             ui->label->setText("Mojoodi: "+ QString::fromLatin1(to_string(data->getAnbar()->getBil())) + "\n\nSpace: " +
                                QString::fromLatin1(to_string(data->getAnbar()->getSpace())));
         }
         else if(i==10){
+            if(num<data->getAnbar()->getSpace()){
                            if(data->getCoin()>=num*30){
                                data->getAnbar()->ChangeMikh(num);
                                str = QString::fromLatin1(to_string(num))+" Mikh Successfully purchased";
@@ -682,6 +717,9 @@ void store::check_buy(){
                                +QString::fromLatin1(to_string(data->getCoin()));
                                str = k  + s;
                            }
+            }
+            else
+                            str = "No enough Space";
 
             ui->label->setText("Mojoodi: "+ QString::fromLatin1(to_string(data->getAnbar()->getMikh())) + "\n\nSpace: "+
                                QString::fromLatin1(to_string(data->getAnbar()->getSpace())));

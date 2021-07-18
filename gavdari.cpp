@@ -210,45 +210,65 @@ Gavdari::Gavdari(QWidget *parent, Data* _data)
     lblCpc2 = new QLabel(this);
     lblCpc2->setNum(data->getGav()->getCapacity());
     lblCpc->move(620, 40);
-    lblCpc2->move(680, 40);
+    lblCpc2->move(710, 40);
 
     lblNum = new QLabel("Number: ", this);
     lblNum2 = new QLabel(this);
     lblNum2->setNum(data->getGav()->getCount());
     lblNum->move(620, 70);
-    lblNum2->move(680, 70);
+    lblNum2->move(710, 70);
 
-    pbnUpgrd = new QPushButton("Upgrade", this);
-    pbnUpgrd->setMinimumHeight(40);
-    pbnUpgrd->setMinimumWidth(100);
-    pbnUpgrd->setMaximumHeight(40);
-    pbnUpgrd->setMaximumWidth(100);
-    pbnUpgrd->move(650, 500);
-    pbnUpgrd->setCursor(Qt::PointingHandCursor);
+    QFont f("Comic Sans MS");
+    f.setPointSize(15);
+    f.setBold(true);
+    lblLvl->setFont(f);
+    lblLvl2->setFont(f);
+    lblCpc->setFont(f);
+    lblCpc2->setFont(f);
+    lblNum->setFont(f);
+    lblNum2->setFont(f);
 
-    pbnFeed = new QPushButton("Feeding", this);
-    pbnFeed->setMinimumHeight(40);
-    pbnFeed->setMinimumWidth(100);
-    pbnFeed->setMaximumHeight(40);
-    pbnFeed->setMaximumWidth(100);
-    pbnFeed->move(650, 550);
+    lblLvl->setStyleSheet("color: #F08010");
+    lblLvl2->setStyleSheet("color: #F08010");
+    lblCpc->setStyleSheet("color: #F08010");
+    lblCpc2->setStyleSheet("color: #F08010");
+    lblNum->setStyleSheet("color: #F08010");
+    lblNum2->setStyleSheet("color: #F08010");
+
+    pbnBack = new QPushButton(this);
+    pbnBack->move(10,10);
+    pbnBack->setMinimumHeight(100);
+    pbnBack->setMinimumWidth(100);
+      pbnBack->setMaximumHeight(100);
+      pbnBack->setMaximumWidth(100);
+      pbnBack->setStyleSheet("QPushButton {border-image:url(:icons/back2.png);}""QPushButton::hover{border-image:url(:icons/back22.png);} ");
+      pbnBack->setToolTip("back to map");
+      pbnBack->setCursor(Qt::ClosedHandCursor);
+
+      pbnUpgrd = new QPushButton(this);
+              pbnUpgrd->setMinimumHeight(90);
+              pbnUpgrd->setMinimumWidth(90);
+              pbnUpgrd->setMaximumHeight(90);
+              pbnUpgrd->setMaximumWidth(90);
+              pbnUpgrd->move(20, 150);
+              pbnUpgrd->setStyleSheet("QPushButton {border-image:url(:icons/uplevel.png);}"
+          "                           QPushButton::hover{border-image:url(:icons/uplevel2.png);} ");
+              pbnUpgrd->setToolTip("level up silo");
+          pbnUpgrd->setCursor(Qt::PointingHandCursor);
+
+    pbnFeed = new QPushButton(this);
+    pbnFeed->setFixedSize(100,100);
+    pbnFeed->move(1200, 30);
+    pbnFeed->setStyleSheet("QPushButton {border-image:url(:icons/food_cow.jfif);border:2px;border-radius:40px;}");
+    pbnFeed->setToolTip("Feeding");
     pbnFeed->setCursor(Qt::PointingHandCursor);
 
-    pbnMilk = new QPushButton("Collecting Milk", this);
-    pbnMilk->setMinimumHeight(40);
-    pbnMilk->setMinimumWidth(100);
-    pbnMilk->setMaximumHeight(40);
-    pbnMilk->setMaximumWidth(100);
-    pbnMilk->move(650, 600);
+    pbnMilk = new QPushButton(this);
+    pbnMilk->setFixedSize(100,100);
+    pbnMilk->move(1200, 140);
+    pbnMilk->setStyleSheet("QPushButton {border-image:url(:icons/col_milk.jfif);border:2px;border-radius:40px;}");
+    pbnMilk->setToolTip("Collecting Milk");
     pbnMilk->setCursor(Qt::PointingHandCursor);
-
-    pbnBack = new QPushButton("Back", this);
-    pbnBack->setMinimumHeight(40);
-    pbnBack->setMinimumWidth(100);
-    pbnBack->setMaximumHeight(40);
-    pbnBack->setMaximumWidth(100);
-    pbnBack->move(10, 710);
-    pbnBack->setCursor(Qt::PointingHandCursor);
 
     connect(pbnUpgrd, SIGNAL(clicked()), this, SLOT(upgrd()));
     connect(pbnFeed, SIGNAL(clicked()), this, SLOT(feed()));
@@ -261,8 +281,9 @@ Gavdari::Gavdari(QWidget *parent, Data* _data)
         font3.setPointSize(15);
 
         time_level->setFont(font3);
-        time_level->setStyleSheet("color: rgb(153,153,0)");
-        time_level->move(20,150);
+        time_level->setStyleSheet("color: #F08010");
+        time_level->move(20,300);
+        time_level->setFixedSize(300,40);
 
         time_level->setText("Time to Upgrade: " + QString::number(data->getGav()->get_Time()/60) +
                                                 ":" + QString::number(data->getGav()->get_Time()%60));
@@ -272,8 +293,9 @@ Gavdari::Gavdari(QWidget *parent, Data* _data)
 
         time_food = new QLabel("days passed goes here!",this);
         time_food->setFont(font3);
-        time_food->setStyleSheet("color: rgb(153,153,0)");
-        time_food->move(20,170);
+        time_food->setStyleSheet("color: #F08010");
+        time_food->move(20,400);
+        time_food->setFixedSize(300,40);
 
         time_food->setText("Time to Milk: " + QString::number(data->getGav()->get_Time_food()/60) +
                                                 ":" + QString::number(data->getGav()->get_Time_food()%60));
@@ -343,14 +365,20 @@ void Gavdari::upgrd()
 
 void Gavdari::feed()
 {
+    if(data->getAqol()->getCount()>0){
     if(data->getGav()->isFood()){
         QString str = "The animals have eaten!!";
         msg* temp = new msg(nullptr , &str);
         temp->show();
     }
+    else if(data->getGav()->isExist()){
+            QString str = "first collect!!";
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
     else{
         if(data->getAnbar()->getYonje()>=data->getGav()->getCount()*2){
-            data->getMorq()->setFood(true);
+            data->getGav()->setFood(true);
             QString str = "The animals ate successfully!!";
             data->getAnbar()->ChangeYonje(data->getGav()->getCount()*-2);
             data->addExp(3);
@@ -367,11 +395,18 @@ void Gavdari::feed()
             temp->show();
         }
     }
+    }
+        else{
+            QString str = "NO Sheep-osarous yet";
+            msg* temp = new msg(nullptr , &str);
+            temp->show();
+        }
 }
 
 void Gavdari::milk()
 {
     if(data->getGav()->isExist()){
+        if(data->getAnbar()->getSpace()>=data->getGav()->getCount()){
             QString str = "The milks were collected successfully!!";
             int num = data->getGav()->getCount();
             for(int i = 0;i<num;data->AddMilk(),i++);
@@ -379,6 +414,12 @@ void Gavdari::milk()
             data->getGav()->setExist(false);
             msg* temp = new msg(nullptr , &str);
             temp->show();
+        }
+        else{
+                        QString str = "NO Space in Storage!!";
+                        msg* temp = new msg(nullptr , &str);
+                        temp->show();
+                    }
     }
     else{
         if(data->getGav()->get_Time_food()>=0){
