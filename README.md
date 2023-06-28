@@ -1,3 +1,3 @@
 # JurassicFarm
-the coolest game in history of game development
-produced by codazzers group
+a ccomplete game developed using QT and c++ 
+in the style of farming games like hayday etc.
